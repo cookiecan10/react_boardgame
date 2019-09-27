@@ -33,7 +33,7 @@ const cardStyle = {
     position: 'relative',
     float: 'left',
     fontSize: '1vh',
-    backgroundColor: '#ffff88',
+    backgroundColor: '#ff8888',
     color: 'black',
     width: '20%',
     height: '100%',

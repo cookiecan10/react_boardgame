@@ -2,3 +2,32 @@ header {
   text-align: center;
 }
 
+#Board {
+  background-image: url("tutoriala.jpg");
+  position: relative;
+  overflow: hidden; /* Don't know why, but this makes it wrap around the content */
+  border: 1px solid black;
+  width: 99.9%;
+  height: auto;
+}
+
+.ActivityCardRow {
+  position: relative;
+  width: 100%;
+  border: 3px solid red;
+  overflow: hidden;
+}
+
+.InteractionCardRow {
+  position: relative;
+  width: 100%;
+  border: 3px solid red;
+  overflow: hidden;
+}
+
+.EnhancedCardRow {
+  position: relative;
+  width: 100%;
+  border: 3px solid red;
+  overflow: hidden;
+}

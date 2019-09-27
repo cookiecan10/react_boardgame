@@ -25,6 +25,26 @@ class App extends React.Component {
         code: 'WHAT007',
         description: 'Some text'
       }
+    ],
+    interactionCards: [
+      {
+        id: 1,
+        content: [
+          'some content stuff',
+        ],
+        code: 'OWO',
+        description: 'Interactions' 
+      }
+    ],
+    enhancedCards: [
+      {
+        id: 1,
+        content: [
+          'some content stuff',
+        ],
+        code: 'OWO',
+        description: 'Interactions' 
+      }
     ]
   }
 
@@ -36,9 +56,29 @@ class App extends React.Component {
             <h1>
               Look this is a Card
             </h1>
-            <CardRow cards={this.state.activityCards}></CardRow>
           </div>
         </header>
+
+        <div id='Board'>
+
+          <div className='BoardLeftSide' >
+            Things on the left side
+          </div>
+
+          <div className='CardRows'>
+            <div className='EnhancedCardRow'>
+              <CardRow cardType='enhanced' cards={this.state.enhancedCards}></CardRow>
+            </div>
+            <div className='InteractionCardRow'>
+              <CardRow cardType='interaction' cards={this.state.interactionCards}></CardRow>
+            </div>
+            <div className='ActivityCardRow'>
+              <CardRow cardType='activity' cards={this.state.activityCards}></CardRow>
+            </div>
+          </div>
+
+        </div>
+
       </div>
     );
   }
