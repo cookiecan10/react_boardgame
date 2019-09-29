@@ -4,9 +4,25 @@ import CardRow from './components/CardRow'
 
 import './App.css';
 
+
+class ActivityCard {
+  constructor(id=0, content=[], code='', description='') {
+    this.id = id;
+    this.content = content;
+    this.code = code;
+    this.description = description;
+    
+  }
+}
+
 class App extends React.Component {
+
   state = {
     activityCards: [
+      // Constructed with Class
+      new ActivityCard(23, ["Info"], 'YOLO', 'Some interesting information'),
+      
+      // Constructed without Class
       {
         id: 1,
         content: [
