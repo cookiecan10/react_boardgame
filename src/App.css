@@ -2,13 +2,25 @@ header {
   text-align: center;
 }
 
-#Board {
+.Board {
   background-image: url("tutoriala.jpg");
   position: relative;
   overflow: hidden; /* Don't know why, but this makes it wrap around the content */
   border: 1px solid black;
   width: 99.9%;
   height: auto;
+}
+
+.BoardLeftSide {
+  position: relative;
+  float: left;
+}
+
+.CardRows {
+  position: relative;
+  float: left;
+  width: 80%;
+  overflow: hidden;
 }
 
 .ActivityCardRow {

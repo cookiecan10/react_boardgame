@@ -21,7 +21,7 @@ class App extends React.Component {
     activityCards: [
       // Constructed with Class
       new ActivityCard(23, ["Info"], 'YOLO', 'Some interesting information'),
-      
+
       // Constructed without Class
       {
         id: 1,
@@ -75,7 +75,7 @@ class App extends React.Component {
           </div>
         </header>
 
-        <div id='Board'>
+        <div className='Board'>
 
           <div className='BoardLeftSide' >
             Things on the left side
