@@ -1,6 +1,6 @@
 import React from 'react';
 import CardRow from './components/CardRow'
-
+import Dialog from './components/Dialog'
 
 import './App.css';
 
@@ -18,6 +18,7 @@ class ActivityCard {
 class App extends React.Component {
 
   state = {
+    diaglogOpen: false,
     activityCards: [
       // Constructed with Class
       new ActivityCard(23, ["Info"], 'YOLO', 'Some interesting information'),
@@ -70,15 +71,16 @@ class App extends React.Component {
         <header className="App-header">
           <div>
             <h1>
-              Look this is a Card
+              Look this is a Cardgame
             </h1>
           </div>
         </header>
-
+        
         <div className='Board'>
 
           <div className='BoardLeftSide' >
-            Things on the left side
+            <button onClick={(e) => this.setState({ diaglogOpen: !this.state.diaglogOpen})}>Show Dialog</button>
+            <p>Things on the left side with some more text en random stuff and I don't know if i'm making typing mistakes but it doesn't matter</p>
           </div>
 
           <div className='CardRows'>
@@ -93,6 +95,8 @@ class App extends React.Component {
             </div>
           </div>
 
+          {/* This needs to be last */}
+          <Dialog isOpen={this.state.diaglogOpen} onClose={(e) => this.setState({ diaglogOpen: false})}>This is a nice dialog box with a lot of dialog that nicely explains what you should do</Dialog>
         </div>
 
       </div>

@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 
 class Card extends Component {
     render() {
-        const { id, content, code, description} = this.props.card;
+        const { key, content, code, description} = this.props.card;
         return (
             <div style={cardStyle}>
                 <div name='title'>
