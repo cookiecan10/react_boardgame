@@ -47,7 +47,7 @@ class App extends React.Component {
       {
         id: 1,
         content: [
-          'some content stuff',
+          'Notices your card',
         ],
         code: 'OWO',
         description: 'Interactions' 

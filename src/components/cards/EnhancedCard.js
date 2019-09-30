@@ -3,12 +3,12 @@ import React, { Component } from 'react'
 
 class Card extends Component {
     render() {
-        const { key, content, code, description} = this.props.card;
+        const { id, content, code, description} = this.props.card;
         return (
             <div style={cardStyle}>
                 <div name='title'>
-                    <div style={{margin:'10px 0px 0px 0px'}}>What do we want to know</div>
-                    <div style={{fontSize:'15px', fontWeight:'bold' ,margin:'5px 0px 5px'}}>Activity</div>
+                    <div style={{ fontSize: '15px', textAlign: 'center', margin: '5px 0px 5px' }}>enhancement opportunities</div>
+                    <div style={{ fontSize: '10px',margin: '5px 0px 5px' }}>- content</div>
                 </div>
 
                 <div style={contentStyle} name='content'>
@@ -19,8 +19,8 @@ class Card extends Component {
                     </ul>
                 </div>
 
-                <div name='description'>
-                    <div style={{fontSize:'20px'}}>Description</div><code>(code:{code})</code>
+                <div name='Description'>
+                    <div style={{ fontSize: '15px', textAlign: 'center' }}>Learning Enhancing Technology</div><code>(code:{code})</code>
                     <p>{description}</p>
                 </div>
 
