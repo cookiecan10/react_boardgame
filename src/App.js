@@ -1,6 +1,9 @@
 import React from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import CardRow from './components/CardRow'
 import Dialog from './components/Dialog'
+import Header from './components/layout/Header'
+import CardList from './components/pages/CardList';
 
 import './App.css';
 
@@ -67,39 +70,41 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <div>
-            <h1>
-              Look this is a Cardgame
-            </h1>
-          </div>
-        </header>
-        
-        <div className='Board'>
+      <Router>
+        <div className="App">
 
-          <div className='BoardLeftSide' >
-            <button onClick={(e) => this.setState({ diaglogOpen: !this.state.diaglogOpen})}>Show Dialog</button>
-            <p>Things on the left side with some more text en random stuff and I don't know if i'm making typing mistakes but it doesn't matter</p>
-          </div>
+          {/* Header: Title, menu and other shenanigens */}
+          <Header />
+          
+          <Route exact path="/" render={props => (
+            <React.Fragment>           
+              <div className='Board'>
 
-          <div className='CardRows'>
-            <div className='EnhancedCardRow'>
-              <CardRow cardType='enhanced' cards={this.state.enhancedCards}></CardRow>
-            </div>
-            <div className='InteractionCardRow'>
-              <CardRow cardType='interaction' cards={this.state.interactionCards}></CardRow>
-            </div>
-            <div className='ActivityCardRow'>
-              <CardRow cardType='activity' cards={this.state.activityCards}></CardRow>
-            </div>
-          </div>
+                <div className='BoardLeftSide' >
+                  <button onClick={(e) => this.setState({ diaglogOpen: !this.state.diaglogOpen})}>Show Dialog</button>
+                  <p>Things on the left side with some more text en random stuff and I don't know if i'm making typing mistakes but it doesn't matter</p>
+                </div>
 
-          {/* This needs to be last */}
-          <Dialog isOpen={this.state.diaglogOpen} onClose={(e) => this.setState({ diaglogOpen: false})}>This is a nice dialog box with a lot of dialog that nicely explains what you should do</Dialog>
+                <div className='CardRows'>
+                  <div className='EnhancedCardRow'>
+                    <CardRow cardType='enhanced' cards={this.state.enhancedCards}></CardRow>
+                  </div>
+                  <div className='InteractionCardRow'>
+                    <CardRow cardType='interaction' cards={this.state.interactionCards}></CardRow>
+                  </div>
+                  <div className='ActivityCardRow'>
+                    <CardRow cardType='activity' cards={this.state.activityCards}></CardRow>
+                  </div>
+                </div>
+
+                {/* This needs to be last */}
+                <Dialog isOpen={this.state.diaglogOpen} onClose={(e) => this.setState({ diaglogOpen: false})}>This is a nice dialog box with a lot of dialog that nicely explains what you should do</Dialog>
+              </div>
+            </React.Fragment> 
+            )} />
+            <Route path="/CardList" component={CardList} />
         </div>
-
-      </div>
+      </Router>
     );
   }
 }

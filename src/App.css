@@ -2,10 +2,6 @@
   box-sizing: border-box;
 }
 
-header {
-  text-align: center;
-}
-
 .Board {
   background-image: url("tutoriala.jpg");
   background-repeat: repeat;
