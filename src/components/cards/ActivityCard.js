@@ -15,7 +15,7 @@ class Card extends Component {
                     <div style={{fontSize:'20px'}}>Learning Analytics</div>
 
                     <ul style={{textAlign:'left'}}>
-                        {content.map((x) => (<li>{x}</li>))}
+                        {content.map((c) => (<li>{c}</li>))}
                     </ul>
                 </div>
 

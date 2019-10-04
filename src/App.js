@@ -9,12 +9,32 @@ import './App.css';
 
 
 class ActivityCard {
-  constructor(id=0, content=[], code='', description='') {
+  constructor(id=0, content=[], code='', description='', isEmpty=true) {
     this.id = id;
     this.content = content;
     this.code = code;
     this.description = description;
-    
+    this.isEmpty=isEmpty;
+  }
+}
+
+class InteractionCard {
+  constructor(id=0, content=[], code='', description='', isEmpty=true) {
+    this.id = id;
+    this.content = content;
+    this.code = code;
+    this.description = description;
+    this.isEmpty=isEmpty;
+  }
+}
+
+class EnhancedCard {
+  constructor(id=0, content=[], code='', description='', isEmpty=true) {
+    this.id = id;
+    this.content = content;
+    this.code = code;
+    this.description = description;
+    this.isEmpty=isEmpty;
   }
 }
 
@@ -22,49 +42,27 @@ class App extends React.Component {
 
   state = {
     diaglogOpen: false,
-    activityCards: [
+    activityCards: //Array(4).fill(new ActivityCard()),
+    [
       // Constructed with Class
-      new ActivityCard(23, ["Info"], 'YOLO', 'Some interesting information'),
-
-      // Constructed without Class
-      {
-        id: 1,
-        content: [
-          'todo: fix vertical card size',
-        ],
-        code: 'WHAT008',
-        description: 'Hoooooooooooooooooooooo'
-      },
-      {
-        id: 2,
-        content: [
-          'Presence',
-          'Number of clicks',
-          'Number of live interactions'
-        ],
-        code: 'WHAT007',
-        description: 'Some text'
-      }
+      // id, content, code, description, isEmpty
+      new ActivityCard(23, ["Info"], 'YOLO', 'Some interesting information', false),
+      new ActivityCard(1, ['todo: fix vertical card size'], 'WHAT008', 'hoooooooooooooooo', false),
+      new ActivityCard(),
+      new ActivityCard(2, ['Presence', 'Number of clicks', 'Number of live interactions'], 'WHAT007', 'Some text', false)
     ],
+
     interactionCards: [
-      {
-        id: 1,
-        content: [
-          'Notices your card',
-        ],
-        code: 'OWO',
-        description: 'Interactions' 
-      }
+      new InteractionCard(0, ['Notices your card'], 'OWO', 'Interactions', false),
+      new InteractionCard(),
+      new InteractionCard(),
+      new InteractionCard(),
     ],
     enhancedCards: [
-      {
-        id: 1,
-        content: [
-          'some content stuff',
-        ],
-        code: 'OWO',
-        description: 'Interactions' 
-      }
+      new EnhancedCard(0, ['some content stuff'], 'OWO', 'enhancing', false),
+      new EnhancedCard(),
+      new EnhancedCard(),
+      new EnhancedCard(),
     ]
   }
 
