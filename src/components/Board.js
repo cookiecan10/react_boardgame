@@ -32,6 +32,8 @@ constructor(key=0, content=[], code='', description='', isEmpty=true) {
     }
 }
 
+const MAX_LENGTH = 4;
+
 let activityCardPlaceholders = [
     // Constructed with Class
     // id, content, code, description, isEmpty
@@ -49,13 +51,15 @@ let interactionCardPlaceholders =
     new InteractionCard(),
 ]
 
-let enhancedCardPlaceholders = //Array(4).fill(new EnhancedCard()); //Weird bug with key's not working correctly
-[
-    new EnhancedCard(0, ['some content stuff'], 'OWO', 'enhancing', false),
-    new EnhancedCard(),
-    new EnhancedCard(),
-    new EnhancedCard(),
-]
+let enhancedCardPlaceholders = Array(MAX_LENGTH).fill();
+    
+    //Array(4).fill(new EnhancedCard()); //Does not work, doesn't create new cards, they are all the same reference
+// [
+//     new EnhancedCard(0, ['some content stuff'], 'OWO', 'enhancing', false),
+//     new EnhancedCard(),
+//     new EnhancedCard(),
+//     new EnhancedCard(),
+// ]
 
 class Board extends Component {
 
@@ -63,26 +67,52 @@ class Board extends Component {
         //You have to do this in react
         super(props)
 
-        //Assigning id's
+        // for(var i = 0; i < enhancedCardPlaceholders; i++){
+        //     var card = Object.create(enhancedCardPlaceholders[i]);
+        //     card.key = i;
+        //     this.state.enhancedCards[i] = card;
+        // }
+
+        // for (var i = 0; i < enhancedCardPlaceholders; i++) {
+        //     enhancedCardPlaceholders.push(new EnhancedCard());
+        // }
+
+        //Assigning keys's
+        //You can probably assign all of the card types if you use a forloop and put the different cardtypes in an array
         this.state.activityCards = activityCardPlaceholders.map( (card, index) => {
-            card.key = index;
-            return (card);
+            if (card !== undefined){
+                card.key = index;
+                return (card);
+            } else {
+                return new ActivityCard(index);
+            }
         });
 
         this.state.interactionCards = interactionCardPlaceholders.map( (card, index) => {
-            card.key = index;
-            return (card);
+            if (card !== undefined){
+                card.key = index;
+                return (card);
+            } else {
+                return new InteractionCard(index);
+            }
         });
 
         this.state.enhancedCards = enhancedCardPlaceholders.map( (card, index) => {
-            card.key = index;
-            return (card);
+            if (card !== undefined){
+                card.key = index;
+                return (card);
+            } else {
+                return new EnhancedCard(index);
+            }
         });
 
     }
 
     state = {
-        diaglogOpen: false
+        diaglogOpen: false,
+        enhancedCards: [],
+        interactionCards: [],
+        activityCards: []
     }
 
     render() {

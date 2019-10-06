@@ -20,7 +20,7 @@ class App extends React.Component {
           <Route exact path="/" render={props => (
             <React.Fragment>           
               <Board />
-            </React.Fragment> 
+            </React.Fragment>
             )} />
             <Route path="/CardList" component={CardList} />
         </div>
