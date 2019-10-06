@@ -1,11 +1,15 @@
 import React, { Component } from 'react'
 
+function log(e) {
+    e.preventDefault();
+    console.log("you clicked an Interaction Card")
+}
 
 class Card extends Component {
     render() {
         const { content, code, description } = this.props.card;
         return (
-            <div style={cardStyle}>
+            <div style={cardStyle} onClick={log}>
                 <div name='title'>
                     <div style={topStyle} name='InteractionTop'>learning enhancing technology</div>
                     <div style={{ margin: '10px 0px 0px 0px', fontSize: '15px', textAlign: 'center' }}>Interaction</div>
@@ -44,7 +48,8 @@ const cardStyle = {
     borderStyle: 'solid',
     borderColor: '#888888',
     borderWidth: '4px 4px',
-    borderRadius: '5px'
+    borderRadius: '5px',
+    userSelect: 'none'
 }
 
 const contentStyle = {

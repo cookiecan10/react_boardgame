@@ -76,6 +76,8 @@ class Board extends Component {
         // for (var i = 0; i < enhancedCardPlaceholders; i++) {
         //     enhancedCardPlaceholders.push(new EnhancedCard());
         // }
+        
+        //ALL OF THIS IS USELESS, BUT I'M GONNA KEEP IT AS IT TOOK A LOT OF WORK
 
         //Assigning keys's
         //You can probably assign all of the card types if you use a forloop and put the different cardtypes in an array

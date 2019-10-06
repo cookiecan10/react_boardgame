@@ -1,11 +1,16 @@
 import React, { Component } from 'react'
 
+function log(e) {
+    e.preventDefault();
+    console.log("you clicked an Activity Card")
+}
+
 
 class Card extends Component {
     render() {
         const { content, code, description } = this.props.card;
         return (
-            <div style={cardStyle}>
+            <div style={cardStyle} onClick={log}>
                 <div name='title'>
                     <div style={{margin:'10px 0px 0px 0px'}}>What do we want to know</div>
                     <div style={{fontSize:'15px', fontWeight:'bold' ,margin:'5px 0px 5px'}}>Activity</div>
@@ -42,7 +47,8 @@ const cardStyle = {
     borderStyle: 'solid',
     borderColor: '#888888',
     borderWidth: '4px 4px',
-    borderRadius: '5px'
+    borderRadius: '5px',
+    userSelect: 'none'
 }
 
 const contentStyle = {

@@ -1,11 +1,15 @@
 import React, { Component } from 'react'
 
+function log(e) {
+    e.preventDefault();
+    console.log("THIS IS AN EMPTY CARD!!!")
+}
 
 class Card extends Component {
     render() {
         //const { id, content, code, description} = this.props.card;
         return (
-            <div style={cardStyle}>
+            <div style={cardStyle} onClick={log}>
                 <div>
                     +
                 </div>
@@ -29,7 +33,8 @@ const cardStyle = {
     borderRadius: '5px',
     opacity: '0.7',
     fontSize:'100px',
-    textAlign: 'center'
+    textAlign: 'center',
+    userSelect: 'none'
 }
 
 export default Card
