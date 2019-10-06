@@ -15,9 +15,9 @@ export default class CardRow extends Component {
                 
                 rCard = this.props.cards.map(card => {
                     if (card.isEmpty){
-                        return (<EmptyCard />)
+                        return (<EmptyCard key={card.key}/>)
                     } else {
-                        return (<ActivityCard key={card.id} card={card}/>)
+                        return (<ActivityCard key={card.key} card={card}/>)
                     }
                 });
 
@@ -27,9 +27,9 @@ export default class CardRow extends Component {
 
                 rCard = this.props.cards.map(card => {
                     if (card.isEmpty){
-                        return (<EmptyCard />)
+                        return (<EmptyCard key={card.key}/>)
                     } else {
-                        return (<EnhancedCard key={card.id} card={card}/>)
+                        return (<EnhancedCard key={card.key} card={card}/>)
                     }
                 });
 
@@ -39,9 +39,9 @@ export default class CardRow extends Component {
 
                 rCard = this.props.cards.map(card => {
                     if (card.isEmpty){
-                        return (<EmptyCard />)
+                        return (<EmptyCard key={card.key}/>)
                     } else {
-                        return (<InteractionCard key={card.id} card={card}/>)
+                        return (<InteractionCard key={card.key} card={card}/>)
                     }
                 });
 
