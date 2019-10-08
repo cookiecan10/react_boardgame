@@ -88,7 +88,7 @@ const delButtonStyle = {
     width: '30px',
     height: '30px',
     fontWeight: 'bold',
-    float: 'left'
+    float: 'right'
 }
 
 const contentStyle = {
