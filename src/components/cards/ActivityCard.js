@@ -11,8 +11,8 @@ class Card extends Component {
         const { key, content, code, description } = this.props.card;
         return (
             <div style={cardStyle}>
-
                 <button style={leftButtonStyle} onClick={this.props.moveLeft.bind(this, key, 'activityCards')}> 🡨 </button>
+                <button style={delButtonStyle} onClick={this.props.delCard.bind(this, key, 'activityCards')}> X </button>
                 <button style={rightButtonStyle} onClick={this.props.moveRight.bind(this, key, 'activityCards')}> 🡪 </button>
 
                 <div name='title'>
@@ -77,6 +77,18 @@ const rightButtonStyle = {
     height: '30px',
     fontWeight: 'bold',
     float: 'right'
+}
+
+const delButtonStyle = {
+    marginBottom: '15px',
+    padding: '3px 8px',
+    cursor: 'pointer',
+    borderRadius: '50%',
+    border: 'none',
+    width: '30px',
+    height: '30px',
+    fontWeight: 'bold',
+    float: 'left'
 }
 
 const contentStyle = {

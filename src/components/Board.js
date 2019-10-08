@@ -120,12 +120,16 @@ class Board extends Component {
 
     }
 
+    deleteCard = (key, type) => {
+        this.setState({[type]: this.state[type].filter(card => card.key !== key)});
+    }
+
     moveLeft = (key, type) => {
 
         // Copy list of cards
         let cards = this.state[type];
         console.log(type);
-        
+
         // Find index of card
         let index = findIndex(cards, key);
         console.log(index);
@@ -186,13 +190,13 @@ class Board extends Component {
 
                     <div className='CardRows'>
                         <div className='EnhancedCardRow'>
-                            <CardRow cardType='enhanced' cards={this.state.enhancedCards} moveLeft={this.moveLeft} moveRight={this.moveRight}></CardRow>
+                            <CardRow cardType='enhanced' cards={this.state.enhancedCards} moveLeft={this.moveLeft} moveRight={this.moveRight} delCard={this.deleteCard}></CardRow>
                         </div>
                         <div className='InteractionCardRow'>
-                            <CardRow cardType='interaction' cards={this.state.interactionCards} moveLeft={this.moveLeft} moveRight={this.moveRight}></CardRow>
+                            <CardRow cardType='interaction' cards={this.state.interactionCards} moveLeft={this.moveLeft} moveRight={this.moveRight} delCard={this.deleteCard}></CardRow>
                         </div>
                         <div className='ActivityCardRow'>
-                            <CardRow cardType='activity' cards={this.state.activityCards} moveLeft={this.moveLeft} moveRight={this.moveRight}></CardRow>
+                            <CardRow cardType='activity' cards={this.state.activityCards} moveLeft={this.moveLeft} moveRight={this.moveRight} delCard={this.deleteCard}></CardRow>
                         </div>
                     </div>
 

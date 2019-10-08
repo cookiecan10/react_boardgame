@@ -12,6 +12,7 @@ class Card extends Component {
             <div style={cardStyle} onClick={log}>
 
                 <button style={leftButtonStyle} onClick={this.props.moveLeft.bind(this, key, 'interactionCards')}> 🡨 </button>
+                <button style={delButtonStyle} onClick={this.props.delCard.bind(this, key, 'activityCards')}> X </button>
                 <button style={rightButtonStyle} onClick={this.props.moveRight.bind(this, key, 'interactionCards')}> 🡪 </button>
 
                 <div name='title'>
@@ -78,6 +79,18 @@ const rightButtonStyle = {
     height: '30px',
     fontWeight: 'bold',
     float: 'right'
+}
+
+const delButtonStyle = {
+    marginBottom: '15px',
+    padding: '3px 8px',
+    cursor: 'pointer',
+    borderRadius: '50%',
+    border: 'none',
+    width: '30px',
+    height: '30px',
+    fontWeight: 'bold',
+    float: 'left'
 }
 
 const contentStyle = {
