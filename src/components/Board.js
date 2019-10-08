@@ -121,34 +121,49 @@ class Board extends Component {
     }
 
     moveLeft = (key, type) => {
+
+        // Copy list of cards
         let cards = this.state[type];
         console.log(type);
-        // find index of card
+        
+        // Find index of card
         let index = findIndex(cards, key);
         console.log(index);
 
-        // Swap with card next to it
-        let card = cards.filter( card => card.key === key)[0];
-        cards = cards.filter( card => card.key !== key); //Delete card
-        cards.splice(index-1, 0, card) // Add card
+        let card = cards.filter( card => card.key === key)[0];  // Copy card
+        cards = cards.filter( card => card.key !== key);        // Delete card from list
 
-        // Set state to new card array
+        //Prevent looping card back around
+        let newIndex = 0;
+        if (index === 0) {
+            newIndex = 0;
+        } else {
+            newIndex = index - 1;
+        }
+
+        cards.splice(newIndex, 0, card) // Add card to list
+
+        // Set state equal to new card array
         this.setState({[type]: this.state[type] = cards});
     }
     
     moveRight = (key, type) => {
+
+        // Copy list of cards
         let cards = this.state[type];
         console.log(type);
-        // find index of card
+
+        // Find index of card
         let index = findIndex(cards, key);
         console.log(index);
 
-        // Swap with card next to it
-        let card = cards.filter( card => card.key === key)[0];
-        cards = cards.filter( card => card.key !== key); //Delete card
-        cards.splice(index+1, 0, card) // Add card
+        let card = cards.filter( card => card.key === key)[0];  // Copy card
+        cards = cards.filter( card => card.key !== key);        // Delete card from list
 
-        // Set state to new card array
+        // Add card to list
+        cards.splice(index+1, 0, card)
+
+        // Set state to equal new card array
         this.setState({[type]: this.state[type] = cards});
     }
 

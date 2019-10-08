@@ -76,7 +76,6 @@ const rightButtonStyle = {
     width: '30px',
     height: '30px',
     fontWeight: 'bold',
-    align: 'right',
     float: 'right'
 }
 

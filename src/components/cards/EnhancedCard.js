@@ -75,8 +75,19 @@ const rightButtonStyle = {
     width: '30px',
     height: '30px',
     fontWeight: 'bold',
-    align: 'right',
     float: 'right'
+}
+
+const closeButtonStyle = {
+    marginBottom: '15px',
+    padding: '3px 8px',
+    cursor: 'pointer',
+    borderRadius: '50%',
+    border: 'none',
+    width: '30px',
+    height: '30px',
+    fontWeight: 'bold',
+    alignSelf: 'flex-end'
 }
 
 const contentStyle = {
