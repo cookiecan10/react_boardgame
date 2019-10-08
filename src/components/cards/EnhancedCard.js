@@ -7,9 +7,13 @@ function log(e) {
 
 class Card extends Component {
     render() {
-        const { content, code, description } = this.props.card;
+        const { key, content, code, description } = this.props.card;
         return (
             <div style={cardStyle} onClick={log}>
+
+                <button style={leftButtonStyle} onClick={this.props.moveLeft.bind(this, key, 'enhancedCards')}> 🡨 </button>
+                <button style={rightButtonStyle} onClick={this.props.moveRight.bind(this, key, 'enhancedCards')}> 🡪 </button>
+
                 <div name='title'>
                     <div style={{ fontSize: '15px', textAlign: 'center', margin: '5px 0px 5px' }}>enhancement opportunities</div>
                     <div style={{ fontSize: '10px',margin: '5px 0px 5px' }}>- content</div>
@@ -48,6 +52,31 @@ const cardStyle = {
     borderWidth: '4px 4px',
     borderRadius: '5px',
     userSelect: 'none'
+}
+
+const leftButtonStyle = {
+    marginBottom: '15px',
+    padding: '3px 8px',
+    cursor: 'pointer',
+    borderRadius: '50%',
+    border: 'none',
+    width: '30px',
+    height: '30px',
+    fontWeight: 'bold',
+    float: 'left'
+}
+
+const rightButtonStyle = {
+    marginBottom: '15px',
+    padding: '3px 8px',
+    cursor: 'pointer',
+    borderRadius: '50%',
+    border: 'none',
+    width: '30px',
+    height: '30px',
+    fontWeight: 'bold',
+    align: 'right',
+    float: 'right'
 }
 
 const contentStyle = {

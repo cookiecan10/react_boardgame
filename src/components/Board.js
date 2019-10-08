@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import CardRow from './CardRow'
 import Dialog from './Dialog'
+import { arrayExpression } from '@babel/types';
 
 class ActivityCard {
     constructor(key=0, content=[], code='', description='', isEmpty=true) {
@@ -13,22 +14,22 @@ class ActivityCard {
 }
   
 class InteractionCard {
-constructor(key=0, content=[], code='', description='', isEmpty=true) {
-    this.key = key;
-    this.content = content;
-    this.code = code;
-    this.description = description;
-    this.isEmpty=isEmpty;
+    constructor(key=0, content=[], code='', description='', isEmpty=true) {
+        this.key = key;
+        this.content = content;
+        this.code = code;
+        this.description = description;
+        this.isEmpty=isEmpty;
     }
 }
 
 class EnhancedCard {
-constructor(key=0, content=[], code='', description='', isEmpty=true) {
-    this.key = key;
-    this.content = content;
-    this.code = code;
-    this.description = description;
-    this.isEmpty=isEmpty;
+    constructor(key=0, content=[], code='', description='', isEmpty=true) {
+        this.key = key;
+        this.content = content;
+        this.code = code;
+        this.description = description;
+        this.isEmpty=isEmpty;
     }
 }
 
@@ -53,13 +54,22 @@ let interactionCardPlaceholders =
 
 let enhancedCardPlaceholders = Array(MAX_LENGTH).fill();
     
-    //Array(4).fill(new EnhancedCard()); //Does not work, doesn't create new cards, they are all the same reference
+    //Array(4).fill(new EnhancedCard()); //Does not work, doesn't create new cards, they all reference the same object
 // [
 //     new EnhancedCard(0, ['some content stuff'], 'OWO', 'enhancing', false),
 //     new EnhancedCard(),
 //     new EnhancedCard(),
 //     new EnhancedCard(),
 // ]
+
+function findIndex(arr, key) {
+    for (var i = 0; i < arr.length; i++) {
+        if (arr[i].key === key) {
+            return i;
+        }
+    }
+    return -1;
+}
 
 class Board extends Component {
 
@@ -110,6 +120,38 @@ class Board extends Component {
 
     }
 
+    moveLeft = (key, type) => {
+        let cards = this.state[type];
+        console.log(type);
+        // find index of card
+        let index = findIndex(cards, key);
+        console.log(index);
+
+        // Swap with card next to it
+        let card = cards.filter( card => card.key === key)[0];
+        cards = cards.filter( card => card.key !== key); //Delete card
+        cards.splice(index-1, 0, card) // Add card
+
+        // Set state to new card array
+        this.setState({[type]: this.state[type] = cards});
+    }
+    
+    moveRight = (key, type) => {
+        let cards = this.state[type];
+        console.log(type);
+        // find index of card
+        let index = findIndex(cards, key);
+        console.log(index);
+
+        // Swap with card next to it
+        let card = cards.filter( card => card.key === key)[0];
+        cards = cards.filter( card => card.key !== key); //Delete card
+        cards.splice(index+1, 0, card) // Add card
+
+        // Set state to new card array
+        this.setState({[type]: this.state[type] = cards});
+    }
+
     state = {
         diaglogOpen: false,
         enhancedCards: [],
@@ -129,13 +171,13 @@ class Board extends Component {
 
                     <div className='CardRows'>
                         <div className='EnhancedCardRow'>
-                            <CardRow cardType='enhanced' cards={this.state.enhancedCards}></CardRow>
+                            <CardRow cardType='enhanced' cards={this.state.enhancedCards} moveLeft={this.moveLeft} moveRight={this.moveRight}></CardRow>
                         </div>
                         <div className='InteractionCardRow'>
-                            <CardRow cardType='interaction' cards={this.state.interactionCards}></CardRow>
+                            <CardRow cardType='interaction' cards={this.state.interactionCards} moveLeft={this.moveLeft} moveRight={this.moveRight}></CardRow>
                         </div>
                         <div className='ActivityCardRow'>
-                            <CardRow cardType='activity' cards={this.state.activityCards}></CardRow>
+                            <CardRow cardType='activity' cards={this.state.activityCards} moveLeft={this.moveLeft} moveRight={this.moveRight}></CardRow>
                         </div>
                     </div>
 

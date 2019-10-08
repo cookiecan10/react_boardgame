@@ -17,7 +17,7 @@ export default class CardRow extends Component {
                     if (card.isEmpty){
                         return (<EmptyCard key={card.key}/>)
                     } else {
-                        return (<ActivityCard key={card.key} card={card}/>)
+                        return (<ActivityCard key={card.key} card={card} moveLeft={this.props.moveLeft} moveRight={this.props.moveRight}/>)
                     }
                 });
 
@@ -29,7 +29,7 @@ export default class CardRow extends Component {
                     if (card.isEmpty){
                         return (<EmptyCard key={card.key}/>)
                     } else {
-                        return (<EnhancedCard key={card.key} card={card}/>)
+                        return (<EnhancedCard key={card.key} card={card} moveLeft={this.props.moveLeft} moveRight={this.props.moveRight}/>)
                     }
                 });
 
@@ -41,14 +41,14 @@ export default class CardRow extends Component {
                     if (card.isEmpty){
                         return (<EmptyCard key={card.key}/>)
                     } else {
-                        return (<InteractionCard key={card.key} card={card}/>)
+                        return (<InteractionCard key={card.key} card={card} moveLeft={this.props.moveLeft} moveRight={this.props.moveRight}/>)
                     }
                 });
 
                 return rCard
 
             default:
-                return <div></div>
+                return <div>This should never appear, if it does appear there's something broken and this should be reported</div>
         }
     }
 }

@@ -8,14 +8,18 @@ function log(e) {
 
 class Card extends Component {
     render() {
-        const { content, code, description } = this.props.card;
+        const { key, content, code, description } = this.props.card;
         return (
-            <div style={cardStyle} onClick={log}>
+            <div style={cardStyle}>
+
+                <button style={leftButtonStyle} onClick={this.props.moveLeft.bind(this, key, 'activityCards')}> 🡨 </button>
+                <button style={rightButtonStyle} onClick={this.props.moveRight.bind(this, key, 'activityCards')}> 🡪 </button>
+
                 <div name='title'>
                     <div style={{margin:'10px 0px 0px 0px'}}>What do we want to know</div>
-                    <div style={{fontSize:'15px', fontWeight:'bold' ,margin:'5px 0px 5px'}}>Activity</div>
+                    <div style={{fontSize:'20px', fontWeight:'bold' ,margin:'5px 0px 5px'}}>Activity</div>
                 </div>
-
+                {key}
                 <div style={contentStyle} name='content'>
                     <div style={{fontSize:'20px'}}>Learning Analytics</div>
 
@@ -26,7 +30,7 @@ class Card extends Component {
 
                 <div name='description'>
                     <div style={{fontSize:'20px'}}>Description</div><code>(code:{code})</code>
-                    <p>{description}</p>
+                    <p>{description}</p> 
                 </div>
 
             </div>
@@ -37,7 +41,7 @@ class Card extends Component {
 const cardStyle = {
     position: 'relative',
     float: 'left',
-    fontSize: '1vh',
+    fontSize: '1.5vh',
     backgroundColor: '#ffff88',
     color: 'black',
     width: '20%',
@@ -48,7 +52,32 @@ const cardStyle = {
     borderColor: '#888888',
     borderWidth: '4px 4px',
     borderRadius: '5px',
-    userSelect: 'none'
+    userSelect: 'none',
+}
+
+const leftButtonStyle = {
+    marginBottom: '15px',
+    padding: '3px 8px',
+    cursor: 'pointer',
+    borderRadius: '50%',
+    border: 'none',
+    width: '30px',
+    height: '30px',
+    fontWeight: 'bold',
+    float: 'left'
+}
+
+const rightButtonStyle = {
+    marginBottom: '15px',
+    padding: '3px 8px',
+    cursor: 'pointer',
+    borderRadius: '50%',
+    border: 'none',
+    width: '30px',
+    height: '30px',
+    fontWeight: 'bold',
+    align: 'right',
+    float: 'right'
 }
 
 const contentStyle = {
