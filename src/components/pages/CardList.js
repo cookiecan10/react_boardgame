@@ -5,12 +5,52 @@ import Todos from './components/Todos'
 import AddTodo from './components/AddTodo'
 import About from './components/pages/About'
 import axios from 'axios';
+import { DropdownMultiple, Dropdown } from 'reactjs-dropdown-component'; // je kan een dropdown aanmaken die een of meerdere seleties toelaat, zie de betreffende componenten voor meer info.
 
 import './Overview.css';
 
 class CardList extends React.Component {
     state = {
-        todos: []
+        todos: [
+            {
+                id: 0,
+                title: 'testing' 
+            }
+        ],
+        cardCategories: [
+            {
+                id: 0,
+                title: 'L.E.T. cards',
+                selected: false,
+                key: 'CardCategories'
+            },
+            {
+                id: 1,
+                title: 'Interaction cards',
+                selected: false,
+                key: 'CardCategories'
+            },
+            {
+                id: 2,
+                title: 'Activity cards',
+                selected: false,
+                key: 'CardCategories'
+            },
+            {
+                id: 3,
+                title: 'Pedagogy cards',
+                selected: false,
+                key: 'CardCategories'
+            }
+        ]
+    }
+    resetThenSet = (id, key) => {
+        let temp = JSON.parse(JSON.stringify(this.state[key]));
+        temp.forEach(item => item.selected = false);
+        temp[id].selected = true;
+        this.setState({
+            [key]: temp
+        });
     }
     componentDidMount() {
         axios.get('https://jsonplaceholder.typicode.com/todos?_limit=10')
@@ -51,6 +91,13 @@ class CardList extends React.Component {
                         <Header />
                         <Route exact path="/" render={props => (
                             <React.Fragment>
+                                <div className="wrapper">
+                                    <Dropdown
+                                        title="Select Category"//Dit is de titel van dropdown,ui taal moet engels zijn.
+                                        list={this.state.cardCategories} //de dropdown wordt gevult met de items die in de state gedfineerd worden.
+                                        resetThenSet={this.resetThenSet}
+                                    />
+                                </div>
                                 <AddTodo addTodo={this.addTodo} />
                                 <Todos todos={this.state.todos} markComplete={this.markComplete}
                                     delTodo={this.delTodo} />
