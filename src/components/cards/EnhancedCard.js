@@ -12,7 +12,7 @@ class Card extends Component {
             <div style={cardStyle} onClick={log}>
 
                 <button style={leftButtonStyle} onClick={this.props.moveLeft.bind(this, key, 'enhancedCards')}> 🡨 </button>
-                <button style={delButtonStyle} onClick={this.props.delCard.bind(this, key, 'activityCards')}> X </button>
+                <button style={delButtonStyle} onClick={this.props.delCard.bind(this, key, 'enhancedCards')}> X </button>
                 <button style={rightButtonStyle} onClick={this.props.moveRight.bind(this, key, 'enhancedCards')}> 🡪 </button>
 
                 <div name='title'>
