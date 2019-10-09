@@ -5,15 +5,15 @@ function log(e) {
     console.log("you clicked an Interaction Card")
 }
 
-class Card extends Component {
+class InteractionCard extends Component {
     render() {
-        const { key, content, code, description } = this.props.card;
+        const { key, cardType, content, code, description } = this.props.card;
         return (
             <div style={cardStyle} onClick={log}>
 
-                <button style={leftButtonStyle} onClick={this.props.moveLeft.bind(this, key, 'interactionCards')}> 🡨 </button>
-                <button style={delButtonStyle} onClick={this.props.delCard.bind(this, key, 'interactionCards')}> X </button>
-                <button style={rightButtonStyle} onClick={this.props.moveRight.bind(this, key, 'interactionCards')}> 🡪 </button>
+                <button style={leftButtonStyle} onClick={this.props.moveLeft.bind(this, key, cardType)}> 🡨 </button>
+                <button style={delButtonStyle} onClick={this.props.delCard.bind(this, key, cardType)}> X </button>
+                <button style={rightButtonStyle} onClick={this.props.moveRight.bind(this, key, cardType)}> 🡪 </button>
 
                 <div name='title'>
                     <div style={topStyle} name='InteractionTop'>learning enhancing technology</div>
@@ -24,7 +24,7 @@ class Card extends Component {
                     <div style={{ fontSize: '20px' }}>Interaction</div>
 
                     <ul style={{textAlign:'left'}}>
-                        {content.map((x) => (<li>{x}</li>))}
+                        {content.map((item, index) => (<li key={index}>{item}</li>))}
                     </ul>
                 </div>
 
@@ -107,4 +107,4 @@ const bottomStyle = {
     fontSize: '15px'
 }
 
-export default Card
+export default InteractionCard

@@ -21,11 +21,17 @@ class Card {
     }
 }
 
-class ActivityCard extends Card {}
+class ActivityCard extends Card {
+    cardType = 'activityCards';
+}
 
-class InteractionCard extends Card {}
+class InteractionCard extends Card {
+    cardType = 'interactionCards';
+}
 
-class EnhancedCard extends Card {}
+class EnhancedCard extends Card {
+    cardType = 'enhancedCards';
+}
 
 const MAX_LENGTH = 4;
 
@@ -48,7 +54,7 @@ let interactionCardPlaceholders =
 
 let enhancedCardPlaceholders = //Array(MAX_LENGTH).fill();
 
-    //Array(4).fill(new EnhancedCard()); //Does not work, doesn't create new cards, they all reference the same object
+    //Array(4).fill(new EnhancedCard()); //Does not work, doesn't create new cards, they all references the same object
 [
     new EnhancedCard(0, ['some content stuff'], 'OWO', 'enhancing', false),
     new EnhancedCard(),
@@ -117,6 +123,7 @@ class Board extends Component {
     deleteCard = (key, type) => {
 
         let cards = this.state[type];
+        console.log(cards)
         console.log(type);
 
         let index = findIndex(cards, key);
@@ -176,6 +183,23 @@ class Board extends Component {
         this.setState({[type]: cards});
     }
 
+    addCard = (key, type) => {
+        let cards = this.state[type];
+        console.log("Key: ", key);
+        console.log(type);
+
+        let index = findIndex(cards, key);
+        console.log(index);
+
+        console.log('before:');
+        console.log(cards);
+        cards[index].reset(key, ['stuff'], 'stuff', 'stuff', false);
+        console.log('after: ');
+        console.log(cards);
+
+        this.setState({[type]: cards});
+    }
+
     state = {
         diaglogOpen: false,
         enhancedCards: [],
@@ -195,13 +219,31 @@ class Board extends Component {
 
                     <div className='CardRows'>
                         <div className='EnhancedCardRow'>
-                            <CardRow cardType='enhanced' cards={this.state.enhancedCards} moveLeft={this.moveLeft} moveRight={this.moveRight} delCard={this.deleteCard}></CardRow>
+                            <CardRow cardType='enhanced' 
+                            cards={this.state.enhancedCards} 
+                            moveLeft={this.moveLeft} 
+                            moveRight={this.moveRight} 
+                            delCard={this.deleteCard} 
+                            addCard={this.addCard}>
+                            </CardRow>
                         </div>
                         <div className='InteractionCardRow'>
-                            <CardRow cardType='interaction' cards={this.state.interactionCards} moveLeft={this.moveLeft} moveRight={this.moveRight} delCard={this.deleteCard}></CardRow>
+                            <CardRow cardType='interaction' 
+                            cards={this.state.interactionCards} 
+                            moveLeft={this.moveLeft} 
+                            moveRight={this.moveRight} 
+                            delCard={this.deleteCard} 
+                            addCard={this.addCard}>
+                            </CardRow>
                         </div>
                         <div className='ActivityCardRow'>
-                            <CardRow cardType='activity' cards={this.state.activityCards} moveLeft={this.moveLeft} moveRight={this.moveRight} delCard={this.deleteCard}></CardRow>
+                            <CardRow cardType='activity' 
+                            cards={this.state.activityCards} 
+                            moveLeft={this.moveLeft} 
+                            moveRight={this.moveRight} 
+                            delCard={this.deleteCard} 
+                            addCard={this.addCard}>
+                            </CardRow>
                         </div>
                     </div>
 
