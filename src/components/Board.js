@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import CardRow from './CardRow'
 import Dialog from './Dialog'
-import { arrayExpression } from '@babel/types';
 
-class ActivityCard {
+class Card {
     constructor(key=0, content=[], code='', description='', isEmpty=true) {
         this.key = key;
         this.content = content;
@@ -11,10 +10,9 @@ class ActivityCard {
         this.description = description;
         this.isEmpty=isEmpty;
     }
-}
-  
-class InteractionCard {
-    constructor(key=0, content=[], code='', description='', isEmpty=true) {
+
+    // Reset all of the data off the card, can also assign new values
+    reset(key=this.key, content=[], code='', description='', isEmpty=true) {
         this.key = key;
         this.content = content;
         this.code = code;
@@ -23,20 +21,16 @@ class InteractionCard {
     }
 }
 
-class EnhancedCard {
-    constructor(key=0, content=[], code='', description='', isEmpty=true) {
-        this.key = key;
-        this.content = content;
-        this.code = code;
-        this.description = description;
-        this.isEmpty=isEmpty;
-    }
-}
+class ActivityCard extends Card {}
+
+class InteractionCard extends Card {}
+
+class EnhancedCard extends Card {}
 
 const MAX_LENGTH = 4;
 
 let activityCardPlaceholders = [
-    // Constructed with Class
+
     // id, content, code, description, isEmpty
     new ActivityCard(0, ["Info"], 'YOLO', 'Some interesting information', false),
     new ActivityCard(645465, ['todo: fix vertical card size'], 'WHAT008', 'hoooooooooooooooo', false),
@@ -44,7 +38,7 @@ let activityCardPlaceholders = [
     new ActivityCard(3, ['Presence', 'Number of clicks', 'Number of live interactions'], 'WHAT007', 'Some text', false)
 ]
 
-let interactionCardPlaceholders = 
+let interactionCardPlaceholders =
 [
     new InteractionCard(0, ['Notices your card'], 'OWO', 'Interactions', false),
     new InteractionCard(),
@@ -52,15 +46,15 @@ let interactionCardPlaceholders =
     new InteractionCard(),
 ]
 
-let enhancedCardPlaceholders = Array(MAX_LENGTH).fill();
-    
+let enhancedCardPlaceholders = //Array(MAX_LENGTH).fill();
+
     //Array(4).fill(new EnhancedCard()); //Does not work, doesn't create new cards, they all reference the same object
-// [
-//     new EnhancedCard(0, ['some content stuff'], 'OWO', 'enhancing', false),
-//     new EnhancedCard(),
-//     new EnhancedCard(),
-//     new EnhancedCard(),
-// ]
+[
+    new EnhancedCard(0, ['some content stuff'], 'OWO', 'enhancing', false),
+    new EnhancedCard(),
+    new EnhancedCard(),
+    new EnhancedCard(),
+]
 
 function findIndex(arr, key) {
     for (var i = 0; i < arr.length; i++) {
@@ -86,14 +80,14 @@ class Board extends Component {
         // for (var i = 0; i < enhancedCardPlaceholders; i++) {
         //     enhancedCardPlaceholders.push(new EnhancedCard());
         // }
-        
+
         //ALL OF THIS IS USELESS, BUT I'M GONNA KEEP IT AS IT TOOK A LOT OF WORK
 
         //Assigning keys's
         //You can probably assign all of the card types if you use a forloop and put the different cardtypes in an array
         this.state.activityCards = activityCardPlaceholders.map( (card, index) => {
             if (card !== undefined){
-                card.key = index;
+                card.key = index; //Remove if you want to take the id's from api
                 return (card);
             } else {
                 return new ActivityCard(index);
@@ -121,7 +115,18 @@ class Board extends Component {
     }
 
     deleteCard = (key, type) => {
-        this.setState({[type]: this.state[type].filter(card => card.key !== key)});
+
+        let cards = this.state[type];
+        console.log(type);
+
+        let index = findIndex(cards, key);
+        console.log(index);
+
+        cards[index].reset();
+
+        console.log(cards);
+
+        this.setState({[type]: cards}); // Set state to equal new card array
     }
 
     moveLeft = (key, type) => {
@@ -145,12 +150,12 @@ class Board extends Component {
             newIndex = index - 1;
         }
 
-        cards.splice(newIndex, 0, card) // Add card to list
+        cards.splice(newIndex, 0, card); // Add card to list
 
         // Set state equal to new card array
-        this.setState({[type]: this.state[type] = cards});
+        this.setState({[type]: cards});
     }
-    
+
     moveRight = (key, type) => {
 
         // Copy list of cards
@@ -165,10 +170,10 @@ class Board extends Component {
         cards = cards.filter( card => card.key !== key);        // Delete card from list
 
         // Add card to list
-        cards.splice(index+1, 0, card)
+        cards.splice(index+1, 0, card);
 
         // Set state to equal new card array
-        this.setState({[type]: this.state[type] = cards});
+        this.setState({[type]: cards});
     }
 
     state = {
