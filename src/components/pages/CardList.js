@@ -85,12 +85,10 @@ class CardList extends React.Component {
     }
     render() {
         return (
-            <Router>
+            <React.Fragment>
                 <div className="App">
                     <div className="container">
-                        <Header />
-                        <Route exact path="/" render={props => (
-                            <React.Fragment>
+
                                 <div className="wrapper">
                                     <Dropdown
                                         title="Select Category"//Dit is de titel van dropdown,ui taal moet engels zijn.
@@ -101,12 +99,11 @@ class CardList extends React.Component {
                                 <AddTodo addTodo={this.addTodo} />
                                 <Todos todos={this.state.todos} markComplete={this.markComplete}
                                     delTodo={this.delTodo} />
-                            </React.Fragment>
                         )} />
                         <Route path="/about" component={About} />
                     </div>
                 </div>
-            </Router>
+                </React.Fragment>
         );
     }
 
