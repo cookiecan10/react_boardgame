@@ -14,7 +14,11 @@ class CardList extends React.Component {
         todos: [
             {
                 id: 0,
-                title: 'testing' 
+                title: 'testItem'
+            },
+            {
+                id: 1,
+                title: 'TestItem 2'
             }
         ],
         cardCategories: [
@@ -53,7 +57,7 @@ class CardList extends React.Component {
         });
     }
     componentDidMount() {
-        axios.get('https://jsonplaceholder.typicode.com/todos?_limit=10')
+        axios.get('')
             .then(res => this.setState({ todos: res.data }))
     }
 
@@ -97,9 +101,7 @@ class CardList extends React.Component {
                                     />
                                 </div>
                                 <AddTodo addTodo={this.addTodo} />
-                                <Todos todos={this.state.todos} markComplete={this.markComplete}
-                                    delTodo={this.delTodo} />
-                        )} />
+                                <Todos todos={this.state.todos} delTodo={this.delTodo} />
                         <Route path="/about" component={About} />
                     </div>
                 </div>
