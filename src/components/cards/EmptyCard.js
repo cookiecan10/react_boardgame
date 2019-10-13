@@ -8,8 +8,9 @@ function log(e) {
 class Card extends Component {
     render() {
         const { key, cardType} = this.props.card;
+        const cardRowType = this.props.cardRowType;
         return (
-            <div style={cardStyle} onClick = {this.props.addCard.bind(this, key, cardType)}>
+            <div style={cardStyle} onClick = {this.props.addCard.bind(this, key, cardRowType)}>
                 <div>
                     +
                 </div>

@@ -8,12 +8,13 @@ function log(e) {
 class EnhancedCard extends Component {
     render() {
         const { key, cardType, content, code, description } = this.props.card;
+        const cardRowType = this.props.cardRowType;
         return (
             <div style={cardStyle} onClick={log}>
 
-                <button style={leftButtonStyle} onClick={this.props.moveLeft.bind(this, key, cardType)}> 🡨 </button>
-                <button style={delButtonStyle} onClick={this.props.delCard.bind(this, key, cardType)}> X </button>
-                <button style={rightButtonStyle} onClick={this.props.moveRight.bind(this, key, cardType)}> 🡪 </button>
+                <button style={leftButtonStyle} onClick={this.props.moveLeft.bind(this, key, cardRowType)}> 🡨 </button>
+                <button style={delButtonStyle} onClick={this.props.delCard.bind(this, key, cardRowType)}> X </button>
+                <button style={rightButtonStyle} onClick={this.props.moveRight.bind(this, key, cardRowType)}> 🡪 </button>
 
                 <div name='title'>
                     <div style={{ fontSize: '15px', textAlign: 'center', margin: '5px 0px 5px' }}>enhancement opportunities</div>

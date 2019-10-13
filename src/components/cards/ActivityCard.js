@@ -7,13 +7,17 @@ function log(e) {
 
 
 class ActivityCard extends Component {
+    constructor(props){
+        super(props)
+    }
     render() {
         const { key, cardType, content, code, description } = this.props.card;
+        const cardRowType = this.props.cardRowType;
         return (
             <div style={cardStyle}>
-                <button style={leftButtonStyle} onClick={this.props.moveLeft.bind(this, key, cardType)}> 🡨 </button>
-                <button style={delButtonStyle} onClick={this.props.delCard.bind(this, key, cardType)}> X </button>
-                <button style={rightButtonStyle} onClick={this.props.moveRight.bind(this, key, cardType)}> 🡪 </button>
+                <button style={leftButtonStyle} onClick={this.props.moveLeft.bind(this, key, cardRowType)}> 🡨 </button>
+                <button style={delButtonStyle} onClick={this.props.delCard.bind(this, key, cardRowType)}> X </button>
+                <button style={rightButtonStyle} onClick={this.props.moveRight.bind(this, key, cardRowType)}> 🡪 </button>
 
                 <div name='title'>
                     <div style={{margin:'10px 0px 0px 0px'}}>What do we want to know</div>

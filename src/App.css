@@ -27,31 +27,11 @@
   height: 600px;
 }
 
-.CardRows {
+.CardRow {
   position: relative;
   float: left;
   width: 80%;
   height: 90%;
-  overflow: hidden;
-}
-
-.ActivityCardRow {
-  position: relative;
-  width: 100%;
-  border: 3px solid red;
-  overflow: hidden;
-}
-
-.InteractionCardRow {
-  position: relative;
-  width: 100%;
-  border: 3px solid red;
-  overflow: hidden;
-}
-
-.EnhancedCardRow {
-  position: relative;
-  width: 100%;
   border: 3px solid red;
   overflow: hidden;
 }

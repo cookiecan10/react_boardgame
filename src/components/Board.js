@@ -41,6 +41,7 @@ let activityCardPlaceholders = [
     new ActivityCard(0, ["Info"], 'YOLO', 'Some interesting information', false),
     new ActivityCard(645465, ['todo: fix vertical card size'], 'WHAT008', 'hoooooooooooooooo', false),
     new ActivityCard(2, ['stuff']),
+    //new InteractionCard(54, ['Presence', 'Number of clicks', 'Number of live interactions'], 'WHAT007', 'Some text', false),
     new ActivityCard(3, ['Presence', 'Number of clicks', 'Number of live interactions'], 'WHAT007', 'Some text', false)
 ]
 
@@ -213,47 +214,41 @@ class Board extends Component {
 
     render() {
         return (
-            <div>
-                <div className='Board'>
+            <div className='Board'>
 
-                    <div className='BoardLeftSide' >
-                        <button onClick={(e) => this.setState({ diaglogOpen: !this.state.diaglogOpen})}>Show Dialog</button>
-                        <p>Things on the left side with some more text en random stuff and I don't know if i'm making typing mistakes but it doesn't matter</p>
-                    </div>
-
-                    <div className='CardRows'>
-                        <div className='EnhancedCardRow'>
-                            <CardRow cardRowType='enhanced' 
-                            cards={this.state.enhancedCards} 
-                            moveLeft={this.moveLeft} 
-                            moveRight={this.moveRight} 
-                            delCard={this.deleteCard} 
-                            addCard={this.addCard}>
-                            </CardRow>
-                        </div>
-                        <div className='InteractionCardRow'>
-                            <CardRow cardRowType='interaction' 
-                            cards={this.state.interactionCards} 
-                            moveLeft={this.moveLeft} 
-                            moveRight={this.moveRight} 
-                            delCard={this.deleteCard} 
-                            addCard={this.addCard}>
-                            </CardRow>
-                        </div>
-                        <div className='ActivityCardRow'>
-                            <CardRow cardRowType='activity' 
-                            cards={this.state.activityCards} 
-                            moveLeft={this.moveLeft} 
-                            moveRight={this.moveRight} 
-                            delCard={this.deleteCard} 
-                            addCard={this.addCard}>
-                            </CardRow>
-                        </div>
-                    </div>
-
-                    {/* This needs to be last */}
-                    <Dialog isOpen={this.state.diaglogOpen} onClose={(e) => this.setState({ diaglogOpen: false})}>This is a nice dialog box with a lot of dialog that nicely explains what you should do</Dialog>
+                <div className='BoardLeftSide' >
+                    <button onClick={(e) => this.setState({ diaglogOpen: !this.state.diaglogOpen})}>Show Dialog</button>
+                    <p>Things on the left side with some more text en random stuff and I don't know if i'm making typing mistakes but it doesn't matter</p>
                 </div>
+
+                <div className='CardRows'>
+                    <CardRow cardRowType='enhancedCards' 
+                        cards={this.state.enhancedCards} 
+                        moveLeft={this.moveLeft} 
+                        moveRight={this.moveRight} 
+                        delCard={this.deleteCard} 
+                        addCard={this.addCard}>
+                    </CardRow>
+
+                    <CardRow cardRowType='interactionCards' 
+                        cards={this.state.interactionCards} 
+                        moveLeft={this.moveLeft} 
+                        moveRight={this.moveRight} 
+                        delCard={this.deleteCard} 
+                        addCard={this.addCard}>
+                    </CardRow>
+
+                    <CardRow cardRowType='activityCards' 
+                        cards={this.state.activityCards} 
+                        moveLeft={this.moveLeft} 
+                        moveRight={this.moveRight} 
+                        delCard={this.deleteCard} 
+                        addCard={this.addCard}>
+                    </CardRow>
+                </div>
+
+                {/* This needs to be last */}
+                <Dialog isOpen={this.state.diaglogOpen} onClose={(e) => this.setState({ diaglogOpen: false})}>This is a nice dialog box with a lot of dialog that nicely explains what you should do</Dialog>
             </div>
         )
     }
