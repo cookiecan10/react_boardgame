@@ -33,7 +33,7 @@ class EnhancedCard extends Card {
     cardType = 'enhancedCards';
 }
 
-const MAX_LENGTH = 4;
+// const MAX_LENGTH = 4;
 
 let activityCardPlaceholders = [
 
@@ -185,15 +185,19 @@ class Board extends Component {
 
     addCard = (key, type) => {
         let cards = this.state[type];
+
         console.log("Key: ", key);
         console.log(type);
 
         let index = findIndex(cards, key);
+
         console.log(index);
 
         console.log('before:');
         console.log(cards);
+
         cards[index].reset(key, ['stuff'], 'stuff', 'stuff', false);
+
         console.log('after: ');
         console.log(cards);
 
@@ -219,7 +223,7 @@ class Board extends Component {
 
                     <div className='CardRows'>
                         <div className='EnhancedCardRow'>
-                            <CardRow cardType='enhanced' 
+                            <CardRow cardRowType='enhanced' 
                             cards={this.state.enhancedCards} 
                             moveLeft={this.moveLeft} 
                             moveRight={this.moveRight} 
@@ -228,7 +232,7 @@ class Board extends Component {
                             </CardRow>
                         </div>
                         <div className='InteractionCardRow'>
-                            <CardRow cardType='interaction' 
+                            <CardRow cardRowType='interaction' 
                             cards={this.state.interactionCards} 
                             moveLeft={this.moveLeft} 
                             moveRight={this.moveRight} 
@@ -237,7 +241,7 @@ class Board extends Component {
                             </CardRow>
                         </div>
                         <div className='ActivityCardRow'>
-                            <CardRow cardType='activity' 
+                            <CardRow cardRowType='activity' 
                             cards={this.state.activityCards} 
                             moveLeft={this.moveLeft} 
                             moveRight={this.moveRight} 
