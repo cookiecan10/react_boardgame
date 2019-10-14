@@ -17,7 +17,7 @@ export default class CardRow extends Component {
             if (card.isEmpty){
                 return (<EmptyCard key={card.key} card={card} cardRowType={cardRowType} addCard={this.props.addCard}/>)
             } else {
-                //Decide which type of card to place down
+                //Decide which type of card to render
                 switch(card.cardType){
                     case 'activityCards':
                         return (<ActivityCard key={card.key} card={card} cardRowType={cardRowType} moveLeft={this.props.moveLeft} moveRight={this.props.moveRight} delCard={this.props.delCard}/>)
@@ -29,47 +29,5 @@ export default class CardRow extends Component {
             }
         });
         return (<div className='CardRow'> {rCard} </div>)
-
-        // switch(this.props.cardType){
-
-        //     case 'activity':
-                
-        //         rCard = this.props.cards.map(card => {
-        //             if (card.isEmpty){
-        //                 return (<EmptyCard key={card.key} card={card} addCard={this.props.addCard}/>)
-        //             } else {
-        //                 return (<ActivityCard key={card.key} card={card} moveLeft={this.props.moveLeft} moveRight={this.props.moveRight} delCard={this.props.delCard}/>)
-        //             }
-        //         });
-
-        //         return rCard
-
-        //     case 'enhanced':
-
-        //         rCard = this.props.cards.map(card => {
-        //             if (card.isEmpty){
-        //                 return (<EmptyCard key={card.key} card={card} moveLeft={this.props.moveLeft} addCard={this.props.addCard}/>)
-        //             } else {
-        //                 return (<EnhancedCard key={card.key} card={card} moveLeft={this.props.moveLeft} moveRight={this.props.moveRight} delCard={this.props.delCard}/>)
-        //             }
-        //         });
-
-        //         return rCard
-
-        //     case 'interaction':
-
-        //         rCard = this.props.cards.map(card => {
-        //             if (card.isEmpty){
-        //                 return (<EmptyCard key={card.key} card={card} moveLeft={this.props.moveLeft} addCard={this.props.addCard}/>)
-        //             } else {
-        //                 return (<InteractionCard key={card.key} card={card} moveLeft={this.props.moveLeft} moveRight={this.props.moveRight} delCard={this.props.delCard}/>)
-        //             }
-        //         });
-
-        //         return rCard
-
-        //     default:
-        //         return <div>This should never appear, if it does appear there's something broken and this should be reported</div>
-        // }
     }
 }

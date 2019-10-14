@@ -14,7 +14,7 @@ class ActivityCard extends Component {
         const { key, cardType, content, code, description } = this.props.card;
         const cardRowType = this.props.cardRowType;
         return (
-            <div style={cardStyle}>
+            <div style={cardStyle} className='Card'>
                 <button style={leftButtonStyle} onClick={this.props.moveLeft.bind(this, key, cardRowType)}> 🡨 </button>
                 <button style={delButtonStyle} onClick={this.props.delCard.bind(this, key, cardRowType)}> X </button>
                 <button style={rightButtonStyle} onClick={this.props.moveRight.bind(this, key, cardRowType)}> 🡪 </button>
@@ -48,8 +48,8 @@ const cardStyle = {
     fontSize: '1.5vh',
     backgroundColor: '#ffff88',
     color: 'black',
-    width: '20%',
-    height: '100%',
+    // width: '20%',
+    height: '250px',
     margin: '7px',
     padding: '0px 4px',
     borderStyle: 'solid',

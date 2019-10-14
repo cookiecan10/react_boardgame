@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Header from './components/layout/Header'
 import CardList from './components/pages/CardList'
 import Board from './components/Board'
+import Footer from './components/layout/Footer'
 
 import './App.css';
 
@@ -23,6 +24,8 @@ class App extends React.Component {
             </React.Fragment>
             )} />
             <Route path="/CardList" component={CardList} />
+
+            <Footer />
         </div>
       </Router>
     );

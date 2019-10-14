@@ -10,7 +10,7 @@ class Card extends Component {
         const { key, cardType} = this.props.card;
         const cardRowType = this.props.cardRowType;
         return (
-            <div style={cardStyle} onClick = {this.props.addCard.bind(this, key, cardRowType)}>
+            <div style={cardStyle} className='Card' onClick = {this.props.addCard.bind(this, key, cardRowType)}>
                 <div>
                     +
                 </div>
@@ -24,8 +24,8 @@ const cardStyle = {
     float: 'left',
     backgroundColor: '#000000',
     color: 'white',
-    width: '20%',
-    height: '200px',
+    // width: '20%',
+    height: '250px',
     margin: '7px',
     padding: '0px 4px',
     borderStyle: 'solid',

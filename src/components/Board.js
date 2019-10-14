@@ -216,7 +216,7 @@ class Board extends Component {
         return (
             <div className='Board'>
 
-                <div className='BoardLeftSide' >
+                <div className='BoardMenu' >
                     <button onClick={(e) => this.setState({ diaglogOpen: !this.state.diaglogOpen})}>Show Dialog</button>
                     <p>Things on the left side with some more text en random stuff and I don't know if i'm making typing mistakes but it doesn't matter</p>
                 </div>
