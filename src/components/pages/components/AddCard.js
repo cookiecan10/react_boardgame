@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-export class AddTodo extends Component {
+export class AddCard extends Component {
     state = {
         title: ''
     }
@@ -21,7 +21,7 @@ export class AddTodo extends Component {
                     type="text" 
                     name="title"
                     style={{flex: '10', padding: '5px'}}
-                    placeholder="Add new card..."
+                    placeholder="Add new card title"
                     value={this.state.title}
                     onChange={this.onChange}
                 />
@@ -37,8 +37,8 @@ export class AddTodo extends Component {
 }
 
 // PropTypes
-AddTodo.propTypes = {
+AddCard.propTypes = {
     addTodo: PropTypes.func.isRequired,
 }
 
-export default AddTodo
+export default AddCard

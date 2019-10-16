@@ -1,8 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Todos from './components/Todos'
-import AddTodo from './components/AddTodo'
+import AddCard from './components/AddCard'
 import About from './components/pages/About'
+import CardInfo from './components/CardInfo'
 import CardRow from '../CardRow'
 import axios from 'axios';
 import { DropdownMultiple, Dropdown } from 'reactjs-dropdown-component'; // je kan een dropdown aanmaken die een of meerdere seleties toelaat, zie de betreffende componenten voor meer info.
@@ -268,7 +269,8 @@ class CardList extends React.Component {
                                         resetThenSet={this.resetThenSet}
                                     />
                                 </div>
-                                <AddTodo addTodo={this.addTodo} />
+                        <AddCard addTodo={this.addTodo} />
+                        <CardInfo/>
                                 <Todos todos={this.state.cards} delTodo={this.delTodo} />
                         <Route path="/about" component={About} />
                     </div>
