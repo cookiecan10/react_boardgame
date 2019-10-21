@@ -4,7 +4,7 @@
 }
 
 .Board {
-  background-image: url("tutoriala.jpg");
+  background-image: url("background.png");
   background-repeat: repeat;
   background-size: cover;
   position: relative;
