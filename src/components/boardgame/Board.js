@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import CardRow from './CardRow'
 import Dialog from './Dialog'
+import axios from 'axios';
 
 class Card {
     constructor(key=0, content=[], code='', description='', isEmpty=true) {
@@ -71,6 +72,8 @@ function findIndex(arr, key) {
     }
     return -1;
 }
+
+axios.get("https://cardgame.shannendolls.com/api/v1.0/cards").then(res => console.log("DING " + res))
 
 class Board extends Component {
 
@@ -198,6 +201,8 @@ class Board extends Component {
         console.log(cards);
 
         cards[index].reset(key, ['stuff'], 'stuff', 'stuff', false);
+
+        //axios.post('https://cardgame.shannendolls.com/api/v1.0/new_card', {type: "LET", content: "This is a let card"})
 
         console.log('after: ');
         console.log(cards);

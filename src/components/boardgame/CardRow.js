@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import ActivityCard from './cards/ActivityCard'
-import EnhancedCard from './cards/EnhancedCard'
-import InteractionCard from './cards/InteractionCard'
-import EmptyCard from './cards/EmptyCard'
+import ActivityCard from '../cards/ActivityCard'
+import EnhancedCard from '../cards/EnhancedCard'
+import InteractionCard from '../cards/InteractionCard'
+import EmptyCard from '../cards/EmptyCard'
 
 export default class CardRow extends Component {
     render() {
