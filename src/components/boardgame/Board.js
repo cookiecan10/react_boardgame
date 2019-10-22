@@ -2,48 +2,20 @@ import React, { Component } from 'react'
 import CardRow from './CardRow'
 import Dialog from './Dialog'
 import axios from 'axios';
-
-class Card {
-    constructor(key=0, content=[], code='', description='', isEmpty=true) {
-        this.key = key;
-        this.content = content;
-        this.code = code;
-        this.description = description;
-        this.isEmpty=isEmpty;
-    }
-
-    // Reset all of the data off the card, can also assign new values
-    reset(key=this.key, content=[], code='', description='', isEmpty=true) {
-        this.key = key;
-        this.content = content;
-        this.code = code;
-        this.description = description;
-        this.isEmpty=isEmpty;
-    }
-}
-
-class ActivityCard extends Card {
-    cardType = 'activityCards';
-}
-
-class InteractionCard extends Card {
-    cardType = 'interactionCards';
-}
-
-class EnhancedCard extends Card {
-    cardType = 'enhancedCards';
-}
+import QuestionCard from '../../classes/QuestionCard'
+import InteractionCard from '../../classes/InteractionCard'
+import LETCard from '../../classes/LETCard'
 
 // const MAX_LENGTH = 4;
 
 let activityCardPlaceholders = [
 
     // id, content, code, description, isEmpty
-    new ActivityCard(0, ["Info"], 'YOLO', 'Some interesting information', false),
-    new ActivityCard(645465, ['todo: fix vertical card size'], 'WHAT008', 'hoooooooooooooooo', false),
-    new ActivityCard(2, ['stuff']),
+    new QuestionCard(0, ["Info"], 'YOLO', 'Some interesting information', false),
+    new QuestionCard(645465, ['todo: fix vertical card size'], 'WHAT008', 'hoooooooooooooooo', false),
+    new QuestionCard(2, ['stuff']),
     //new InteractionCard(54, ['Presence', 'Number of clicks', 'Number of live interactions'], 'WHAT007', 'Some text', false),
-    new ActivityCard(3, ['Presence', 'Number of clicks', 'Number of live interactions'], 'WHAT007', 'Some text', false)
+    new QuestionCard(3, ['Presence', 'Number of clicks', 'Number of live interactions'], 'WHAT007', 'Some text', false)
 ]
 
 let interactionCardPlaceholders =
@@ -56,12 +28,12 @@ let interactionCardPlaceholders =
 
 let enhancedCardPlaceholders = //Array(MAX_LENGTH).fill();
 
-    //Array(4).fill(new EnhancedCard()); //Does not work, doesn't create new cards, they all references the same object
+    //Array(4).fill(new LETCard()); //Does not work, doesn't create new cards, they all references the same object
 [
-    new EnhancedCard(0, ['some content stuff'], 'OWO', 'enhancing', false),
-    new EnhancedCard(),
-    new EnhancedCard(),
-    new EnhancedCard(),
+    new LETCard(0, ['some content stuff'], 'OWO', 'enhancing', false),
+    new LETCard(),
+    new LETCard(),
+    new LETCard(),
 ]
 
 function findIndex(arr, key) {
@@ -81,26 +53,14 @@ class Board extends Component {
         //You have to do this in react
         super(props)
 
-        // for(var i = 0; i < enhancedCardPlaceholders; i++){
-        //     var card = Object.create(enhancedCardPlaceholders[i]);
-        //     card.key = i;
-        //     this.state.enhancedCards[i] = card;
-        // }
-
-        // for (var i = 0; i < enhancedCardPlaceholders; i++) {
-        //     enhancedCardPlaceholders.push(new EnhancedCard());
-        // }
-
-        //ALL OF THIS IS USELESS, BUT I'M GONNA KEEP IT AS IT TOOK A LOT OF WORK
-
         //Assigning keys's
         //You can probably assign all of the card types if you use a forloop and put the different cardtypes in an array
-        this.state.activityCards = activityCardPlaceholders.map( (card, index) => {
+        this.state.questionCards = activityCardPlaceholders.map( (card, index) => {
             if (card !== undefined){
                 card.key = index; //Remove if you want to take the id's from api
                 return (card);
             } else {
-                return new ActivityCard(index);
+                return new QuestionCard(index);
             }
         });
 
@@ -113,12 +73,12 @@ class Board extends Component {
             }
         });
 
-        this.state.enhancedCards = enhancedCardPlaceholders.map( (card, index) => {
+        this.state.LETCards = enhancedCardPlaceholders.map( (card, index) => {
             if (card !== undefined){
                 card.key = index;
                 return (card);
             } else {
-                return new EnhancedCard(index);
+                return new LETCard(index);
             }
         });
 
@@ -212,9 +172,16 @@ class Board extends Component {
 
     state = {
         diaglogOpen: false,
-        enhancedCards: [],
-        interactionCards: [],
-        activityCards: []
+        allCards: [],
+        // LET: [],
+        // interactionCards: [],
+        // questionCards: []
+    }
+
+    componentDidMount() {
+        axios.get('https://cardgame.shannendolls.com/api/v1.0/cards').then(res => this.setState({allCards: res.data}))
+        console.log("Server Cards")
+        console.log("blabla", this.state.allCards)
     }
 
     render() {
@@ -227,8 +194,8 @@ class Board extends Component {
                 </div>
 
                 <div className='CardRows'>
-                    <CardRow cardRowType='enhancedCards' 
-                        cards={this.state.enhancedCards} 
+                    <CardRow cardRowType='LETCards' 
+                        cards={this.state.LETCards} 
                         moveLeft={this.moveLeft} 
                         moveRight={this.moveRight} 
                         delCard={this.deleteCard} 
@@ -243,8 +210,8 @@ class Board extends Component {
                         addCard={this.addCard}>
                     </CardRow>
 
-                    <CardRow cardRowType='activityCards' 
-                        cards={this.state.activityCards} 
+                    <CardRow cardRowType='questionCards' 
+                        cards={this.state.questionCards} 
                         moveLeft={this.moveLeft} 
                         moveRight={this.moveRight} 
                         delCard={this.deleteCard} 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import ActivityCard from '../cards/ActivityCard'
-import EnhancedCard from '../cards/EnhancedCard'
-import InteractionCard from '../cards/InteractionCard'
+import QuestionCard from '../cards/smallCards/Question_Card'
+import LETCard from '../cards/smallCards/LET_Card'
+import InteractionCard from '../cards/smallCards/Interaction_Card'
 import EmptyCard from '../cards/EmptyCard'
 
 export default class CardRow extends Component {
@@ -19,11 +19,11 @@ export default class CardRow extends Component {
             } else {
                 //Decide which type of card to render
                 switch(card.cardType){
-                    case 'activityCards':
-                        return (<ActivityCard key={card.key} card={card} cardRowType={cardRowType} moveLeft={this.props.moveLeft} moveRight={this.props.moveRight} delCard={this.props.delCard}/>)
-                    case 'enhancedCards':
-                        return (<EnhancedCard key={card.key} card={card} cardRowType={cardRowType} moveLeft={this.props.moveLeft} moveRight={this.props.moveRight} delCard={this.props.delCard}/>)
-                    case 'interactionCards':
+                    case 'QuestionCards':
+                        return (<QuestionCard key={card.key} card={card} cardRowType={cardRowType} moveLeft={this.props.moveLeft} moveRight={this.props.moveRight} delCard={this.props.delCard}/>)
+                    case 'LETCards':
+                        return (<LETCard key={card.key} card={card} cardRowType={cardRowType} moveLeft={this.props.moveLeft} moveRight={this.props.moveRight} delCard={this.props.delCard}/>)
+                    case 'InteractionCards':
                         return (<InteractionCard key={card.key} card={card} cardRowType={cardRowType} moveLeft={this.props.moveLeft} moveRight={this.props.moveRight} delCard={this.props.delCard}/>)
                 }
             }
