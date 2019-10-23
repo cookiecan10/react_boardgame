@@ -32,11 +32,21 @@ export default class CardSelect extends Component {
             return null;
         }
 
-        return (<div style={cardSelectorStyle} className='CardRow'> {rCard} </div>)
+        return (<div style={cardSelectorStyle} className='CardRow'>
+                    <div style={titleStyle}>
+                        Select a Card
+                    </div>
+                    {rCard} 
+                </div>)
     }
 }
 
+const titleStyle = {
+    color: 'white'
+}
+
 const cardSelectorStyle = {
+    boxSizing: 'border-box',
     position: 'absolute',
     color: 'white',
     backgroundColor: 'black',
@@ -48,9 +58,11 @@ const cardSelectorStyle = {
     right: '0',
     margin: 'auto',
     padding: '10px',
-    width: '400px',
-    height: '300px',
+    width: '800px',
+    height: '600px',
     borderRadius: '10px',
-    display: 'flex',    // Note to self, google what 'flex' actually does
-    flexDirection: 'column'
+    //display: 'flex',    // Note to self, google what 'flex' actually does
+    flexDirection: 'column',
+    overflow: 'auto',
+    float: 'left',
 }

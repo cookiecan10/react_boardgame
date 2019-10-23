@@ -1,38 +1,42 @@
 import React, { Component } from 'react'
 
-function log(e) {
-    e.preventDefault();
-    console.log("you clicked an Enhanced Card")
-}
+// function log(e) {
+//     e.preventDefault();
+//     console.log("you clicked an Enhanced Card")
+// }
 
 class LETCard extends Component {
-
     render() {
-        const { key, content, code, description } = this.props.card;
+        const { key, title, enhancements, code, analytics } = this.props.card;
         const cardRowType = this.props.cardRowType;
         return (
-            <div style={cardStyle} onClick={log} className='Card'>
+            <div style={cardStyle} className='Card'>
 
-                <button style={leftButtonStyle} onClick={this.props.moveLeft.bind(this, key, cardRowType)}> 🡨 </button>
+                {/* <button style={leftButtonStyle} onClick={this.props.moveLeft.bind(this, key, cardRowType)}> 🡨 </button>
                 <button style={delButtonStyle} onClick={this.props.delCard.bind(this, key, cardRowType)}> X </button>
-                <button style={rightButtonStyle} onClick={this.props.moveRight.bind(this, key, cardRowType)}> 🡪 </button>
+                <button style={rightButtonStyle} onClick={this.props.moveRight.bind(this, key, cardRowType)}> 🡪 </button> */}
 
                 <div name='title'>
-                    <div style={{ fontSize: '15px', textAlign: 'center', margin: '5px 0px 5px' }}>enhancement opportunities</div>
-                    <div style={{ fontSize: '10px',margin: '5px 0px 5px' }}>- content</div>
+                    <div style={{ fontSize: '13px', margin: '5px 0px 5px' }}>enhancement opportunities</div>
+                </div>
+
+                <div>
+                    <ul style={{textAlign:'left', listStylePosition: 'inside'}}>
+                        {enhancements.map((item, index) => (<li key={index}>{item}</li>))}
+                    </ul>
                 </div>
 
                 <div style={contentStyle} name='content'>
                     <div style={{fontSize:'20px'}}>Learning Analytics</div>
 
-                    <ul style={{textAlign:'left'}}>
-                        {content.map((item, index) => (<li key={index}>{item}</li>))}
+                    <ul style={{textAlign:'left', listStylePosition: 'inside'}}>
+                        {analytics.map((item, index) => (<li key={index}>{item}</li>))}
                     </ul>
                 </div>
 
                 <div name='Description'>
                     <div style={{ fontSize: '15px', textAlign: 'center' }}>Learning Enhancing Technology</div><code>(code:{code})</code>
-                    <p>{description}</p>
+                    <div style={{ fontSize: '17px', fontWeight: 'bold'}}>{title}</div>
                 </div>
 
             </div>

@@ -1,12 +1,12 @@
 
 export default class LETCard {
-    constructor(key=0, content=[], code='', description='', isEmpty=true) {
+    constructor(key=0, title='', enhancements=[], code='', analytics=[], isEmpty=true) {
 
         this.key = key;
-        //this.title = title;
-        this.content = content;
+        this.title = title;
+        this.enhancements = enhancements;
         this.code = code;
-        this.description = description;
+        this.analytics = analytics;
         this.isEmpty=isEmpty;
         this.cardType = 'LETCards';
     }

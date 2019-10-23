@@ -1,39 +1,32 @@
 import React, { Component } from 'react'
 
-function log(e) {
-    e.preventDefault();
-    console.log("you clicked an Interaction Card")
-}
+// function log(e) {
+//     e.preventDefault();
+//     console.log("you clicked an Interaction Card")
+// }
 
 class InteractionCard extends Component {
-
     render() {
-        const { key, content, code, description } = this.props.card;
+        const { key, from, to, description } = this.props.card;
         const cardRowType = this.props.cardRowType;
         return (
-            <div style={cardStyle} onClick={log} className='Card'>
+            <div style={cardStyle} className='Card'>
 
-                <button style={leftButtonStyle} onClick={this.props.moveLeft.bind(this, key, cardRowType)}> 🡨 </button>
+                {/* <button style={leftButtonStyle} onClick={this.props.moveLeft.bind(this, key, cardRowType)}> 🡨 </button>
                 <button style={delButtonStyle} onClick={this.props.delCard.bind(this, key, cardRowType)}> X </button>
-                <button style={rightButtonStyle} onClick={this.props.moveRight.bind(this, key, cardRowType)}> 🡪 </button>
+                <button style={rightButtonStyle} onClick={this.props.moveRight.bind(this, key, cardRowType)}> 🡪 </button> */}
 
                 <div name='title'>
                     <div style={topStyle} name='InteractionTop'>learning enhancing technology</div>
-                    <div style={{ margin: '10px 0px 0px 0px', fontSize: '15px', textAlign: 'center' }}>Interaction</div>
-                    <div style={{ fontSize: '15px', fontWeight: 'bold', margin: '5px 0px 5px', textAlign: 'center' }}>student and student </div>
+                    <div style={{ fontSize: '15px', fontWeight: 'bold', margin: '10px 0px 0px 0px', textAlign: 'center' }}>Interaction</div>
+                    <div style={{ fontSize: '15px', fontWeight: 'normal', margin: '5px 0px 5px', textAlign: 'center' }}>{from} to {to} </div>
                 </div>
                 <div style={contentStyle} name='content'>
-                    <div style={{ fontSize: '20px' }}>Interaction</div>
-
-                    <ul style={{textAlign:'left'}}>
-                        {content.map((item, index) => (<li key={index}>{item}</li>))}
-                    </ul>
+                    <div style={{ fontSize: '15px' }}>{description}</div>
                 </div>
 
                 <div name='description'>
                     <div style={bottomStyle}>What do we want to know?
-                    <code style={{fontSize:'10px'}}>(code:{code})</code>
-                    <p>{description}</p>
                     </div>
                 </div>
 

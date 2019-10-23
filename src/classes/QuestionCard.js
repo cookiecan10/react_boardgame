@@ -1,9 +1,9 @@
 
 export default class QuestionCard {
-    constructor(key=0, content=[], code='', description='', isEmpty=true) {
+    constructor(key=0, title='', content=[], code='', description='', isEmpty=true) {
 
         this.key = key;
-        //this.title = title;
+        this.title = title;
         this.content = content;
         this.code = code;
         this.description = description;

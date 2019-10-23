@@ -28,6 +28,16 @@ export default class CardRow extends Component {
                 }
             }
         });
-        return (<div className='CardRow'> {rCard} </div>)
+        return (<div style={cardRowStyle} className='CardRow'> {rCard} </div>)
     }
+}
+
+const cardRowStyle = {
+    position: "relative",
+    float: "left",
+    width: "100%",
+    height: "90%",
+    border: "3px solid rgba(49, 49, 49, 0.856)",
+    overflow: "hidden",
+    textAlign: 'center',
 }

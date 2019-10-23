@@ -12,17 +12,18 @@ import CardSelector from './CardSelector'
 
 let questionCardPlaceholders = [
 
-    // id, content, code, description, isEmpty
-    new QuestionCard(0, ["Info"], 'YOLO', 'Some interesting information', false),
-    new QuestionCard(645465, ['todo: fix vertical card size'], 'WHAT008', 'hoooooooooooooooo', false),
-    new QuestionCard(2, ['stuff']),
+    // id, title, enhancements, code, analytics, isEmpty
+    new QuestionCard(0, 'Initiative', ['Timing in collaboration environments', 'Timing in asking questions', 'Timing in handling in assignments'], 'WHAT003', 'How often and how fast do student take initiative', false),
+    new QuestionCard(645465, 'Yeeting in class', ['todo: fix vertical card size'], 'WUT0W0', 'I am become death, destroyer of worlds', false),
+    new QuestionCard(2, 'Having Fun', ['Questionnaire', 'Facial Expression (Camera)'], 'WHAT004', 'Do student enjoy the learning activities', false),
     //new InteractionCard(54, ['Presence', 'Number of clicks', 'Number of live interactions'], 'WHAT007', 'Some text', false),
-    new QuestionCard(3, ['Presence', 'Number of clicks', 'Number of live interactions'], 'WHAT007', 'Some text', false)
+    new QuestionCard(3, 'Activity', ['Presence', 'Number of clicks', 'Number of live interactions'], 'WHAT009', 'How active are students', false),
 ]
 
 let interactionCardPlaceholders =
 [
-    new InteractionCard(0, ['Notices your card'], 'OWO', 'Interactions', false),
+    //key, from, to, desciption, isEmpty
+    new InteractionCard(0, 'student', 'envirement', 'Interaction desciption', false),
     new InteractionCard(),
     new InteractionCard(),
     new InteractionCard(),
@@ -32,7 +33,8 @@ let LETCardPlaceholders = //Array(MAX_LENGTH).fill();
 
     //Array(4).fill(new LETCard()); //Does not work, doesn't create new cards, they all references the same object
 [
-    new LETCard(0, ['some content stuff'], 'OWO', 'enhancing', false),
+    // id, title, content, code, description, isEmpty
+    new LETCard(0, 'BLOG/VLOG', ['Content creation', '(Peer) Feedback', 'Collaboration'], 'LET003', ['Timing of creation/reaction', 'Amount creation/reaction', 'Content distribution'], false),
     new LETCard(),
     new LETCard(),
     new LETCard(),
@@ -162,9 +164,9 @@ class Board extends Component {
         console.log('before:');
         console.log(cards);
 
-        cards[index].reset(key, ['stuff'], 'stuff', 'stuff', false);
+        //cards[index].reset(key, ['stuff'], 'stuff', 'stuff', false);
 
-        axios.post('https://cardgame.shannendolls.com/api/v1.0/new_card', cards[index])
+        //axios.post('https://cardgame.shannendolls.com/api/v1.0/new_card', cards[index])
 
         console.log('after: ');
         console.log(cards);
@@ -195,7 +197,7 @@ class Board extends Component {
 
                 <div className='BoardMenu' >
                     <button onClick={(e) => this.setState({ diaglogOpen: !this.state.diaglogOpen})}>Show Dialog</button>
-                    <p>Things on the left side with some more text en random stuff and I don't know if i'm making typing mistakes but it doesn't matter</p>
+                    <p>These are menu items</p>
                 </div>
 
                 <div className='CardRows'>

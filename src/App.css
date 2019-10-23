@@ -30,14 +30,14 @@
   font-size: 20px;
 }
 
-.CardRow {
+/* .CardRow {
   position: relative;
   float: left;
   width: 100%;
   height: 90%;
   border: 3px solid rgba(49, 49, 49, 0.856);
   overflow: hidden;
-}
+} */
 
 .Card {
   position: relative;

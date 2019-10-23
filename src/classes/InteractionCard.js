@@ -1,12 +1,10 @@
 
 export default class InteractionCard {
-    constructor(key=0, content=[], code='', description='', isEmpty=true) {
+    constructor(key=0, from='', to='', description='', isEmpty=true) {
 
         this.key = key;
-        //this.from = from;
-        //this.to = to;
-        this.content = content;
-        this.code = code;
+        this.from = from;
+        this.to = to;
         this.description = description;
         this.isEmpty=isEmpty;
         this.cardType = 'InteractionCards';

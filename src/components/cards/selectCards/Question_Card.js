@@ -9,28 +9,28 @@ import React, { Component } from 'react'
 class QuestionCard extends Component {
 
     render() {
-        const { key, content, code, description } = this.props.card;
+        const { key, title, content, code, description } = this.props.card;
         const cardRowType = this.props.cardRowType;
         return (
             <div style={cardStyle} className='Card'>
-                <button style={leftButtonStyle} onClick={this.props.moveLeft.bind(this, key, cardRowType)}> 🡨 </button>
+                {/* <button style={leftButtonStyle} onClick={this.props.moveLeft.bind(this, key, cardRowType)}> 🡨 </button>
                 <button style={delButtonStyle} onClick={this.props.delCard.bind(this, key, cardRowType)}> X </button>
-                <button style={rightButtonStyle} onClick={this.props.moveRight.bind(this, key, cardRowType)}> 🡪 </button>
+                <button style={rightButtonStyle} onClick={this.props.moveRight.bind(this, key, cardRowType)}> 🡪 </button> */}
 
                 <div name='title'>
-                    <div style={{margin:'10px 0px 0px 0px'}}>What do we want to know</div>
-                    <div style={{fontSize:'20px', fontWeight:'bold' ,margin:'5px 0px 5px'}}>Activity</div>
+                    <div style={{margin:'8px 0px 0px 0px'}}>What do we want to know</div>
+                    <div style={{fontSize:'20px', fontWeight:'bold' ,margin:'0px 0px 5px'}}>{title}</div>
                 </div>
                 <div style={contentStyle} name='content'>
-                    <div style={{fontSize:'20px'}}>Learning Analytics</div>
+                    <div style={{fontSize:'17px'}}>Learning Analytics</div>
 
-                    <ul style={{textAlign:'left'}}>
+                    <ul style={{textAlign:'left', listStylePosition: 'inside'}}>
                         {content.map((item, index) => (<li key={index}>{item}</li>))}
                     </ul>
                 </div>
 
                 <div name='description'>
-                    <div style={{fontSize:'20px'}}>Description</div><code>(code:{code})</code>
+                    <div style={{fontSize:'17px'}}>Description <code style={{fontSize:'10px'}}>(code:{code})</code></div>
                     <p>{description}</p> 
                 </div>
 
@@ -45,7 +45,7 @@ const cardStyle = {
     fontSize: '1.5vh',
     backgroundColor: '#ffff88',
     color: 'black',
-    //width: '20%',
+    width: '25%',
     height: '250px',
     margin: '7px',
     padding: '0px 4px',
