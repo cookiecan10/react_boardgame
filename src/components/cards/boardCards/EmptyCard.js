@@ -35,7 +35,8 @@ const cardStyle = {
     opacity: '0.7',
     fontSize:'100px',
     textAlign: 'center',
-    userSelect: 'none'
+    userSelect: 'none',
+    cursor: 'pointer'
 }
 
 export default Card

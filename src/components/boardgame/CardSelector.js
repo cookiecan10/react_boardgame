@@ -11,19 +11,19 @@ export default class CardSelect extends Component {
 
         rCard = this.props.cards.map(card => {
             //console.log(card.cardType)
-            console.log(cardRowType)
+            // console.log(cardRowType)
 
             if (card.isEmpty){
-                return (<div />)
+                return (<div key={card.key}/>)
             } else {
                 //Decide which type of card to render
                 switch(card.cardType){
                     case 'QuestionCards':
-                        return (<QuestionCard key={card.key} card={card} cardRowType={cardRowType} moveLeft={this.props.moveLeft} moveRight={this.props.moveRight} delCard={this.props.delCard}/>)
+                        return (<QuestionCard key={card.key} card={card} addCard={this.props.addCard} />)
                     case 'LETCards':
-                        return (<LETCard key={card.key} card={card} cardRowType={cardRowType} moveLeft={this.props.moveLeft} moveRight={this.props.moveRight} delCard={this.props.delCard}/>)
-                    case 'interactionCards':
-                        return (<InteractionCard key={card.key} card={card} cardRowType={cardRowType} moveLeft={this.props.moveLeft} moveRight={this.props.moveRight} delCard={this.props.delCard}/>)
+                        return (<LETCard key={card.key} card={card} addCard={this.props.addCard} />)
+                    case 'InteractionCards':
+                        return (<InteractionCard key={card.key} card={card} addCard={this.props.addCard} />)
                 }
             }
         });
@@ -33,10 +33,13 @@ export default class CardSelect extends Component {
         }
 
         return (<div style={cardSelectorStyle} className='CardRow'>
+                    <button style={closeButtonStyle} onClick={this.props.onClose}>X</button>
                     <div style={titleStyle}>
                         Select a Card
                     </div>
-                    {rCard} 
+                    <div>
+                        {rCard} 
+                    </div>
                 </div>)
     }
 }
@@ -62,7 +65,18 @@ const cardSelectorStyle = {
     height: '600px',
     borderRadius: '10px',
     //display: 'flex',    // Note to self, google what 'flex' actually does
-    flexDirection: 'column',
     overflow: 'auto',
     float: 'left',
+}
+
+const closeButtonStyle = {
+    marginBottom: '15px',
+    padding: '3px 8px',
+    cursor: 'pointer',
+    borderRadius: '50%',
+    border: 'none',
+    width: '30px',
+    height: '30px',
+    fontWeight: 'bold',
+    alignSelf: 'flex-end'
 }

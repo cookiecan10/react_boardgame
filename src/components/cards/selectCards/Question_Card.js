@@ -9,13 +9,9 @@ import React, { Component } from 'react'
 class QuestionCard extends Component {
 
     render() {
-        const { key, title, content, code, description } = this.props.card;
-        const cardRowType = this.props.cardRowType;
+        const { key, title, content, code, description, cardType } = this.props.card;
         return (
-            <div style={cardStyle} className='Card'>
-                {/* <button style={leftButtonStyle} onClick={this.props.moveLeft.bind(this, key, cardRowType)}> 🡨 </button>
-                <button style={delButtonStyle} onClick={this.props.delCard.bind(this, key, cardRowType)}> X </button>
-                <button style={rightButtonStyle} onClick={this.props.moveRight.bind(this, key, cardRowType)}> 🡪 </button> */}
+            <div style={cardStyle} onClick={this.props.addCard.bind(this, key, cardType)} className='Card'>
 
                 <div name='title'>
                     <div style={{margin:'8px 0px 0px 0px'}}>What do we want to know</div>
@@ -54,42 +50,8 @@ const cardStyle = {
     borderWidth: '4px 4px',
     borderRadius: '5px',
     userSelect: 'none',
-}
-
-const leftButtonStyle = {
-    marginBottom: '15px',
-    padding: '3px 8px',
-    cursor: 'pointer',
-    borderRadius: '50%',
-    border: 'none',
-    width: '30px',
-    height: '30px',
-    fontWeight: 'bold',
-    float: 'left'
-}
-
-const rightButtonStyle = {
-    marginBottom: '15px',
-    padding: '3px 8px',
-    cursor: 'pointer',
-    borderRadius: '50%',
-    border: 'none',
-    width: '30px',
-    height: '30px',
-    fontWeight: 'bold',
-    float: 'right'
-}
-
-const delButtonStyle = {
-    marginBottom: '15px',
-    padding: '3px 8px',
-    cursor: 'pointer',
-    borderRadius: '50%',
-    border: 'none',
-    width: '30px',
-    height: '30px',
-    fontWeight: 'bold',
-    float: 'right'
+    flexDirection: 'row',
+    cursor: 'pointer'
 }
 
 const contentStyle = {

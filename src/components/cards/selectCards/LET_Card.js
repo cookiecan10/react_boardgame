@@ -7,14 +7,9 @@ import React, { Component } from 'react'
 
 class LETCard extends Component {
     render() {
-        const { key, title, enhancements, code, analytics } = this.props.card;
-        const cardRowType = this.props.cardRowType;
+        const { key, title, enhancements, code, analytics, cardType } = this.props.card;
         return (
-            <div style={cardStyle} className='Card'>
-
-                {/* <button style={leftButtonStyle} onClick={this.props.moveLeft.bind(this, key, cardRowType)}> 🡨 </button>
-                <button style={delButtonStyle} onClick={this.props.delCard.bind(this, key, cardRowType)}> X </button>
-                <button style={rightButtonStyle} onClick={this.props.moveRight.bind(this, key, cardRowType)}> 🡪 </button> */}
+            <div style={cardStyle} onClick={this.props.addCard.bind(this, key, cardType)} className='Card'>
 
                 <div name='title'>
                     <div style={{ fontSize: '13px', margin: '5px 0px 5px' }}>enhancement opportunities</div>
@@ -50,7 +45,7 @@ const cardStyle = {
     fontSize: '1vh',
     backgroundColor: '#ff8888',
     color: 'black',
-    //width: '20%',
+    width: '25%',
     height: '250px',
     margin: '7px',
     padding: '0px 4px',
@@ -58,43 +53,8 @@ const cardStyle = {
     borderColor: '#888888',
     borderWidth: '4px 4px',
     borderRadius: '5px',
-    userSelect: 'none'
-}
-
-const leftButtonStyle = {
-    marginBottom: '15px',
-    padding: '3px 8px',
-    cursor: 'pointer',
-    borderRadius: '50%',
-    border: 'none',
-    width: '30px',
-    height: '30px',
-    fontWeight: 'bold',
-    float: 'left'
-}
-
-const rightButtonStyle = {
-    marginBottom: '15px',
-    padding: '3px 8px',
-    cursor: 'pointer',
-    borderRadius: '50%',
-    border: 'none',
-    width: '30px',
-    height: '30px',
-    fontWeight: 'bold',
-    float: 'right'
-}
-
-const delButtonStyle = {
-    marginBottom: '15px',
-    padding: '3px 8px',
-    cursor: 'pointer',
-    borderRadius: '50%',
-    border: 'none',
-    width: '30px',
-    height: '30px',
-    fontWeight: 'bold',
-    float: 'right'
+    userSelect: 'none',
+    cursor: 'pointer'
 }
 
 const contentStyle = {

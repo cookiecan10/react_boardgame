@@ -151,32 +151,78 @@ class Board extends Component {
         this.setState({[type]: cards});
     }
 
-    addCard = (key, type) => {
+    openCardSelect = (key, type) => {
         let cards = this.state[type];
 
-        console.log("Key: ", key);
-        console.log(type);
+        // console.log("Key: ", key);
+        // console.log(type);
 
         let index = findIndex(cards, key);
 
-        console.log(index);
+        // console.log(index);
 
-        console.log('before:');
-        console.log(cards);
+        // console.log('before:');
+        // console.log(cards);
 
         //cards[index].reset(key, ['stuff'], 'stuff', 'stuff', false);
 
         //axios.post('https://cardgame.shannendolls.com/api/v1.0/new_card', cards[index])
+        
+        // console.log('after: ');
+        // console.log(cards);
 
-        console.log('after: ');
-        console.log(cards);
+        this.setState({cardSelectOpen: true});
+        this.setState({selectIndex: index});
+        this.setState({selectRowType: type});
+        this.setState({selectCards: cards});
 
-        this.setState({[type]: cards});
+        // console.log("These ", type, " should render", this.state.selectCards)
+    }
+
+    addCard = (key, type) => {
+
+        let index = findIndex(this.state.selectCards, key); //Find the index in the selection cards
+
+        let card = this.state.selectCards[index]; //Store selected card
+
+        console.log("selected card: ", card)
+
+        let cardRow = this.state[this.state.selectRowType];
+
+        console.log("lsupfeoajfeopafeij: ", this.state.selectRowType);
+
+        console.log(cardRow[this.state.selectIndex]);
+
+        cardRow[this.state.selectIndex].reset(new InteractionCard(0, 'student', 'envirement', 'Interaction desciption', false));
+
+        // if (this.state.selectRowType == 'LETcards'){
+        //     //                  title='', enhancements=[], code='', analytics=[], isEmpty=true
+        //     cardRow[this.state.selectIndex].reset(card.title, card.enhancements, card.code, card.analytics);
+        // } else if (this.state.selectRowType == 'interactionCards') {
+        //     console.log("lalalallalalalalalalallalalalalalalalalalalalalalallalalalalalalal")
+        //     //                  from='', to='', description='', isEmpty=true
+        //     cardRow[this.state.selectIndex].reset(card.from, card.to, card.description)
+        // } else if (this.state.selectRowType == 'questionCards'){
+        //     //                  title='', content=[], code='', description='', isEmpty=true
+        //     cardRow[this.state.selectIndex].reset(card.title, card.content, card.code, card.desciption)
+        // }
+
+        console.log("new list: ", cardRow)
+
+        this.setState({[type]: cardRow})
+
+        // let cardRow = this.state[this.state.selectType]; 
+        // this.state[this.state.selectType][this.state.selectIndex] = card;
+
+        // this.setState({[this.state.selectType]: cardRow})
     }
 
     state = {
         diaglogOpen: false,
-        cardSelectOpen: true,
+        cardSelectOpen: false,
+        selectIndex: -1,
+        selectRowType: '',
+        selectCards: [],
         allCards: [],
         // LETcards: [],
         // interactionCards: [],
@@ -206,7 +252,7 @@ class Board extends Component {
                         moveLeft={this.moveLeft} 
                         moveRight={this.moveRight} 
                         delCard={this.deleteCard} 
-                        addCard={this.addCard}>
+                        addCard={this.openCardSelect}>
                     </CardRow>
 
                     <CardRow cardRowType='interactionCards' 
@@ -214,7 +260,7 @@ class Board extends Component {
                         moveLeft={this.moveLeft} 
                         moveRight={this.moveRight} 
                         delCard={this.deleteCard} 
-                        addCard={this.addCard}>
+                        addCard={this.openCardSelect}>
                     </CardRow>
 
                     <CardRow cardRowType='questionCards' 
@@ -222,21 +268,18 @@ class Board extends Component {
                         moveLeft={this.moveLeft} 
                         moveRight={this.moveRight} 
                         delCard={this.deleteCard} 
-                        addCard={this.addCard}>
+                        addCard={this.openCardSelect}>
                     </CardRow>
                 </div>
 
                 {/* This needs to be last */}
                     <CardSelector 
                         isOpen={this.state.cardSelectOpen}
-                        cardRowType='questionCards' 
-                        cards={this.state.questionCards} 
-                        moveLeft={this.moveLeft} 
-                        moveRight={this.moveRight} 
-                        delCard={this.deleteCard} 
+                        cards={this.state.selectCards} 
+                        onClose={(e) => this.setState({ cardSelectOpen: false})}
                         addCard={this.addCard}>
                     </CardSelector>
-                <Dialog isOpen={this.state.diaglogOpen} onClose={(e) => this.setState({ diaglogOpen: false})}>This is a nice dialog box with a lot of dialog that nicely explains what you should do</Dialog>
+                <Dialog isOpen={this.state.diaglogOpen} onClose={(e) => this.setState({ diaglogOpen: false})}> <img src={require('../../bordspel_cirkel.PNG')} width='90%'/> </Dialog>
             </div>
         )
     }

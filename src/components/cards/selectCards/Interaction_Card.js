@@ -1,20 +1,15 @@
 import React, { Component } from 'react'
 
-// function log(e) {
-//     e.preventDefault();
-//     console.log("you clicked an Interaction Card")
-// }
+function log(e) {
+    e.preventDefault();
+    console.log("SELECTED Interaction card")
+}
 
 class InteractionCard extends Component {
     render() {
-        const { key, from, to, description } = this.props.card;
-        const cardRowType = this.props.cardRowType;
+        const { key, from, to, description, cardType} = this.props.card;
         return (
-            <div style={cardStyle} className='Card'>
-
-                {/* <button style={leftButtonStyle} onClick={this.props.moveLeft.bind(this, key, cardRowType)}> 🡨 </button>
-                <button style={delButtonStyle} onClick={this.props.delCard.bind(this, key, cardRowType)}> X </button>
-                <button style={rightButtonStyle} onClick={this.props.moveRight.bind(this, key, cardRowType)}> 🡪 </button> */}
+            <div style={cardStyle} onClick={this.props.addCard.bind(this, key, cardType)} className='Card'>
 
                 <div name='title'>
                     <div style={topStyle} name='InteractionTop'>learning enhancing technology</div>
@@ -41,7 +36,7 @@ const cardStyle = {
     fontSize: '1vh',
     backgroundColor: '#8888ff',
     color: 'black',
-    //width: '20%',
+    width: '25%',
     height: '250px',
     margin: '7px',
     padding: '0px 4px',
@@ -49,43 +44,8 @@ const cardStyle = {
     borderColor: '#888888',
     borderWidth: '4px 4px',
     borderRadius: '5px',
-    userSelect: 'none'
-}
-
-const leftButtonStyle = {
-    marginBottom: '15px',
-    padding: '3px 8px',
-    cursor: 'pointer',
-    borderRadius: '50%',
-    border: 'none',
-    width: '30px',
-    height: '30px',
-    fontWeight: 'bold',
-    float: 'left'
-}
-
-const rightButtonStyle = {
-    marginBottom: '15px',
-    padding: '3px 8px',
-    cursor: 'pointer',
-    borderRadius: '50%',
-    border: 'none',
-    width: '30px',
-    height: '30px',
-    fontWeight: 'bold',
-    float: 'right'
-}
-
-const delButtonStyle = {
-    marginBottom: '15px',
-    padding: '3px 8px',
-    cursor: 'pointer',
-    borderRadius: '50%',
-    border: 'none',
-    width: '30px',
-    height: '30px',
-    fontWeight: 'bold',
-    float: 'right'
+    userSelect: 'none',
+    cursor: 'pointer'
 }
 
 const contentStyle = {

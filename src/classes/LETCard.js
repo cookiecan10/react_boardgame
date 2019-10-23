@@ -12,12 +12,15 @@ export default class LETCard {
     }
 
     // Reset all of the data off the card, can also assign new values
-    reset(key=this.key, content=[], code='', description='', isEmpty=true) {
-        this.key = key;
-        //this.title = title;
-        this.content = content;
+    reset( title='', enhancements=[], code='', analytics=[], isEmpty=true) {
+        //key=this.key
+
+        //this.key = key;
+
+        this.title = title;
+        this.enhancements = enhancements;
         this.code = code;
-        this.description = description;
+        this.analytics = analytics;
         this.isEmpty=isEmpty;
     }
 }

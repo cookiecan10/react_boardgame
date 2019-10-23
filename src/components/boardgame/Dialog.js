@@ -36,8 +36,8 @@ const dialogStyle = {
     right: '0',
     margin: 'auto',
     padding: '10px',
-    width: '400px',
-    height: '300px',
+    width: '800px',
+    height: '440px',
     borderRadius: '10px',
     display: 'flex',    // Note to self, google what 'flex' actually does
     flexDirection: 'column'
