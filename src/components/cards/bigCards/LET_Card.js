@@ -2,28 +2,25 @@ import React, { Component } from 'react'
 
 function log(e) {
     e.preventDefault();
-    console.log("you clicked an Activity Card")
+    console.log("you clicked a LET Card")
 }
 
-
-class ActivityCard extends Component {
-    constructor(props){
-        super(props)
-    }
+export default class LETCard extends Component {
     render() {
-        const { key, cardType, content, code, description } = this.props.card;
+        const { key, content, code, description } = this.props.card;
         const cardRowType = this.props.cardRowType;
         return (
-            <div style={cardStyle} className='Card'>
+            <div style={cardStyle} onClick={log} className='Card'>
+
                 <button style={leftButtonStyle} onClick={this.props.moveLeft.bind(this, key, cardRowType)}> 🡨 </button>
                 <button style={delButtonStyle} onClick={this.props.delCard.bind(this, key, cardRowType)}> X </button>
                 <button style={rightButtonStyle} onClick={this.props.moveRight.bind(this, key, cardRowType)}> 🡪 </button>
 
                 <div name='title'>
-                    <div style={{margin:'10px 0px 0px 0px'}}>What do we want to know</div>
-                    <div style={{fontSize:'20px', fontWeight:'bold' ,margin:'5px 0px 5px'}}>Activity</div>
+                    <div style={{ fontSize: '15px', textAlign: 'center', margin: '5px 0px 5px' }}>enhancement opportunities</div>
+                    <div style={{ fontSize: '10px',margin: '5px 0px 5px' }}>- content</div>
                 </div>
-                {key}
+
                 <div style={contentStyle} name='content'>
                     <div style={{fontSize:'20px'}}>Learning Analytics</div>
 
@@ -32,9 +29,9 @@ class ActivityCard extends Component {
                     </ul>
                 </div>
 
-                <div name='description'>
-                    <div style={{fontSize:'20px'}}>Description</div><code>(code:{code})</code>
-                    <p>{description}</p> 
+                <div name='Description'>
+                    <div style={{ fontSize: '15px', textAlign: 'center' }}>Learning Enhancing Technology</div><code>(code:{code})</code>
+                    <p>{description}</p>
                 </div>
 
             </div>
@@ -45,8 +42,8 @@ class ActivityCard extends Component {
 const cardStyle = {
     position: 'relative',
     float: 'left',
-    fontSize: '1.5vh',
-    backgroundColor: '#ffff88',
+    fontSize: '1vh',
+    backgroundColor: '#ff8888',
     color: 'black',
     // width: '20%',
     height: '250px',
@@ -56,7 +53,7 @@ const cardStyle = {
     borderColor: '#888888',
     borderWidth: '4px 4px',
     borderRadius: '5px',
-    userSelect: 'none',
+    userSelect: 'none'
 }
 
 const leftButtonStyle = {
@@ -98,5 +95,3 @@ const delButtonStyle = {
 const contentStyle = {
     backgroundColor: '#55ff55'
 }
-
-export default ActivityCard

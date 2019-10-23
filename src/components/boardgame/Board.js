@@ -5,10 +5,12 @@ import axios from 'axios';
 import QuestionCard from '../../classes/QuestionCard'
 import InteractionCard from '../../classes/InteractionCard'
 import LETCard from '../../classes/LETCard'
+// import { restElement } from '@babel/types';
+import CardSelector from './CardSelector'
 
 // const MAX_LENGTH = 4;
 
-let activityCardPlaceholders = [
+let questionCardPlaceholders = [
 
     // id, content, code, description, isEmpty
     new QuestionCard(0, ["Info"], 'YOLO', 'Some interesting information', false),
@@ -26,7 +28,7 @@ let interactionCardPlaceholders =
     new InteractionCard(),
 ]
 
-let enhancedCardPlaceholders = //Array(MAX_LENGTH).fill();
+let LETCardPlaceholders = //Array(MAX_LENGTH).fill();
 
     //Array(4).fill(new LETCard()); //Does not work, doesn't create new cards, they all references the same object
 [
@@ -55,7 +57,7 @@ class Board extends Component {
 
         //Assigning keys's
         //You can probably assign all of the card types if you use a forloop and put the different cardtypes in an array
-        this.state.questionCards = activityCardPlaceholders.map( (card, index) => {
+        this.state.questionCards = questionCardPlaceholders.map( (card, index) => {
             if (card !== undefined){
                 card.key = index; //Remove if you want to take the id's from api
                 return (card);
@@ -73,7 +75,7 @@ class Board extends Component {
             }
         });
 
-        this.state.LETCards = enhancedCardPlaceholders.map( (card, index) => {
+        this.state.LETCards = LETCardPlaceholders.map( (card, index) => {
             if (card !== undefined){
                 card.key = index;
                 return (card);
@@ -162,7 +164,7 @@ class Board extends Component {
 
         cards[index].reset(key, ['stuff'], 'stuff', 'stuff', false);
 
-        //axios.post('https://cardgame.shannendolls.com/api/v1.0/new_card', {type: "LET", content: "This is a let card"})
+        axios.post('https://cardgame.shannendolls.com/api/v1.0/new_card', cards[index])
 
         console.log('after: ');
         console.log(cards);
@@ -172,16 +174,19 @@ class Board extends Component {
 
     state = {
         diaglogOpen: false,
+        cardSelectOpen: true,
         allCards: [],
-        // LET: [],
+        // LETcards: [],
         // interactionCards: [],
         // questionCards: []
     }
 
     componentDidMount() {
-        axios.get('https://cardgame.shannendolls.com/api/v1.0/cards').then(res => this.setState({allCards: res.data}))
-        console.log("Server Cards")
-        console.log("blabla", this.state.allCards)
+        axios.get('https://cardgame.shannendolls.com/api/v1.0/cards')
+        .then(res => this.setState({allCards: res.data.cards}))
+        .catch((error) => {
+            console.log("Error: ", error);
+        })
     }
 
     render() {
@@ -220,6 +225,15 @@ class Board extends Component {
                 </div>
 
                 {/* This needs to be last */}
+                    <CardSelector 
+                        isOpen={this.state.cardSelectOpen}
+                        cardRowType='questionCards' 
+                        cards={this.state.questionCards} 
+                        moveLeft={this.moveLeft} 
+                        moveRight={this.moveRight} 
+                        delCard={this.deleteCard} 
+                        addCard={this.addCard}>
+                    </CardSelector>
                 <Dialog isOpen={this.state.diaglogOpen} onClose={(e) => this.setState({ diaglogOpen: false})}>This is a nice dialog box with a lot of dialog that nicely explains what you should do</Dialog>
             </div>
         )

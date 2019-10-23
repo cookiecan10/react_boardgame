@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
-import QuestionCard from '../cards/boardCards/Question_Card'
-import LETCard from '../cards/boardCards/LET_Card'
-import InteractionCard from '../cards/boardCards/Interaction_Card'
-import EmptyCard from '../cards/boardCards/EmptyCard'
+import QuestionCard from '../cards/selectCards/Question_Card'
+import LETCard from '../cards/selectCards/LET_Card'
+import InteractionCard from '../cards/selectCards/Interaction_Card'
 
-export default class CardRow extends Component {
+export default class CardSelect extends Component {
     render() {
         const cardRowType = this.props.cardRowType;
 
@@ -15,7 +14,7 @@ export default class CardRow extends Component {
             console.log(cardRowType)
 
             if (card.isEmpty){
-                return (<EmptyCard key={card.key} card={card} cardRowType={cardRowType} addCard={this.props.addCard}/>)
+                return (<div />)
             } else {
                 //Decide which type of card to render
                 switch(card.cardType){
@@ -23,11 +22,35 @@ export default class CardRow extends Component {
                         return (<QuestionCard key={card.key} card={card} cardRowType={cardRowType} moveLeft={this.props.moveLeft} moveRight={this.props.moveRight} delCard={this.props.delCard}/>)
                     case 'LETCards':
                         return (<LETCard key={card.key} card={card} cardRowType={cardRowType} moveLeft={this.props.moveLeft} moveRight={this.props.moveRight} delCard={this.props.delCard}/>)
-                    case 'InteractionCards':
+                    case 'interactionCards':
                         return (<InteractionCard key={card.key} card={card} cardRowType={cardRowType} moveLeft={this.props.moveLeft} moveRight={this.props.moveRight} delCard={this.props.delCard}/>)
                 }
             }
         });
-        return (<div className='CardRow'> {rCard} </div>)
+
+        if (!this.props.isOpen) {
+            return null;
+        }
+
+        return (<div style={cardSelectorStyle} className='CardRow'> {rCard} </div>)
     }
+}
+
+const cardSelectorStyle = {
+    position: 'absolute',
+    color: 'white',
+    backgroundColor: 'black',
+    textAlign: 'center',
+    opacity: '0.9',
+    top: '0',
+    left: '0', 
+    bottom: '0', 
+    right: '0',
+    margin: 'auto',
+    padding: '10px',
+    width: '400px',
+    height: '300px',
+    borderRadius: '10px',
+    display: 'flex',    // Note to self, google what 'flex' actually does
+    flexDirection: 'column'
 }

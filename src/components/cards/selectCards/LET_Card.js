@@ -6,8 +6,9 @@ function log(e) {
 }
 
 class LETCard extends Component {
+
     render() {
-        const { key, cardType, content, code, description } = this.props.card;
+        const { key, content, code, description } = this.props.card;
         const cardRowType = this.props.cardRowType;
         return (
             <div style={cardStyle} onClick={log} className='Card'>
@@ -45,7 +46,7 @@ const cardStyle = {
     fontSize: '1vh',
     backgroundColor: '#ff8888',
     color: 'black',
-    width: '20%',
+    //width: '20%',
     height: '250px',
     margin: '7px',
     padding: '0px 4px',

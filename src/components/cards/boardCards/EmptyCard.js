@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 
-function log(e) {
-    e.preventDefault();
-    console.log("THIS IS AN EMPTY CARD!!!")
-}
+// function log(e) {
+//     e.preventDefault();
+//     console.log("THIS IS AN EMPTY CARD!!!")
+// }
 
 class Card extends Component {
     render() {
-        const { key, cardType} = this.props.card;
+        const { key } = this.props.card;
         const cardRowType = this.props.cardRowType;
         return (
             <div style={cardStyle} className='Card' onClick = {this.props.addCard.bind(this, key, cardRowType)}>

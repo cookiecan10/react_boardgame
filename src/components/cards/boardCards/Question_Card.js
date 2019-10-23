@@ -2,27 +2,27 @@ import React, { Component } from 'react'
 
 function log(e) {
     e.preventDefault();
-    console.log("you clicked an Interaction Card")
+    console.log("you clicked an Activity Card")
 }
 
-class InteractionCard extends Component {
+
+class QuestionCard extends Component {
+
     render() {
-        const { key, cardType, content, code, description } = this.props.card;
+        const { key, content, code, description } = this.props.card;
         const cardRowType = this.props.cardRowType;
         return (
             <div style={cardStyle} onClick={log} className='Card'>
-
                 <button style={leftButtonStyle} onClick={this.props.moveLeft.bind(this, key, cardRowType)}> 🡨 </button>
                 <button style={delButtonStyle} onClick={this.props.delCard.bind(this, key, cardRowType)}> X </button>
                 <button style={rightButtonStyle} onClick={this.props.moveRight.bind(this, key, cardRowType)}> 🡪 </button>
 
                 <div name='title'>
-                    <div style={topStyle} name='InteractionTop'>learning enhancing technology</div>
-                    <div style={{ margin: '10px 0px 0px 0px', fontSize: '15px', textAlign: 'center' }}>Interaction</div>
-                    <div style={{ fontSize: '15px', fontWeight: 'bold', margin: '5px 0px 5px', textAlign: 'center' }}>student and student </div>
+                    <div style={{margin:'10px 0px 0px 0px'}}>What do we want to know</div>
+                    <div style={{fontSize:'20px', fontWeight:'bold' ,margin:'5px 0px 5px'}}>Activity</div>
                 </div>
                 <div style={contentStyle} name='content'>
-                    <div style={{ fontSize: '20px' }}>Interaction</div>
+                    <div style={{fontSize:'20px'}}>Learning Analytics</div>
 
                     <ul style={{textAlign:'left'}}>
                         {content.map((item, index) => (<li key={index}>{item}</li>))}
@@ -30,10 +30,8 @@ class InteractionCard extends Component {
                 </div>
 
                 <div name='description'>
-                    <div style={bottomStyle}>What do we want to know?
-                    <code style={{fontSize:'10px'}}>(code:{code})</code>
-                    <p>{description}</p>
-                    </div>
+                    <div style={{fontSize:'20px'}}>Description</div><code>(code:{code})</code>
+                    <p>{description}</p> 
                 </div>
 
             </div>
@@ -44,10 +42,10 @@ class InteractionCard extends Component {
 const cardStyle = {
     position: 'relative',
     float: 'left',
-    fontSize: '1vh',
-    backgroundColor: '#8888ff',
+    fontSize: '1.5vh',
+    backgroundColor: '#ffff88',
     color: 'black',
-    // width: '20%',
+    //width: '20%',
     height: '250px',
     margin: '7px',
     padding: '0px 4px',
@@ -55,7 +53,7 @@ const cardStyle = {
     borderColor: '#888888',
     borderWidth: '4px 4px',
     borderRadius: '5px',
-    userSelect: 'none'
+    userSelect: 'none',
 }
 
 const leftButtonStyle = {
@@ -95,17 +93,7 @@ const delButtonStyle = {
 }
 
 const contentStyle = {
-    backgroundColor: '#ffffff'
-}
-const topStyle = {
-    backgroundColor: '#ff8888',
-    textAlign: 'center',
-    fontSize: '15px'
-}
-const bottomStyle = {
-    backgroundColor: '#ffff88',
-    textAlign: 'center',
-    fontSize: '15px'
+    backgroundColor: '#55ff55'
 }
 
-export default InteractionCard
+export default QuestionCard
