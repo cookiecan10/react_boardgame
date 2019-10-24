@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 
-function log(e) {
-    e.preventDefault();
-    console.log("SELECTED Interaction card")
-}
+// function log(e) {
+//     e.preventDefault();
+//     console.log("SELECTED Interaction card")
+// }
 
 class InteractionCard extends Component {
     render() {
@@ -14,7 +14,7 @@ class InteractionCard extends Component {
                 <div name='title'>
                     <div style={topStyle} name='InteractionTop'>learning enhancing technology</div>
                     <div style={{ fontSize: '15px', fontWeight: 'bold', margin: '10px 0px 0px 0px', textAlign: 'center' }}>Interaction</div>
-                    <div style={{ fontSize: '15px', fontWeight: 'normal', margin: '5px 0px 5px', textAlign: 'center' }}>{from} to {to} </div>
+                    <div style={{ fontSize: '15px', fontWeight: 'normal', margin: '5px 0px 5px', textAlign: 'center' }}>{from} 🠊 {to} </div>
                 </div>
                 <div style={contentStyle} name='content'>
                     <div style={{ fontSize: '15px' }}>{description}</div>

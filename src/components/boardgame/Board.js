@@ -8,7 +8,7 @@ import LETCard from '../../classes/LETCard'
 // import { restElement } from '@babel/types';
 import CardSelector from './CardSelector'
 
-const MAX_LENGTH = 8;
+const MAX_LENGTH = 9;
 
 let questionCardPlaceholders = Array(MAX_LENGTH).fill();
 // [
@@ -48,13 +48,15 @@ function findIndex(arr, key) {
     return null;
 }
 
-axios.get("https://cardgame.shannendolls.com/api/v1.0/cards").then(res => console.log("DING " + res))
+axios.get("https://cardgame.shannendolls.com/api/v1.0/cards").then(res => console.log("DING ", res))
 
 class Board extends Component {
 
     constructor(props) {
         //You have to do this in react
         super(props)
+
+        //axios.post('https://jsonplaceholder.typicode.com/todos'
 
         //Assigning keys's
         //You can probably assign all of the card types if you use a forloop and put the different cardtypes in an array
@@ -168,13 +170,15 @@ class Board extends Component {
 
         let cards = [...this.state[this.state.selectedRowType]]; // Make shallow copy of the selected row
 
-        let menuCard = this.state.menuCards.filter( card => card.key === key)[0]; 
+        let menuCard = this.state.menuCards.filter( card => card.key === key)[0]; // Copy the selected menuCard
 
-        // Copy the card (Carefull this is dependend on the fact that the 2 cards have the same type)
+        // Copy the card (Carefull this is dependend on the fact that the cards are the same type of card)
         // This has been done with a .copy in order to copy by value instead of by reference, any other way to copy by value would also work
         cards[this.state.selectedCardIndex].copy(menuCard);
 
         this.setState({[this.state.selectedRowType]: cards}); // Save
+
+        this.setState({cardSelectOpen: false})
     }
 
     state = {
@@ -192,9 +196,16 @@ class Board extends Component {
         ],
         allLETCards: [
             new LETCard(0, 'BLOG/VLOG', ['Content creation', '(Peer) Feedback', 'Collaboration'], 'LET003', ['Timing of creation/reaction', 'Amount creation/reaction', 'Content distribution'], false),
+            new LETCard(0, 'MOBILE PHONE (APP)', ['Content Delivery', 'Sensors', 'Photo/Video', 'Location Tracking'], 'LET001', ['Sensors', 'Photo/Video', 'Location Tracking', 'Questionnaire Distribution'], false),
         ],
         allInteractionCards: [
-            new InteractionCard(0, 'student', 'envirement', 'Interaction desciption', false),
+            new InteractionCard(0, 'Student', 'Environment', 'Interaction desciption', false),
+            new InteractionCard(0, 'Environment', 'Student', 'Interaction desciption', false),
+            new InteractionCard(0, 'Student', 'Material', 'Interaction desciption', false),
+            new InteractionCard(0, 'Material', 'Student', 'Interaction desciption', false),
+            new InteractionCard(0, 'Student', 'Student', 'Interaction desciption', false),
+            new InteractionCard(0, 'Student', 'Teacher', 'Interaction desciption', false),
+            new InteractionCard(0, 'Teacher', 'Student', 'Interaction desciption', false),
         ],
         // LETcards: [],
         // interactionCards: [],
@@ -214,7 +225,7 @@ class Board extends Component {
             <div className='Board'>
 
                 <div className='BoardMenu' >
-                    <button onClick={(e) => this.setState({ diaglogOpen: !this.state.diaglogOpen})}>Show Dialog</button>
+                    <button onClick={(e) => this.setState({ diaglogOpen: !this.state.diaglogOpen})}>Regels</button>
                     <p>These are menu items</p>
                 </div>
 
