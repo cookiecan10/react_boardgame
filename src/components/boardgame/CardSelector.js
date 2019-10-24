@@ -33,6 +33,7 @@ export default class CardSelect extends Component {
         }
 
         return (<div style={cardSelectorStyle} className='CardRow'>
+                    <button style={customCardStyle}>Make a Custom Card (WIP)</button>
                     <button style={closeButtonStyle} onClick={this.props.onClose}>X</button>
                     <div style={titleStyle}>
                         Select a Card
@@ -67,6 +68,19 @@ const cardSelectorStyle = {
     //display: 'flex',    // Note to self, google what 'flex' actually does
     overflow: 'auto',
     float: 'left',
+}
+
+const customCardStyle = {
+    marginBottom: '15px',
+    padding: '3px',
+    margin: '5px',
+    cursor: 'pointer',
+    borderRadius: '10px',
+    //border: '2px',
+    //width: '30px',
+    height: '30px',
+    fontWeight: 'bold',
+    alignSelf: 'flex-end'
 }
 
 const closeButtonStyle = {
