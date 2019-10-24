@@ -1,8 +1,9 @@
+import uuid from 'uuid'
 
 export default class InteractionCard {
     constructor(key=0, from='', to='', description='', isEmpty=true) {
 
-        this.key = key;
+        this.key = uuid();
         this.from = from;
         this.to = to;
         this.description = description;
@@ -19,5 +20,12 @@ export default class InteractionCard {
         this.to = to;
         this.description = description;
         this.isEmpty=isEmpty;
+    }
+
+    copy(card) {
+        this.from = card.from;
+        this.to = card.to;
+        this.description = card.description;
+        this.isEmpty = card.isEmpty;
     }
 }

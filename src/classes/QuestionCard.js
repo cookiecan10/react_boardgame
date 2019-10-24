@@ -1,8 +1,9 @@
+import uuid from 'uuid'
 
 export default class QuestionCard {
     constructor(key=0, title='', content=[], code='', description='', isEmpty=true) {
 
-        this.key = key;
+        this.key = uuid();
         this.title = title;
         this.content = content;
         this.code = code;
@@ -21,5 +22,14 @@ export default class QuestionCard {
         this.code = code;
         this.description = description;
         this.isEmpty=isEmpty;
+    }
+
+    // Copy constructor
+    copy(card){
+        this.title = card.title;
+        this.content = card.content;
+        this.code = card.code;
+        this.description = card.description;
+        this.isEmpty = card.isEmpty;
     }
 }

@@ -8,37 +8,36 @@ import LETCard from '../../classes/LETCard'
 // import { restElement } from '@babel/types';
 import CardSelector from './CardSelector'
 
-// const MAX_LENGTH = 4;
+const MAX_LENGTH = 8;
 
-let questionCardPlaceholders = [
+let questionCardPlaceholders = Array(MAX_LENGTH).fill();
+// [
+//     // id, title, enhancements, code, analytics, isEmpty
+//     new QuestionCard(0, 'Initiative', ['Timing in collaboration environments', 'Timing in asking questions', 'Timing in handling in assignments'], 'WHAT003', 'How often and how fast do student take initiative', false),
+//     new QuestionCard(645465, 'Yeeting in class', ['todo: fix vertical card size'], 'WUT0W0', 'I am become death, destroyer of worlds', false),
+//     new QuestionCard(2, 'Having Fun', ['Questionnaire', 'Facial Expression (Camera)'], 'WHAT004', 'Do student enjoy the learning activities', false),
+//     new QuestionCard(3, 'Activity', ['Presence', 'Number of clicks', 'Number of live interactions'], 'WHAT009', 'How active are students', false),
+// ]
 
-    // id, title, enhancements, code, analytics, isEmpty
-    new QuestionCard(0, 'Initiative', ['Timing in collaboration environments', 'Timing in asking questions', 'Timing in handling in assignments'], 'WHAT003', 'How often and how fast do student take initiative', false),
-    new QuestionCard(645465, 'Yeeting in class', ['todo: fix vertical card size'], 'WUT0W0', 'I am become death, destroyer of worlds', false),
-    new QuestionCard(2, 'Having Fun', ['Questionnaire', 'Facial Expression (Camera)'], 'WHAT004', 'Do student enjoy the learning activities', false),
-    //new InteractionCard(54, ['Presence', 'Number of clicks', 'Number of live interactions'], 'WHAT007', 'Some text', false),
-    new QuestionCard(3, 'Activity', ['Presence', 'Number of clicks', 'Number of live interactions'], 'WHAT009', 'How active are students', false),
-]
+let interactionCardPlaceholders = Array(MAX_LENGTH).fill();
+// [
+//     //key, from, to, desciption, isEmpty
+//     new InteractionCard(0, 'student', 'envirement', 'Interaction desciption', false),
+//     new InteractionCard(),
+//     new InteractionCard(),
+//     new InteractionCard(),
+// ]
 
-let interactionCardPlaceholders =
-[
-    //key, from, to, desciption, isEmpty
-    new InteractionCard(0, 'student', 'envirement', 'Interaction desciption', false),
-    new InteractionCard(),
-    new InteractionCard(),
-    new InteractionCard(),
-]
-
-let LETCardPlaceholders = //Array(MAX_LENGTH).fill();
+let LETCardPlaceholders = Array(MAX_LENGTH).fill();
 
     //Array(4).fill(new LETCard()); //Does not work, doesn't create new cards, they all references the same object
-[
-    // id, title, content, code, description, isEmpty
-    new LETCard(0, 'BLOG/VLOG', ['Content creation', '(Peer) Feedback', 'Collaboration'], 'LET003', ['Timing of creation/reaction', 'Amount creation/reaction', 'Content distribution'], false),
-    new LETCard(),
-    new LETCard(),
-    new LETCard(),
-]
+// [
+//     // id, title, content, code, description, isEmpty
+//     new LETCard(0, 'BLOG/VLOG', ['Content creation', '(Peer) Feedback', 'Collaboration'], 'LET003', ['Timing of creation/reaction', 'Amount creation/reaction', 'Content distribution'], false),
+//     new LETCard(),
+//     new LETCard(),
+//     new LETCard(),
+// ]
 
 function findIndex(arr, key) {
     for (var i = 0; i < arr.length; i++) {
@@ -46,7 +45,7 @@ function findIndex(arr, key) {
             return i;
         }
     }
-    return -1;
+    return null;
 }
 
 axios.get("https://cardgame.shannendolls.com/api/v1.0/cards").then(res => console.log("DING " + res))
@@ -91,15 +90,10 @@ class Board extends Component {
     deleteCard = (key, type) => {
 
         let cards = this.state[type];
-        console.log(cards)
-        console.log(type);
 
         let index = findIndex(cards, key);
-        console.log(index);
 
         cards[index].reset();
-
-        console.log(cards);
 
         this.setState({[type]: cards}); // Set state to equal new card array
     }
@@ -108,11 +102,9 @@ class Board extends Component {
 
         // Copy list of cards
         let cards = this.state[type];
-        console.log(type);
 
         // Find index of card
         let index = findIndex(cards, key);
-        console.log(index);
 
         let card = cards.filter( card => card.key === key)[0];  // Copy card
         cards = cards.filter( card => card.key !== key);        // Delete card from list
@@ -135,13 +127,11 @@ class Board extends Component {
 
         // Copy list of cards
         let cards = this.state[type];
-        console.log(type);
 
         // Find index of card
         let index = findIndex(cards, key);
-        console.log(index);
 
-        let card = cards.filter( card => card.key === key)[0];  // Copy card
+        let card = cards.filter( card => card.key === key)[0];  // Copy card by value, not by reference
         cards = cards.filter( card => card.key !== key);        // Delete card from list
 
         // Add card to list
@@ -152,78 +142,60 @@ class Board extends Component {
     }
 
     openCardSelect = (key, type) => {
-        let cards = this.state[type];
 
-        // console.log("Key: ", key);
-        // console.log(type);
+        var index = findIndex(this.state[type], key)
+        console.log(index)
 
-        let index = findIndex(cards, key);
+        this.setState({selectedCardIndex: index});
+        this.setState({selectedRowType: type});
 
-        // console.log(index);
-
-        // console.log('before:');
-        // console.log(cards);
-
-        //cards[index].reset(key, ['stuff'], 'stuff', 'stuff', false);
-
-        //axios.post('https://cardgame.shannendolls.com/api/v1.0/new_card', cards[index])
-        
-        // console.log('after: ');
-        // console.log(cards);
+        switch(type){
+            case 'questionCards':
+                this.setState({menuCards: this.state.allQuestionCards})
+                break;
+            case 'interactionCards':
+                    this.setState({menuCards: this.state.allInteractionCards})
+                    break;
+            case 'LETCards':
+                    this.setState({menuCards: this.state.allLETCards})
+                    break;
+        }
 
         this.setState({cardSelectOpen: true});
-        this.setState({selectIndex: index});
-        this.setState({selectRowType: type});
-        this.setState({selectCards: cards});
-
-        // console.log("These ", type, " should render", this.state.selectCards)
     }
 
     addCard = (key, type) => {
 
-        let index = findIndex(this.state.selectCards, key); //Find the index in the selection cards
+        let cards = [...this.state[this.state.selectedRowType]]; // Make shallow copy of the selected row
 
-        let card = this.state.selectCards[index]; //Store selected card
+        let menuCard = this.state.menuCards.filter( card => card.key === key)[0]; 
 
-        console.log("selected card: ", card)
+        // Copy the card (Carefull this is dependend on the fact that the 2 cards have the same type)
+        // This has been done with a .copy in order to copy by value instead of by reference, any other way to copy by value would also work
+        cards[this.state.selectedCardIndex].copy(menuCard);
 
-        let cardRow = this.state[this.state.selectRowType];
-
-        console.log("lsupfeoajfeopafeij: ", this.state.selectRowType);
-
-        console.log(cardRow[this.state.selectIndex]);
-
-        cardRow[this.state.selectIndex].reset(new InteractionCard(0, 'student', 'envirement', 'Interaction desciption', false));
-
-        // if (this.state.selectRowType == 'LETcards'){
-        //     //                  title='', enhancements=[], code='', analytics=[], isEmpty=true
-        //     cardRow[this.state.selectIndex].reset(card.title, card.enhancements, card.code, card.analytics);
-        // } else if (this.state.selectRowType == 'interactionCards') {
-        //     console.log("lalalallalalalalalalallalalalalalalalalalalalalalallalalalalalalal")
-        //     //                  from='', to='', description='', isEmpty=true
-        //     cardRow[this.state.selectIndex].reset(card.from, card.to, card.description)
-        // } else if (this.state.selectRowType == 'questionCards'){
-        //     //                  title='', content=[], code='', description='', isEmpty=true
-        //     cardRow[this.state.selectIndex].reset(card.title, card.content, card.code, card.desciption)
-        // }
-
-        console.log("new list: ", cardRow)
-
-        this.setState({[type]: cardRow})
-
-        // let cardRow = this.state[this.state.selectType]; 
-        // this.state[this.state.selectType][this.state.selectIndex] = card;
-
-        // this.setState({[this.state.selectType]: cardRow})
+        this.setState({[this.state.selectedRowType]: cards}); // Save
     }
 
     state = {
         diaglogOpen: false,
         cardSelectOpen: false,
-        selectIndex: -1,
-        selectRowType: '',
-        selectCards: [],
+        selectKey: -1,
+        selectedRowType: '',
+        menuCards: [],
         allCards: [],
+        allQuestionCards: [
+            new QuestionCard(0, 'Initiative', ['Timing in collaboration environments', 'Timing in asking questions', 'Timing in handling in assignments'], 'WHAT003', 'How often and how fast do student take initiative', false),
+            new QuestionCard(645465, 'Yeeting in class', ['todo: fix vertical card size'], 'WUT0W0', 'I am become death, destroyer of worlds', false),
+            new QuestionCard(2, 'Having Fun', ['Questionnaire', 'Facial Expression (Camera)'], 'WHAT004', 'Do student enjoy the learning activities', false),
+            new QuestionCard(3, 'Activity', ['Presence', 'Number of clicks', 'Number of live interactions'], 'WHAT009', 'How active are students', false),
+        ],
+        allLETCards: [
+            new LETCard(0, 'BLOG/VLOG', ['Content creation', '(Peer) Feedback', 'Collaboration'], 'LET003', ['Timing of creation/reaction', 'Amount creation/reaction', 'Content distribution'], false),
+        ],
+        allInteractionCards: [
+            new InteractionCard(0, 'student', 'envirement', 'Interaction desciption', false),
+        ],
         // LETcards: [],
         // interactionCards: [],
         // questionCards: []
@@ -275,7 +247,7 @@ class Board extends Component {
                 {/* This needs to be last */}
                     <CardSelector 
                         isOpen={this.state.cardSelectOpen}
-                        cards={this.state.selectCards} 
+                        cards={this.state.menuCards} 
                         onClose={(e) => this.setState({ cardSelectOpen: false})}
                         addCard={this.addCard}>
                     </CardSelector>

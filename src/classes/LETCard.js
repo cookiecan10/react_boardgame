@@ -1,8 +1,9 @@
+import uuid from 'uuid'
 
 export default class LETCard {
     constructor(key=0, title='', enhancements=[], code='', analytics=[], isEmpty=true) {
 
-        this.key = key;
+        this.key = uuid();
         this.title = title;
         this.enhancements = enhancements;
         this.code = code;
@@ -22,5 +23,13 @@ export default class LETCard {
         this.code = code;
         this.analytics = analytics;
         this.isEmpty=isEmpty;
+    }
+
+    copy(card){
+        this.title = card.title;
+        this.enhancements = card.enhancements;
+        this.code = card.code;
+        this.analytics = card.analytics;
+        this.isEmpty = card.isEmpty;
     }
 }
