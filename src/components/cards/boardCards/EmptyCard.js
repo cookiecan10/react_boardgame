@@ -11,7 +11,7 @@ class Card extends Component {
         const cardRowType = this.props.cardRowType;
 
         var style;
-        switch('Change to "cardType"'){
+        switch(cardType){
             case 'InteractionCards':
                 style = interactionCardStyle;
                 break;
@@ -42,7 +42,7 @@ var defaultCardStyle = {
     backgroundColor: '#000000',
     color: 'white',
     // width: '20%',
-    height: '250px',
+    height: '500px',
     margin: '7px',
     padding: '0px 4px',
     borderStyle: 'solid',
@@ -62,7 +62,7 @@ var interactionCardStyle = {
     backgroundColor: '#8888ff',
     color: 'white',
     // width: '20%',
-    height: '250px',
+    height: '500px',
     margin: '7px',
     padding: '0px 4px',
     borderStyle: 'solid',
@@ -82,7 +82,7 @@ var LETCardStyle = {
     backgroundColor: '#ff8888',
     color: 'white',
     // width: '20%',
-    height: '250px',
+    height: '500px',
     margin: '7px',
     padding: '0px 4px',
     borderStyle: 'solid',
@@ -102,7 +102,7 @@ var questionCardStyle = {
     backgroundColor: '#ffff88',
     color: 'white',
     // width: '20%',
-    height: '250px',
+    height: '500px',
     margin: '7px',
     padding: '0px 4px',
     borderStyle: 'solid',
