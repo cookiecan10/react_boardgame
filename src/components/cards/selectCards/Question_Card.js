@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import TemplateCard from './Template_Card'
 
 // function log(e) {
 //     e.preventDefault();
@@ -6,10 +7,13 @@ import React, { Component } from 'react'
 // }
 
 
-class QuestionCard extends Component {
+class QuestionCard extends TemplateCard {
 
     render() {
         const { key, title, content, code, description, cardType } = this.props.card;
+
+        var cardStyle = {...this.allCardStyle, ...questionCardStyle}
+
         return (
             <div style={cardStyle} onClick={this.props.addCard.bind(this, key, cardType)} className='Card'>
 
@@ -35,23 +39,8 @@ class QuestionCard extends Component {
     }
 }
 
-const cardStyle = {
-    position: 'relative',
-    float: 'left',
-    fontSize: '1.5vh',
+const questionCardStyle = {
     backgroundColor: '#ffff88',
-    color: 'black',
-    width: '25%',
-    height: '250px',
-    margin: '7px',
-    padding: '0px 4px',
-    borderStyle: 'solid',
-    borderColor: '#888888',
-    borderWidth: '4px 4px',
-    borderRadius: '5px',
-    userSelect: 'none',
-    flexDirection: 'row',
-    cursor: 'pointer'
 }
 
 const contentStyle = {

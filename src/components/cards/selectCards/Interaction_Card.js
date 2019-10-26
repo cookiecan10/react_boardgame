@@ -1,13 +1,17 @@
 import React, { Component } from 'react'
+import TemplateCard from './Template_Card'
 
 // function log(e) {
 //     e.preventDefault();
 //     console.log("SELECTED Interaction card")
 // }
 
-class InteractionCard extends Component {
+class InteractionCard extends TemplateCard {
     render() {
         const { key, from, to, description, cardType} = this.props.card;
+
+        var cardStyle = {...this.allCardStyle, ...interactionCardStyle};
+
         return (
             <div style={cardStyle} onClick={this.props.addCard.bind(this, key, cardType)} className='Card'>
 
@@ -30,22 +34,8 @@ class InteractionCard extends Component {
     }
 }
 
-const cardStyle = {
-    position: 'relative',
-    float: 'left',
-    fontSize: '1vh',
+const interactionCardStyle = {
     backgroundColor: '#8888ff',
-    color: 'black',
-    width: '25%',
-    height: '250px',
-    margin: '7px',
-    padding: '0px 4px',
-    borderStyle: 'solid',
-    borderColor: '#888888',
-    borderWidth: '4px 4px',
-    borderRadius: '5px',
-    userSelect: 'none',
-    cursor: 'pointer'
 }
 
 const contentStyle = {

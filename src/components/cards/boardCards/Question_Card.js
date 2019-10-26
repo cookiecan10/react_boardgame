@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import TemplateCard from './Template_Card'
 
 function log(e) {
     e.preventDefault();
@@ -6,16 +7,19 @@ function log(e) {
 }
 
 
-class QuestionCard extends Component {
+class QuestionCard extends TemplateCard {
 
     render() {
         const { key, title, content, code, description } = this.props.card;
         const cardRowType = this.props.cardRowType;
+
+        var cardStyle = {...this.allCardStyle, ...questionCardStyle};
+
         return (
             <div style={cardStyle} onClick={log} className='Card'>
-                <button style={leftButtonStyle} onClick={this.props.moveLeft.bind(this, key, cardRowType)}> 🡨 </button>
-                <button style={delButtonStyle} onClick={this.props.delCard.bind(this, key, cardRowType)}> X </button>
-                <button style={rightButtonStyle} onClick={this.props.moveRight.bind(this, key, cardRowType)}> 🡪 </button>
+                <button style={this.leftButtonStyle} onClick={this.props.moveLeft.bind(this, key, cardRowType)}> 🡨 </button>
+                <button style={this.delButtonStyle} onClick={this.props.delCard.bind(this, key, cardRowType)}> X </button>
+                <button style={this.rightButtonStyle} onClick={this.props.moveRight.bind(this, key, cardRowType)}> 🡪 </button>
 
                 <div name='title'>
                     <div style={{margin:'8px 0px 0px 0px'}}>What do we want to know</div>
@@ -39,58 +43,8 @@ class QuestionCard extends Component {
     }
 }
 
-const cardStyle = {
-    position: 'relative',
-    float: 'left',
-    fontSize: '1.5vh',
+const questionCardStyle = {
     backgroundColor: '#ffff88',
-    color: 'black',
-    boxShadow: '10px 10px rgba(0, 0, 0, 0.5)',
-    //width: '20%',
-    height: '500px',
-    margin: '7px',
-    padding: '0px 4px',
-    borderStyle: 'solid',
-    borderColor: '#888888',
-    borderWidth: '4px 4px',
-    borderRadius: '5px',
-    userSelect: 'none',
-}
-
-const leftButtonStyle = {
-    marginBottom: '15px',
-    padding: '3px 8px',
-    cursor: 'pointer',
-    borderRadius: '50%',
-    border: 'none',
-    width: '30px',
-    height: '30px',
-    fontWeight: 'bold',
-    float: 'left'
-}
-
-const rightButtonStyle = {
-    marginBottom: '15px',
-    padding: '3px 8px',
-    cursor: 'pointer',
-    borderRadius: '50%',
-    border: 'none',
-    width: '30px',
-    height: '30px',
-    fontWeight: 'bold',
-    float: 'right'
-}
-
-const delButtonStyle = {
-    marginBottom: '15px',
-    padding: '3px 8px',
-    cursor: 'pointer',
-    borderRadius: '50%',
-    border: 'none',
-    width: '30px',
-    height: '30px',
-    fontWeight: 'bold',
-    float: 'right'
 }
 
 const contentStyle = {

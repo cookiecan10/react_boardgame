@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
+import TemplateCard from './Template_Card'
 
 // function log(e) {
-//     e.preventDefault();
+//     e.preventempty();
 //     console.log("THIS IS AN EMPTY CARD!!!")
 // }
 
-class Card extends Component {
+export default class Card extends TemplateCard {
     render() {
         const { key, cardType } = this.props.card;
         const cardRowType = this.props.cardRowType;
@@ -13,16 +14,16 @@ class Card extends Component {
         var style;
         switch(cardType){
             case 'InteractionCards':
-                style = interactionCardStyle;
+                style = {...this.allCardStyle, ...emptyCardStyle, ...interactionCardStyle};
                 break;
             case 'LETCards':
-                style = LETCardStyle;
+                style = {...this.allCardStyle, ...emptyCardStyle, ...LETCardStyle};
                 break;
             case 'QuestionCards':
-                style = questionCardStyle;
+                style = {...this.allCardStyle, ...emptyCardStyle, ...questionCardStyle};
                 break;
-            default:
-                style = defaultCardStyle;
+            empty:
+                style = emptyCardStyle;
                 break;
         }
 
@@ -36,84 +37,27 @@ class Card extends Component {
     }
 }
 
-var defaultCardStyle = {
-    position: 'relative',
-    float: 'left',
+var emptyCardStyle = {
     backgroundColor: '#000000',
     color: 'white',
-    // width: '20%',
-    height: '500px',
     margin: '7px',
     padding: '0px 4px',
-    borderStyle: 'solid',
-    borderColor: '#888888',
-    borderWidth: '4px 4px',
-    borderRadius: '5px',
     opacity: '0.7',
     fontSize:'100px',
     textAlign: 'center',
     userSelect: 'none',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    boxShadow: '0px',
 }
 
 var interactionCardStyle = {
-    position: 'relative',
-    float: 'left',
     backgroundColor: '#8888ff',
-    color: 'white',
-    // width: '20%',
-    height: '500px',
-    margin: '7px',
-    padding: '0px 4px',
-    borderStyle: 'solid',
-    borderColor: '#888888',
-    borderWidth: '4px 4px',
-    borderRadius: '5px',
-    opacity: '0.7',
-    fontSize:'100px',
-    textAlign: 'center',
-    userSelect: 'none',
-    cursor: 'pointer'
 }
 
 var LETCardStyle = {
-    position: 'relative',
-    float: 'left',
     backgroundColor: '#ff8888',
-    color: 'white',
-    // width: '20%',
-    height: '500px',
-    margin: '7px',
-    padding: '0px 4px',
-    borderStyle: 'solid',
-    borderColor: '#888888',
-    borderWidth: '4px 4px',
-    borderRadius: '5px',
-    opacity: '0.7',
-    fontSize:'100px',
-    textAlign: 'center',
-    userSelect: 'none',
-    cursor: 'pointer'
 }
 
 var questionCardStyle = {
-    position: 'relative',
-    float: 'left',
     backgroundColor: '#ffff88',
-    color: 'white',
-    // width: '20%',
-    height: '500px',
-    margin: '7px',
-    padding: '0px 4px',
-    borderStyle: 'solid',
-    borderColor: '#888888',
-    borderWidth: '4px 4px',
-    borderRadius: '5px',
-    opacity: '0.7',
-    fontSize:'100px',
-    textAlign: 'center',
-    userSelect: 'none',
-    cursor: 'pointer'
 }
-
-export default Card

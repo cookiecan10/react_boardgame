@@ -1,13 +1,17 @@
 import React, { Component } from 'react'
+import TemplateCard from './Template_Card'
 
 // function log(e) {
 //     e.preventDefault();
 //     console.log("you clicked an Enhanced Card")
 // }
 
-class LETCard extends Component {
+class LETCard extends TemplateCard {
     render() {
         const { key, title, enhancements, code, analytics, cardType } = this.props.card;
+
+        var cardStyle = {...this.allCardStyle, ...LETCardStyle};
+
         return (
             <div style={cardStyle} onClick={this.props.addCard.bind(this, key, cardType)} className='Card'>
 
@@ -39,7 +43,7 @@ class LETCard extends Component {
     }
 }
 
-const cardStyle = {
+const LETCardStyle = {
     position: 'relative',
     float: 'left',
     fontSize: '1vh',
