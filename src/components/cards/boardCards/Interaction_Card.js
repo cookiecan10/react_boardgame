@@ -7,6 +7,22 @@ function log(e) {
 }
 
 class InteractionCard extends TemplateCard {
+
+    state = {
+        des: '',
+    }
+
+    onChange = (e) => {
+        this.setState({[e.target.name]: e.target.value});
+        console.log('this is actually happening')
+        this.props.changeIDescription.bind(this, this.key, this.state.des);
+    }
+    // this.setState({[e.target.name]: e.target.value});
+
+    onSubmit = (e) => {
+        e.preventDefault();//Don't submit to server
+    }
+
     render() {
         const { key, from, to, description } = this.props.card;
         const cardRowType = this.props.cardRowType;
@@ -26,7 +42,15 @@ class InteractionCard extends TemplateCard {
                     <div style={{ fontSize: '15px', fontWeight: 'normal', margin: '5px 0px 5px', textAlign: 'center' }}>{from} 🠊 {to} </div>
                 </div>
                 <div style={contentStyle} name='content'>
-                    <div style={{ fontSize: '15px' }}>{description}</div>
+                    <div style={{ fontSize: '15px' }}><form onSubmit={this.onSubmit}><textarea
+                                                             rows='4'
+                                                             cols='19'
+                                                             name='des' 
+                                                             style={descriptionStyle} 
+                                                             placeholder='Add Description' 
+                                                             //value={this.state.des} 
+                                                             onChange={this.onChange}/>
+                                                    </form></div>
                 </div>
 
                 <div name='description'>
@@ -46,6 +70,14 @@ const interactionCardStyle = {
 const contentStyle = {
     backgroundColor: '#ffffff'
 }
+
+const descriptionStyle = {
+    height: 'auto',
+    width: 'auto',
+    resize: 'none',
+    overflow: 'auto',
+}
+
 const topStyle = {
     backgroundColor: '#ff8888',
     textAlign: 'center',

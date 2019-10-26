@@ -21,7 +21,7 @@ class InteractionCard extends TemplateCard {
                     <div style={{ fontSize: '15px', fontWeight: 'normal', margin: '5px 0px 5px', textAlign: 'center' }}>{from} 🠊 {to} </div>
                 </div>
                 <div style={contentStyle} name='content'>
-                    <div style={{ fontSize: '15px' }}>{description}</div>
+                    <div style={{ fontSize: '15px' }}>Add Description</div>
                 </div>
 
                 <div name='description'>

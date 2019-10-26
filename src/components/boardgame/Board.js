@@ -181,6 +181,18 @@ class Board extends Component {
         this.setState({cardSelectOpen: false})
     }
 
+    changeIDescription = (key, data) => {
+        console.log("Hey stoms tuffffffffffffff")
+        let cards = [...this.state.interactionCards];
+
+        let index = findIndex(cards, key);
+
+        cards[index].desciption = data;
+        console.log(data)
+
+        this.setState({interactionCards: cards});
+    }
+
     state = {
         diaglogOpen: false,
         cardSelectOpen: false,
@@ -199,13 +211,13 @@ class Board extends Component {
             new LETCard(0, 'MOBILE PHONE (APP)', ['Content Delivery', 'Sensors', 'Photo/Video', 'Location Tracking'], 'LET001', ['Sensors', 'Photo/Video', 'Location Tracking', 'Questionnaire Distribution'], false),
         ],
         allInteractionCards: [
-            new InteractionCard(0, 'Student', 'Environment', 'Interaction desciption', false),
-            new InteractionCard(0, 'Environment', 'Student', 'Interaction desciption', false),
-            new InteractionCard(0, 'Student', 'Material', 'Interaction desciption', false),
-            new InteractionCard(0, 'Material', 'Student', 'Interaction desciption', false),
-            new InteractionCard(0, 'Student', 'Student', 'Interaction desciption', false),
-            new InteractionCard(0, 'Student', 'Teacher', 'Interaction desciption', false),
-            new InteractionCard(0, 'Teacher', 'Student', 'Interaction desciption', false),
+            new InteractionCard(0, 'Student', 'Environment', '', false),
+            new InteractionCard(0, 'Environment', 'Student', '', false),
+            new InteractionCard(0, 'Student', 'Material', '', false),
+            new InteractionCard(0, 'Material', 'Student', '', false),
+            new InteractionCard(0, 'Student', 'Student', '', false),
+            new InteractionCard(0, 'Student', 'Teacher', '', false),
+            new InteractionCard(0, 'Teacher', 'Student', '', false),
         ],
         // LETcards: [],
         // interactionCards: [],
@@ -239,7 +251,8 @@ class Board extends Component {
                     </CardRow>
 
                     <CardRow cardRowType='interactionCards' 
-                        cards={this.state.interactionCards} 
+                        cards={this.state.interactionCards}
+                        changeIDescription={this.changeIDescription}
                         moveLeft={this.moveLeft} 
                         moveRight={this.moveRight} 
                         delCard={this.deleteCard} 
