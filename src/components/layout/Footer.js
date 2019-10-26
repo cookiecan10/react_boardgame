@@ -12,6 +12,7 @@ export default class Footer extends Component {
 
 const footerStyle = {
     background: '#333',
+    position: 'relative',
     color: '#fff',
     textAlign: 'center',
     padding: '0px',

@@ -3,11 +3,13 @@ import Todos from './components/Todos'
 import AddCard from './components/AddCard'
 import CardInfo from './components/CardInfo'
 import LetCard from './components/LetCard'
+import InteractionCard from './components/InteractionCard'
+import PedagogyCard from './components/PedagogyCard'
+import QuestionCard from './components/QuestionCard'
 import axios from 'axios';
 import { DropdownMultiple, Dropdown } from 'reactjs-dropdown-component'; // je kan een dropdown aanmaken die een of meerdere seleties toelaat, zie de betreffende componenten voor meer info.
 
 import './Overview.css';
-import LETCard from '../cards/bigCards/LET_Card';
 
 
 
@@ -77,27 +79,34 @@ class CardList extends React.Component {
         ],
         cards:
             [
+                
             ]
     }
     render() {
-        let rCard;//moet nog kaart die getoont moet worden hierin doen
+        let rCard = new LetCard(['hi','dag tijmen'],"ha","bah");
         return (
             <React.Fragment>
                 <div className="App">
                     <div className="container">
-
                                 <div className="wrapper">
                                     <Dropdown
                                         title="Select Category"//Dit is de titel van dropdown,ui taal moet engels zijn.
                                         list={this.state.cardCategories} //de dropdown wordt gevult met de items die in de state gedfineerd worden.
-                                        resetThenSet={this.resetThenSet}
-                                    />
+                                        resetThenSet={this.resetThenSet}                                    
+                                    />                                   
                                 </div>
                         <AddCard addTodo={this.addTodo} />
                         <CardInfo/>
-                                <Todos todos={this.state.cards} delTodo={this.delTodo} />
+                        <div className = 'cardlist'>
+                        <Todos todos={this.state.cards} delTodo={this.delTodo} />    
+                                <LetCard card={{content:['this is a card'], description:'hello', code:'14'}}></LetCard>
+                                <InteractionCard card ={{content:['hey'],description:'hello',code:'1'}}></InteractionCard>
+                                <PedagogyCard card ={{content:['sanic'],description:'gotta go fast',code:'1337'}}></PedagogyCard>
+                                <QuestionCard card ={{content:['sanic'],description:'gotta go fast',code:'1337'}}/>
+                        </div>
+                                
                     </div>
-
+                    
                 </div>
                 </React.Fragment>
         );
