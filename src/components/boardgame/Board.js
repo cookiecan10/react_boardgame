@@ -145,8 +145,8 @@ class Board extends Component {
 
     openCardSelect = (key, type) => {
 
-        var index = findIndex(this.state[type], key)
-        console.log(index)
+        var index = findIndex(this.state[type], key) // Vind index van plaats op het bord
+        //console.log(index)
 
         this.setState({selectedCardIndex: index});
         this.setState({selectedRowType: type});
@@ -186,9 +186,10 @@ class Board extends Component {
         let cards = [...this.state.interactionCards];
 
         let index = findIndex(cards, key);
+        console.log(index);
 
-        cards[index].desciption = data;
-        console.log(data)
+        cards[index].description = data.target.value;
+        console.log(data.target.value)
 
         this.setState({interactionCards: cards});
     }
@@ -211,7 +212,7 @@ class Board extends Component {
             new LETCard(0, 'MOBILE PHONE (APP)', ['Content Delivery', 'Sensors', 'Photo/Video', 'Location Tracking'], 'LET001', ['Sensors', 'Photo/Video', 'Location Tracking', 'Questionnaire Distribution'], false),
         ],
         allInteractionCards: [
-            new InteractionCard(0, 'Student', 'Environment', '', false),
+            new InteractionCard(0, 'Student', 'Environment', 'standarta distrionctipoing', false),
             new InteractionCard(0, 'Environment', 'Student', '', false),
             new InteractionCard(0, 'Student', 'Material', '', false),
             new InteractionCard(0, 'Material', 'Student', '', false),

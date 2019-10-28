@@ -8,14 +8,11 @@ function log(e) {
 
 class InteractionCard extends TemplateCard {
 
-    state = {
-        des: '',
-    }
-
     onChange = (e) => {
         this.setState({[e.target.name]: e.target.value});
         console.log('this is actually happening')
-        this.props.changeIDescription.bind(this, this.key, this.state.des);
+        //this.props.moveLeft.bind(this, 4, cardRowType)
+        // this.props.changeIDescription.bind(this, key, this.state.des);
     }
     // this.setState({[e.target.name]: e.target.value});
 
@@ -48,8 +45,8 @@ class InteractionCard extends TemplateCard {
                                                              name='des' 
                                                              style={descriptionStyle} 
                                                              placeholder='Add Description' 
-                                                             //value={this.state.des} 
-                                                             onChange={this.onChange}/>
+                                                            //  value={this.state.des} 
+                                                             onChange={this.props.changeIDescription.bind(this, key)}/>
                                                     </form></div>
                 </div>
 

@@ -40,7 +40,7 @@ class CardList extends React.Component {
     }
 
     //Add Todo
-    addTodo = (title) => {
+    AddCard = (title) => {
         axios.post('https://jsonplaceholder.typicode.com/todos', {
             title: title,
             completed: false
@@ -85,7 +85,7 @@ class CardList extends React.Component {
     render() {
         let rCard = new LetCard(['hi','dag tijmen'],"ha","bah");
         return (
-            <React.Fragment>
+            // <React.Fragment>
                 <div className="App">
                     <div className="container">
                                 <div className="wrapper">
@@ -95,7 +95,7 @@ class CardList extends React.Component {
                                         resetThenSet={this.resetThenSet}                                    
                                     />                                   
                                 </div>
-                        <AddCard addTodo={this.addTodo} />
+                        <AddCard AddCard={this.AddCard} />
                         <CardInfo/>
                         <div className = 'cardlist'>
                         <Todos todos={this.state.cards} delTodo={this.delTodo} />    
@@ -108,7 +108,7 @@ class CardList extends React.Component {
                     </div>
                     
                 </div>
-                </React.Fragment>
+                // </React.Fragment>
         );
     }
 
