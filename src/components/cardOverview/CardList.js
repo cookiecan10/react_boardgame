@@ -89,7 +89,7 @@ class CardList extends React.Component {
                 <div className="App">
                     <div className="container">
                                 <div className="wrapper">
-                                    <Dropdown
+                                    <Dropdown style={DropdownStyle}
                                         title="Select Category"//Dit is de titel van dropdown,ui taal moet engels zijn.
                                         list={this.state.cardCategories} //de dropdown wordt gevult met de items die in de state gedfineerd worden.
                                         resetThenSet={this.resetThenSet}                                    
@@ -113,5 +113,9 @@ class CardList extends React.Component {
     }
 
 }
+const DropdownStyle = {
+    border: '20px',
+    backgroundColor: '#ff00ff' //zo donker als mijn ziel
 
+}
 export default CardList

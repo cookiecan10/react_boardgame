@@ -8,7 +8,7 @@ export class AddCard extends Component {
 
     onSubmit = (e) => {
         e.preventDefault();//Don't submit to server
-        this.props.addTodo(this.state.title);
+        this.props.AddCard(this.state.title);
         this.setState({ title: ''});
     }
 
@@ -38,7 +38,7 @@ export class AddCard extends Component {
 
 // PropTypes
 AddCard.propTypes = {
-    addTodo: PropTypes.func.isRequired,
+    AddCard: PropTypes.func.isRequired,
 }
 
 export default AddCard
