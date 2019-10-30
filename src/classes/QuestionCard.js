@@ -1,9 +1,13 @@
 import uuid from 'uuid'
 
 export default class QuestionCard {
-    constructor(key=0, title='', content=[], code='', description='', isEmpty=true) {
+    constructor(key=null, title='', content=[], code='', description='', isEmpty=true) {
 
-        this.key = uuid();
+        if (key === null){
+            this.key = uuid();
+        } else {
+            this.key = key;
+        }
         this.title = title;
         this.content = content;
         this.code = code;

@@ -11,33 +11,10 @@ import CardSelector from './CardSelector'
 const MAX_LENGTH = 9;
 
 let questionCardPlaceholders = Array(MAX_LENGTH).fill();
-// [
-//     // id, title, enhancements, code, analytics, isEmpty
-//     new QuestionCard(0, 'Initiative', ['Timing in collaboration environments', 'Timing in asking questions', 'Timing in handling in assignments'], 'WHAT003', 'How often and how fast do student take initiative', false),
-//     new QuestionCard(645465, 'Yeeting in class', ['todo: fix vertical card size'], 'WUT0W0', 'I am become death, destroyer of worlds', false),
-//     new QuestionCard(2, 'Having Fun', ['Questionnaire', 'Facial Expression (Camera)'], 'WHAT004', 'Do student enjoy the learning activities', false),
-//     new QuestionCard(3, 'Activity', ['Presence', 'Number of clicks', 'Number of live interactions'], 'WHAT009', 'How active are students', false),
-// ]
 
 let interactionCardPlaceholders = Array(MAX_LENGTH).fill();
-// [
-//     //key, from, to, desciption, isEmpty
-//     new InteractionCard(0, 'student', 'envirement', 'Interaction desciption', false),
-//     new InteractionCard(),
-//     new InteractionCard(),
-//     new InteractionCard(),
-// ]
 
 let LETCardPlaceholders = Array(MAX_LENGTH).fill();
-
-    //Array(4).fill(new LETCard()); //Does not work, doesn't create new cards, they all references the same object
-// [
-//     // id, title, content, code, description, isEmpty
-//     new LETCard(0, 'BLOG/VLOG', ['Content creation', '(Peer) Feedback', 'Collaboration'], 'LET003', ['Timing of creation/reaction', 'Amount creation/reaction', 'Content distribution'], false),
-//     new LETCard(),
-//     new LETCard(),
-//     new LETCard(),
-// ]
 
 function findIndex(arr, key) {
     for (var i = 0; i < arr.length; i++) {
@@ -47,8 +24,7 @@ function findIndex(arr, key) {
     }
     return null;
 }
-
-axios.get("https://cardgame.shannendolls.com/api/v1.0/cards").then(res => console.log("DING ", res))
+axios.defaults.headers.common['Content-Type'] = 'application/json' 
 
 class Board extends Component {
 
@@ -56,7 +32,7 @@ class Board extends Component {
         //You have to do this in react
         super(props)
 
-        //axios.post('https://jsonplaceholder.typicode.com/todos'
+        axios.get("https://cardgame.shannendolls.com/api/v1.0/cards").then(res => this.proccesGetCards(res.data));
 
         //Assigning keys's
         //You can probably assign all of the card types if you use a forloop and put the different cardtypes in an array
@@ -87,6 +63,31 @@ class Board extends Component {
             }
         });
 
+    }
+
+    proccesGetCards = (cardsData) => {
+        let cards = cardsData.cards;
+        console.log('Cards collected from server: ', cards);
+        cards.map((card) => {
+            if (card.cardType === undefined){
+                console.log("Incorrect card format provided, cannot procces this card!", card)
+            } else {
+
+                switch(card.cardType){
+                    case 'InteractionCards':
+                                                    // key, to, from, description, id, isEmpty
+                        let iCard = new InteractionCard(null, card.to, card.from, card.description, card._id, false);
+                        this.setState({allInteractionCards: [...this.state.allInteractionCards, iCard] });
+                        break;
+                    case 'QuestionCards':
+                        // let qCard = new QuestionCard();
+                        // let newCard = {...qCard, ...card, ...{isEmpty: false}}
+                    default:
+                        console.log('Unrecognised card: ', card);
+                        break;
+                }
+            }
+        })
     }
 
     deleteCard = (key, type) => {
@@ -172,6 +173,26 @@ class Board extends Component {
 
         let menuCard = this.state.menuCards.filter( card => card.key === key)[0]; // Copy the selected menuCard
 
+        console.log('look this is a taype:::::', type)
+        
+        let x;
+
+        switch(type){
+            case 'InteractionCards':
+                console.log('This posts an interaction card to the database');
+                x = menuCard.getDBinfo();
+                break;
+            case 'LETCards':
+                console.log('this posts a LET card to the database');
+                //axios.delete('https://cardgame.shannendolls.com/api/v1.0/delete_card', {card: "5db770eb6301ac4d3cb71e7b"}, {headers: {'Content-Type': 'application/json'}})
+                break;
+            case 'QuestionCards':
+                console.log('this posts a question card to the database');
+                break;
+        }
+        console.log('SEND: ', x)
+        axios.post('https://cardgame.shannendolls.com/api/v1.0/new_card', x).then(res => console.log('RESPONSE: ', res))
+
         // Copy the card (Carefull this is dependend on the fact that the cards are the same type of card)
         // This has been done with a .copy in order to copy by value instead of by reference, any other way to copy by value would also work
         cards[this.state.selectedCardIndex].copy(menuCard);
@@ -212,13 +233,13 @@ class Board extends Component {
             new LETCard(0, 'MOBILE PHONE (APP)', ['Content Delivery', 'Sensors', 'Photo/Video', 'Location Tracking'], 'LET001', ['Sensors', 'Photo/Video', 'Location Tracking', 'Questionnaire Distribution'], false),
         ],
         allInteractionCards: [
-            new InteractionCard(0, 'Student', 'Environment', 'standarta distrionctipoing', false),
-            new InteractionCard(0, 'Environment', 'Student', '', false),
-            new InteractionCard(0, 'Student', 'Material', '', false),
-            new InteractionCard(0, 'Material', 'Student', '', false),
-            new InteractionCard(0, 'Student', 'Student', '', false),
-            new InteractionCard(0, 'Student', 'Teacher', '', false),
-            new InteractionCard(0, 'Teacher', 'Student', '', false),
+            // new InteractionCard(null, 'Student', 'Environment', '', null, false),
+            // new InteractionCard(null, 'Environment', 'Student', '', null, false),
+            // new InteractionCard(null, 'Student', 'Material', '', null, false),
+            // new InteractionCard(null, 'Material', 'Student', '', null, false),
+            // new InteractionCard(null, 'Student', 'Student', '', null, false),
+            // new InteractionCard(null, 'Student', 'Teacher', '', null, false),
+            // new InteractionCard(null, 'Teacher', 'Student', '', null, false),
         ],
         // LETcards: [],
         // interactionCards: [],

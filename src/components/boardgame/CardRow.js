@@ -11,8 +11,6 @@ export default class CardRow extends Component {
         let rCard;
 
         rCard = this.props.cards.map(card => {
-            //console.log(card.cardType)
-            console.log(cardRowType)
 
             if (card.isEmpty){
                 return (<EmptyCard key={card.key} card={card} cardRowType={cardRowType} addCard={this.props.addCard}/>)

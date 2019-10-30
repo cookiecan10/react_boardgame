@@ -1,9 +1,13 @@
 import uuid from 'uuid'
 
 export default class LETCard {
-    constructor(key=0, title='', enhancements=[], code='', analytics=[], isEmpty=true) {
+    constructor(key=null, title='', enhancements=[], code='', analytics=[], isEmpty=true) {
 
-        this.key = uuid();
+        if (key === null){
+            this.key = uuid();
+        } else {
+            this.key = key;
+        }
         this.title = title;
         this.enhancements = enhancements;
         this.code = code;

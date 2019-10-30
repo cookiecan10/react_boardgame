@@ -1,14 +1,19 @@
 import uuid from 'uuid'
 
 export default class InteractionCard {
-    constructor(key=0, from='', to='', description='', isEmpty=true) {
+    constructor(key=null, from='', to='', description='', id=null, isEmpty=true) {
 
-        this.key = uuid();
+        if (key === null){
+            this.key = uuid();
+        } else {
+            this.key = key;
+        }
         this.from = from;
         this.to = to;
         this.description = description;
         this.isEmpty=isEmpty;
         this.cardType = 'InteractionCards';
+        this._id = id;
     }
 
     // Reset all of the data off the card, can also assign new values
@@ -27,5 +32,16 @@ export default class InteractionCard {
         this.to = card.to;
         this.description = card.description;
         this.isEmpty = card.isEmpty;
+    }
+
+    getDBinfo() {
+        let obj = {
+            from: this.from,
+            to: this.to,
+            description: this.description,
+            cardType: this.cardType,
+            _id: this._id,
+        }
+        return obj
     }
 }
