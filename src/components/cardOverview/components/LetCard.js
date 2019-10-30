@@ -1,52 +1,53 @@
 import React, {Component} from 'react';
+import TemplateCard from '../../cards/boardCards/Template_Card'
 
 var cardType = 'LetCard';
 
 
-export default class LetCard extends Component {
-    render(){
-        const {content, code, description } = this.props.card;
-        return(
+class LETCard extends TemplateCard {
+    render() {
+        const { key, title, enhancements, code, analytics } = this.props.card;
+        const cardRowType = this.props.cardRowType;
+
+        var cardStyle = {...this.allCardStyle, ...LETCardStyle};
+
+        return (
             <div style={cardStyle} className='Card'>
+
                 <div name='title'>
-                    <div style={{ fontSize: '15px', textAlign: 'center', margin: '5px 0px 5px' }}>enhancement opportunities</div>
-                    <div style={{ fontSize: '10px',margin: '5px 0px 5px' }}>- content</div>
+                    <div style={{ fontSize: '13px', margin: '5px 0px 5px' }}>enhancement opportunities</div>
                 </div>
+
+                <div>
+                    <ul style={{textAlign:'left', listStylePosition: 'inside'}}>
+                        {enhancements}
+                    </ul>
+                </div>
+
                 <div style={contentStyle} name='content'>
                     <div style={{fontSize:'20px'}}>Learning Analytics</div>
 
-                    <ul style={{textAlign:'left'}}>
-                        {content.map((item, index) => (<li key={index}>{item}</li>))}
+                    <ul style={{textAlign:'left', listStylePosition: 'inside'}}>
+                        {analytics}
                     </ul>
                 </div>
 
                 <div name='Description'>
                     <div style={{ fontSize: '15px', textAlign: 'center' }}>Learning Enhancing Technology</div><code>(code:{code})</code>
-                    <p>{description}</p>
+                    <div style={{ fontSize: '17px', fontWeight: 'bold'}}>{title}</div>
                 </div>
+
             </div>
         )
     }
-
-    
 }
 
-const cardStyle = {
-    position: 'relative',
-    float: 'left',
-    fontSize: '1vh',
+const LETCardStyle = {
     backgroundColor: '#ff8888',
-    color: 'black',
-    // width: '20%',
-    height: '250px',
-    margin: '7px',
-    padding: '0px 4px',
-    borderStyle: 'solid',
-    borderColor: '#888888',
-    borderWidth: '4px 4px',
-    borderRadius: '5px',
-    userSelect: 'none'
 }
+
 const contentStyle = {
     backgroundColor: '#55ff55'
 }
+
+export default LETCard;

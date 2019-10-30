@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
+import TemplateCard from '../../cards/boardCards/Template_Card'
 
 
-class PedagogyCard extends Component {
+class PedagogyCard extends TemplateCard {
     render() {
         const { id, content, code, description } = this.props.card;
         return (
