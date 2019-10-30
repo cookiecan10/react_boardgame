@@ -1,11 +1,9 @@
 import React from 'react';
-import Todos from './components/Todos'
-import AddCard from './components/AddCard'
-import CardInfo from './components/CardInfo'
 import LetCard from './components/LetCard'
 import InteractionCard from './components/InteractionCard'
 import PedagogyCard from './components/PedagogyCard'
 import QuestionCard from './components/QuestionCard'
+import EmptyCard from '../cards/boardCards/EmptyCard'
 import axios from 'axios';
 import { DropdownMultiple, Dropdown } from 'reactjs-dropdown-component'; // je kan een dropdown aanmaken die een of meerdere seleties toelaat, zie de betreffende componenten voor meer info.
 
@@ -14,10 +12,41 @@ import './Overview.css';
 
 
 class CardList extends React.Component {
+    constructor(props){
+        super(props)
+        axios.get("https://cardgame.shannendolls.com/api/v1.0/cards").then(res => this.proccesGetCards(res.data));
+    }
+    proccesGetCards = (cardsData) => {
+        let cards = cardsData.cards;
+        console.log('Cards collected from server: ', cards);
+        cards.map((card) => {
+            if (card.cardType === undefined){
+                console.log("Incorrect card format provided, cannot procces this card!", card)
+            } else {
 
-
-
-
+                switch(card.cardType){
+                    case 'InteractionCards':
+                                                    // key, to, from, description, id, isEmpty
+                        let iCard = new InteractionCard(null, card.to, card.from, card.description, card._id, false);
+                        this.setState({allInteractionCards: [...this.state.allInteractionCards, iCard] });
+                        break;
+                    case 'QuestionCards':
+                                                    // key, title, content, code, description, id, isEmpty
+                        let qCard = new QuestionCard(null, card.title, card.content, card.code, card.description, null, false );
+                        this.setState({allQuestionCards: [...this.state.allQuestionCards, qCard]});
+                        break;
+                    case 'LETCards':
+                                            // key=null, title='', enhancements=[], code='', analytics=[], id=null, isEmpty=true
+                        let lCard = new LetCard(null, card.title, card.enhancements, card.code, card.analytics, null, false)
+                        this.setState({allLETCards: [...this.state.allLETCards, lCard]})
+                    default:
+                        console.log('Unrecognised card: ', card);
+                        break;
+                }
+            }
+        })
+    }
+    
 
     resetThenSet = (id, key) => {
         let temp = JSON.parse(JSON.stringify(this.state[key]));
@@ -27,30 +56,17 @@ class CardList extends React.Component {
             [key]: temp
         });
     }
-    componentDidMount() {
-        axios.get('')
-            .then(res => this.setState({ todos: res.data }))
-    }
 
-
-    // Delete Todo
-    delTodo = id => {
-        axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
-            .then(res => this.setState({ todos: [...this.state.cards.filter(todo => todo.id !== id)] }))
-    }
-
-    //Add Todo
-    AddCard = (title) => {
-        axios.post('https://jsonplaceholder.typicode.com/todos', {
-            title: title,
-            completed: false
-        })
-            .then(res => this.setState({ todos: [...this.state.cards, res.data] }));
-    }
     state = {
-        enhancedCards: [],
-        interactionCards: [],
-        activityCards: [],
+        allLETCards:[
+
+        ],
+        allQuestionCards:[
+
+        ],
+        allInteractionCards:[
+
+        ],
         cardCategories: [
             {
                 id: 0,
@@ -77,15 +93,11 @@ class CardList extends React.Component {
                 key: 'CardCategories'
             }
         ],
-        cards:
-            [
-                
-            ]
+        cards:[],
     }
     render() {
-        let rCard = new LetCard(['hi','dag tijmen'],"ha","bah");
         return (
-            // <React.Fragment>
+            <React.Fragment>
                 <div className="App">
                     <div className="container">
                                 <div className="wrapper">
@@ -95,27 +107,32 @@ class CardList extends React.Component {
                                         resetThenSet={this.resetThenSet}                                    
                                     />                                   
                                 </div>
-                        <AddCard AddCard={this.AddCard} />
-                        <CardInfo/>
-                        <div className = 'cardlist'>
-                        <Todos todos={this.state.cards} delTodo={this.delTodo} />    
-                                <LetCard card={{content:['this is a card'], description:'hello', code:'14'}}></LetCard>
-                                <InteractionCard card ={{content:['hey'],description:'hello',code:'1'}}></InteractionCard>
-                                <PedagogyCard card ={{content:['sanic'],description:'gotta go fast',code:'1337'}}></PedagogyCard>
-                                <QuestionCard card ={{content:['sanic'],description:'gotta go fast',code:'1337'}}/>
+                                <div>
+                                    <button content="Sample Button" style ={ButtonStyle}>Voeg een kaart toe (WIP)</button>
+                                </div>  
+                        <div className='Cardlist'>
+                            
                         </div>
                                 
                     </div>
                     
                 </div>
-                // </React.Fragment>
+            </React.Fragment>
         );
     }
 
 }
 const DropdownStyle = {
     border: '20px',
-    backgroundColor: '#ff00ff' //zo donker als mijn ziel
-
+    backgroundColor: '#ff00ff' 
 }
+const ButtonStyle = {
+    border: '5px',
+    height: '50px',
+    width: '220px',
+    borderStyle: 'solid',
+    borderColor: 'grey',
+    backgroundColor: 'white',
+}
+
 export default CardList
