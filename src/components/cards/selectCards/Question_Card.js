@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import TemplateCard from './Template_Card'
 
 // function log(e) {

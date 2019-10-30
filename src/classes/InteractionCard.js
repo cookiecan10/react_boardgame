@@ -17,7 +17,7 @@ export default class InteractionCard {
     }
 
     // Reset all of the data off the card, can also assign new values
-    reset( from='', to='', description='', isEmpty=true) {
+    reset( from='', to='', description='', id=null, isEmpty=true) {
         //key=this.key
 
         //this.key = key;
@@ -25,12 +25,14 @@ export default class InteractionCard {
         this.to = to;
         this.description = description;
         this.isEmpty=isEmpty;
+        this._id = id;
     }
 
     copy(card) {
         this.from = card.from;
         this.to = card.to;
         this.description = card.description;
+        this._id = card._id;
         this.isEmpty = card.isEmpty;
     }
 

@@ -1,7 +1,7 @@
 import uuid from 'uuid'
 
 export default class QuestionCard {
-    constructor(key=null, title='', content=[], code='', description='', isEmpty=true) {
+    constructor(key=null, title='', content=[], code='', description='', id=null, isEmpty=true) {
 
         if (key === null){
             this.key = uuid();
@@ -14,10 +14,11 @@ export default class QuestionCard {
         this.description = description;
         this.isEmpty=isEmpty;
         this.cardType = 'QuestionCards';
+        this._id = id;
     }
 
     // Reset all of the data off the card, can also assign new values
-    reset(title='', content=[], code='', description='', isEmpty=true) {
+    reset(title='', content=[], code='', description='', id=null, isEmpty=true) {
         //key=this.key
 
         //this.key = key;
@@ -26,6 +27,7 @@ export default class QuestionCard {
         this.code = code;
         this.description = description;
         this.isEmpty=isEmpty;
+        this._id = id;
     }
 
     // Copy constructor
@@ -34,6 +36,19 @@ export default class QuestionCard {
         this.content = card.content;
         this.code = card.code;
         this.description = card.description;
+        this._id = card._id;
         this.isEmpty = card.isEmpty;
+    }
+
+    getDBinfo() {
+        let obj = {
+            title: this.title,
+            content: this.content,
+            code: this.code,
+            description: this.description,
+            cardType: this.cardType,
+            _id: this._id,
+        }
+        return obj
     }
 }

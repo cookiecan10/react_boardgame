@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import TemplateCard from './Template_Card'
 
 // function log(e) {
@@ -8,7 +8,7 @@ import TemplateCard from './Template_Card'
 
 class InteractionCard extends TemplateCard {
     render() {
-        const { key, from, to, description, cardType} = this.props.card;
+        const { key, from, to, cardType} = this.props.card;
 
         var cardStyle = {...this.allCardStyle, ...interactionCardStyle};
 

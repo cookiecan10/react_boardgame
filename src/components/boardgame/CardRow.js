@@ -23,8 +23,10 @@ export default class CardRow extends Component {
                         return (<LETCard key={card.key} card={card} cardRowType={cardRowType} moveLeft={this.props.moveLeft} moveRight={this.props.moveRight} delCard={this.props.delCard}/>)
                     case 'InteractionCards':
                         return (<InteractionCard key={card.key} changeIDescription={this.props.changeIDescription} card={card} cardRowType={cardRowType} moveLeft={this.props.moveLeft} moveRight={this.props.moveRight} delCard={this.props.delCard}/>)
+                    default:
+                        return (<div />)
+                    }
                 }
-            }
         });
         return (<div style={cardRowStyle} className='CardRow'> {rCard} </div>)
     }

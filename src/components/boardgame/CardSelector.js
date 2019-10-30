@@ -5,7 +5,7 @@ import InteractionCard from '../cards/selectCards/Interaction_Card'
 
 export default class CardSelect extends Component {
     render() {
-        const cardRowType = this.props.cardRowType;
+        //const cardRowType = this.props.cardRowType;
 
         let rCard;
 
@@ -24,6 +24,8 @@ export default class CardSelect extends Component {
                         return (<LETCard key={card.key} card={card} addCard={this.props.addCard} />)
                     case 'InteractionCards':
                         return (<InteractionCard key={card.key} card={card} addCard={this.props.addCard} />)
+                    default:
+                        return (<div />)
                 }
             }
         });
