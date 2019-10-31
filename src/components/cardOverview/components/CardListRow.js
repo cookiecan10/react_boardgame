@@ -1,7 +1,7 @@
 import React from 'react';
-import QuestionCard from '../../cards/boardCards/Question_Card'
-import LETCard from '../../cards/boardCards/LET_Card'
-import InteractionCard from '../../cards/boardCards/Interaction_Card'
+import QuestionCard from './QuestionCard'
+import LETCard from './LetCard'
+import InteractionCard from './InteractionCard'
 
 class CardListRow extends React.Component{
     render(){
@@ -28,7 +28,7 @@ const cardRowStyle = {
     float: "left",
     width: "100%",
     height: "90%",
-    border: "3px solid rgba(49, 49, 49, 0.856)",
+    border: "0px solid rgba(49, 49, 49, 0.856)",
     overflow: "hidden",
     textAlign: 'center',
 }

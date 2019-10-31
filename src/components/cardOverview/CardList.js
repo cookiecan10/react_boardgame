@@ -1,8 +1,7 @@
 import React from 'react';
-import LetCard from './components/LetCard'
-import InteractionCard from './components/InteractionCard'
-import PedagogyCard from './components/PedagogyCard'
-import QuestionCard from './components/QuestionCard'
+import QuestionCard from '../../classes/QuestionCard'
+import InteractionCard from '../../classes/InteractionCard'
+import LetCard from '../../classes/LETCard'
 import CardListRow from './components/CardListRow'
 import axios from 'axios';
 import { DropdownMultiple, Dropdown } from 'reactjs-dropdown-component'; // je kan een dropdown aanmaken die een of meerdere seleties toelaat, zie de betreffende componenten voor meer info.
@@ -28,6 +27,7 @@ class CardList extends React.Component {
                     case 'InteractionCards':
                                                     // key, to, from, description, id, isEmpty
                         let iCard = new InteractionCard(null, card.to, card.from, card.description, card._id, false);
+                        console.log('key',iCard.key)
                         this.setState({allInteractionCards: [...this.state.allInteractionCards, iCard] });
                         break;
                     case 'QuestionCards':
