@@ -31,6 +31,7 @@ export default class LETCard {
         this._id = id;
     }
 
+    // Copy all of the values of another card
     copy(card){
         this.title = card.title;
         this.enhancements = card.enhancements;
@@ -40,6 +41,7 @@ export default class LETCard {
         this.isEmpty = card.isEmpty;
     }
 
+    // Get the data neccessary for storing stuff in the database
     getDBinfo() {
         let obj = {
             title: this.title,

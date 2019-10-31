@@ -28,6 +28,7 @@ export default class InteractionCard {
         this._id = id;
     }
 
+    // Copy all of the values of another card
     copy(card) {
         this.from = card.from;
         this.to = card.to;
@@ -36,6 +37,7 @@ export default class InteractionCard {
         this.isEmpty = card.isEmpty;
     }
 
+    // Get the data neccessary for storing stuff in the database
     getDBinfo() {
         let obj = {
             from: this.from,

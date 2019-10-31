@@ -8,14 +8,12 @@ export default class CardRow extends Component {
     render() {
         const cardRowType = this.props.cardRowType;
 
-        let rCard;
-
-        rCard = this.props.cards.map(card => {
-
+        // Decide which type of card to render
+        let rCard = this.props.cards.map(card => {
+            
             if (card.isEmpty){
                 return (<EmptyCard key={card.key} card={card} cardRowType={cardRowType} addCard={this.props.addCard}/>)
             } else {
-                //Decide which type of card to render
                 switch(card.cardType){
                     case 'QuestionCards':
                         return (<QuestionCard key={card.key} card={card} cardRowType={cardRowType} moveLeft={this.props.moveLeft} moveRight={this.props.moveRight} delCard={this.props.delCard}/>)

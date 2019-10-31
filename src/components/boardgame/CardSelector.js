@@ -5,18 +5,13 @@ import InteractionCard from '../cards/selectCards/Interaction_Card'
 
 export default class CardSelect extends Component {
     render() {
-        //const cardRowType = this.props.cardRowType;
 
-        let rCard;
-
-        rCard = this.props.cards.map(card => {
-            //console.log(card.cardType)
-            // console.log(cardRowType)
+        //Decide which type of card to render
+        let rCard = this.props.cards.map(card => {
 
             if (card.isEmpty){
-                return (<div key={card.key}/>)
+                return (<div key={card.key}/>) // Just return a div if the card if empty, could probably also return null
             } else {
-                //Decide which type of card to render
                 switch(card.cardType){
                     case 'QuestionCards':
                         return (<QuestionCard key={card.key} card={card} addCard={this.props.addCard} />)
@@ -30,10 +25,12 @@ export default class CardSelect extends Component {
             }
         });
 
+        // Check if the menu is closed, if it's closed -> return null
         if (!this.props.isOpen) {
             return null;
         }
 
+        // Return this if the menu is in fact open
         return (<div style={cardSelectorStyle} className='CardRow'>
                     <button style={customCardStyle}>Make a Custom Card (WIP)</button>
                     <button style={closeButtonStyle} onClick={this.props.onClose}>X</button>

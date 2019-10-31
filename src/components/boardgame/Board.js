@@ -5,17 +5,15 @@ import axios from 'axios';
 import QuestionCard from '../../classes/QuestionCard'
 import InteractionCard from '../../classes/InteractionCard'
 import LETCard from '../../classes/LETCard'
-// import { restElement } from '@babel/types';
 import CardSelector from './CardSelector'
 
-const MAX_LENGTH = 9;
+const MAX_CARD_LENGTH = 9;
 
-let questionCardPlaceholders = Array(MAX_LENGTH).fill();
+let LETCardPlaceholders = Array(MAX_CARD_LENGTH).fill();
+let interactionCardPlaceholders = Array(MAX_CARD_LENGTH).fill();
+let questionCardPlaceholders = Array(MAX_CARD_LENGTH).fill();
 
-let interactionCardPlaceholders = Array(MAX_LENGTH).fill();
-
-let LETCardPlaceholders = Array(MAX_LENGTH).fill();
-
+// Find the index of an object by key
 function findIndex(arr, key) {
     for (var i = 0; i < arr.length; i++) {
         if (arr[i].key === key) {
@@ -24,6 +22,8 @@ function findIndex(arr, key) {
     }
     return null;
 }
+
+// Set default headers for axios
 axios.defaults.headers.common['Content-Type'] = 'application/json' 
 
 class Board extends Component {
@@ -32,42 +32,34 @@ class Board extends Component {
         //You have to do this in react
         super(props)
 
+        // Get and procces cards from the api
         axios.get("https://cardgame.shannendolls.com/api/v1.0/cards").then(res => this.proccesGetCards(res.data));
 
-        //Assigning keys's
-        //You can probably assign all of the card types if you use a forloop and put the different cardtypes in an array
-        this.state.questionCards = questionCardPlaceholders.map( (card, index) => {
-            if (card !== undefined){
-                card.key = index; //Remove if you want to take the id's from api
-                return (card);
-            } else {
-                return new QuestionCard(index);
-            }
+
+        // Assigning keys's and put (empty) cards in the state
+        this.state.LETCards = LETCardPlaceholders.map( (card, index) => {
+            if (card === undefined){
+                return new LETCard(index);
+            } else {return card}
         });
 
         this.state.interactionCards = interactionCardPlaceholders.map( (card, index) => {
-            if (card !== undefined){
-                card.key = index;
-                return (card);
-            } else {
+            if (card === undefined){
                 return new InteractionCard(index);
-            }
+            } else {return card}
         });
 
-        this.state.LETCards = LETCardPlaceholders.map( (card, index) => {
-            if (card !== undefined){
-                card.key = index;
-                return (card);
-            } else {
-                return new LETCard(index);
-            }
+        this.state.questionCards = questionCardPlaceholders.map( (card, index) => {
+            if (card === undefined){
+                return new QuestionCard(index);
+            } else {return card}
         });
-
     }
 
+    // Procces the cards from the api, put them in the state sorted by cardtype
     proccesGetCards = (cardsData) => {
-        let cards = cardsData.cards;
-        console.log('Cards collected from server: ', cards);
+        let cards = cardsData.cards; // Get cards from api object
+        console.log('Cards collected from server: ', cards); // Log card data
         cards.map((card) => {
             if (card.cardType === undefined){
                 console.log("Incorrect card format provided, cannot procces this card!", card)
@@ -89,24 +81,26 @@ class Board extends Component {
                         let lCard = new LETCard(null, card.title, card.enhancements, card.code, card.analytics, null, false)
                         this.setState({allLETCards: [...this.state.allLETCards, lCard]})
                     default:
-                        console.log('Unrecognised card: ', card);
+                        console.log('This card type does not exists! ', card);
                         break;
                 }
             }
         })
     }
 
+    // Delete a card on the board
     deleteCard = (key, type) => {
 
         let cards = this.state[type];
 
         let index = findIndex(cards, key);
 
-        cards[index].reset();
+        cards[index].reset(); // Reset all values to default except the key
 
         this.setState({[type]: cards}); // Set state to equal new card array
     }
 
+    // Move a board card to the left
     moveLeft = (key, type) => {
 
         // Copy list of cards
@@ -132,6 +126,7 @@ class Board extends Component {
         this.setState({[type]: cards});
     }
 
+    // Move a board card to the right
     moveRight = (key, type) => {
 
         // Copy list of cards
@@ -150,14 +145,15 @@ class Board extends Component {
         this.setState({[type]: cards});
     }
 
+    // Open the card selection menu
     openCardSelect = (key, type) => {
 
-        var index = findIndex(this.state[type], key) // Vind index van plaats op het bord
-        //console.log(index)
+        var index = findIndex(this.state[type], key) // Find index of the board card
 
-        this.setState({selectedCardIndex: index});
-        this.setState({selectedRowType: type});
+        this.setState({selectedCardIndex: index}); // Save index
+        this.setState({selectedRowType: type}); // Save card row type
 
+        // Choose which set of cards get displayed in the card menu
         switch(type){
             case 'questionCards':
                 this.setState({menuCards: this.state.allQuestionCards})
@@ -172,9 +168,10 @@ class Board extends Component {
                 break;
         }
 
-        this.setState({cardSelectOpen: true});
+        this.setState({cardSelectOpen: true}); // Open the card selection menu
     }
 
+    // Add a card to the board
     addCard = (key, type) => {
 
         let cards = [...this.state[this.state.selectedRowType]]; // Make shallow copy of the selected row
@@ -182,31 +179,33 @@ class Board extends Component {
         let menuCard = this.state.menuCards.filter( card => card.key === key)[0]; // Copy the selected menuCard
         
 
+        // ------------------------------------------------------------------------------------------------------------------
+        // WARNING: This code has been used to post cards to the api. It is no longer relevant in this function, but has not been deleted to provide an example of how to post
+        //
         // let x = menuCard.getDBinfo();
         // console.log('SEND: ', x)
         // axios.post('https://cardgame.shannendolls.com/api/v1.0/new_card', x).then(res => console.log('RESPONSE: ', res))
+        // ------------------------------------------------------------------------------------------------------------------
 
 
-        // Copy the card (Carefull this is dependend on the fact that the cards are the same type of card)
+        // Copy the card (Carefull this is dependend on the fact that the cards are the same type)
         // This has been done with a .copy in order to copy by value instead of by reference, any other way to copy by value would also work
         cards[this.state.selectedCardIndex].copy(menuCard);
 
-        this.setState({[this.state.selectedRowType]: cards}); // Save
+        this.setState({[this.state.selectedRowType]: cards}); // Save changes to the state
 
-        this.setState({cardSelectOpen: false})
+        this.setState({cardSelectOpen: false}) // Close the card selection menu
     }
 
+    // Save the description of an interaction card to the state
     changeIDescription = (key, data) => {
-        console.log("Hey stoms tuffffffffffffff")
-        let cards = [...this.state.interactionCards];
+        let cards = [...this.state.interactionCards];   // Copy interaction cards
 
-        let index = findIndex(cards, key);
-        console.log(index);
+        let index = findIndex(cards, key);              // Find the card index
 
-        cards[index].description = data.target.value;
-        console.log(data.target.value)
+        cards[index].description = data.target.value;   // Change the description in the state to the provided description
 
-        this.setState({interactionCards: cards});
+        this.setState({interactionCards: cards});       // Save changes to the state
     }
 
     state = {
@@ -215,47 +214,22 @@ class Board extends Component {
         selectKey: -1,
         selectedRowType: '',
         menuCards: [],
-        allQuestionCards: [
-            // new QuestionCard(null, 'Initiative', ['Timing in collaboration environments', 'Timing in asking questions', 'Timing in handling in assignments'], 'WHAT003', 'How often and how fast do student take initiative', null, false),
-            // new QuestionCard(null, 'Yeeting in class', ['todo: fix vertical card size'], 'WUT0W0', 'I am become death, destroyer of worlds',null, false),
-            // new QuestionCard(null, 'Having Fun', ['Questionnaire', 'Facial Expression (Camera)'], 'WHAT004', 'Do student enjoy the learning activities', null, false),
-            // new QuestionCard(null, 'Activity', ['Presence', 'Number of clicks', 'Number of live interactions'], 'WHAT009', 'How active are students',null, false),
-        ],
-        allLETCards: [
-            // new LETCard(null, 'BLOG/VLOG', ['Content creation', '(Peer) Feedback', 'Collaboration'], 'LET003', ['Timing of creation/reaction', 'Amount creation/reaction', 'Content distribution'], null, false),
-            // new LETCard(null, 'MOBILE PHONE (APP)', ['Content Delivery', 'Sensors', 'Photo/Video', 'Location Tracking'], 'LET001', ['Sensors', 'Photo/Video', 'Location Tracking', 'Questionnaire Distribution'], null, false),
-        ],
-        allInteractionCards: [
-            // new InteractionCard(null, 'Student', 'Environment', '', null, false),
-            // new InteractionCard(null, 'Environment', 'Student', '', null, false),
-            // new InteractionCard(null, 'Student', 'Material', '', null, false),
-            // new InteractionCard(null, 'Material', 'Student', '', null, false),
-            // new InteractionCard(null, 'Student', 'Student', '', null, false),
-            // new InteractionCard(null, 'Student', 'Teacher', '', null, false),
-            // new InteractionCard(null, 'Teacher', 'Student', '', null, false),
-        ],
-        // LETcards: [],
-        // interactionCards: [],
-        // questionCards: []
+        allQuestionCards: [],
+        allLETCards: [],
+        allInteractionCards: [],
     }
-
-    // componentDidMount() {
-    //     axios.get('https://cardgame.shannendolls.com/api/v1.0/cards')
-    //     .then(res => this.setState({allCards: res.data.cards}))
-    //     .catch((error) => {
-    //         console.log("Error: ", error);
-    //     })
-    // }
 
     render() {
         return (
             <div className='Board'>
 
+                {/* The menu */}
                 <div className='BoardMenu' >
                     <button onClick={(e) => this.setState({ diaglogOpen: !this.state.diaglogOpen})}>Regels</button>
                     <p>These are menu items</p>
                 </div>
 
+                {/* The rows of cards */}
                 <div className='CardRows'>
                     <CardRow cardRowType='LETCards' 
                         cards={this.state.LETCards} 
@@ -283,7 +257,7 @@ class Board extends Component {
                     </CardRow>
                 </div>
 
-                {/* This needs to be last */}
+                {/* This needs to be last because HTML draws objects in the order that they are defined. Overlays go last*/}
                     <CardSelector 
                         isOpen={this.state.cardSelectOpen}
                         cards={this.state.menuCards} 
