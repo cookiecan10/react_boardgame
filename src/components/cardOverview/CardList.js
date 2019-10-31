@@ -3,7 +3,7 @@ import LetCard from './components/LetCard'
 import InteractionCard from './components/InteractionCard'
 import PedagogyCard from './components/PedagogyCard'
 import QuestionCard from './components/QuestionCard'
-import EmptyCard from '../cards/boardCards/EmptyCard'
+import CardListRow from './components/CardListRow'
 import axios from 'axios';
 import { DropdownMultiple, Dropdown } from 'reactjs-dropdown-component'; // je kan een dropdown aanmaken die een of meerdere seleties toelaat, zie de betreffende componenten voor meer info.
 
@@ -111,7 +111,12 @@ class CardList extends React.Component {
                                     <button content="Sample Button" style ={ButtonStyle}>Voeg een kaart toe (WIP)</button>
                                 </div>  
                         <div className='Cardlist'>
-                            
+                            <CardListRow cards = {this.state.allInteractionCards}>                               
+                            </CardListRow>
+                            <CardListRow cards = {this.state.allLETCards}>                                
+                            </CardListRow>
+                            <CardListRow cards = {this.state.allQuestionCards}>                              
+                            </CardListRow>
                         </div>
                                 
                     </div>
