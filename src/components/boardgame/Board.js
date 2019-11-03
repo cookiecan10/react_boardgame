@@ -34,7 +34,7 @@ class Board extends Component {
 
         // Get and procces cards from the api
         axios.get("https://cardgame.shannendolls.com/api/v1.0/cards").then(res => this.proccesGetCards(res.data));
-
+        axios.post("https://cardgame.shannendolls.com/api/v1.0/new_session", {}).then(res => this.getSessionID(res.data));
 
         // Assigning keys's and put (empty) cards in the state
         this.state.LETCards = LETCardPlaceholders.map( (card, index) => {
@@ -54,6 +54,10 @@ class Board extends Component {
                 return new QuestionCard(index);
             } else {return card}
         });
+    }
+
+    getSessionID = (idData) => {
+        console.log(idData);
     }
 
     // Procces the cards from the api, put them in the state sorted by cardtype
@@ -80,6 +84,7 @@ class Board extends Component {
                                             // key=null, title='', enhancements=[], code='', analytics=[], id=null, isEmpty=true
                         let lCard = new LETCard(null, card.title, card.enhancements, card.code, card.analytics, null, false)
                         this.setState({allLETCards: [...this.state.allLETCards, lCard]})
+                        break;
                     default:
                         console.log('This card type does not exists! ', card);
                         break;
