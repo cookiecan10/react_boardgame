@@ -58,6 +58,7 @@ class Board extends Component {
 
     getSessionID = (idData) => {
         console.log(idData);
+        this.setState({sessionID: idData.oid})
     }
 
     // Procces the cards from the api, put them in the state sorted by cardtype
@@ -93,6 +94,20 @@ class Board extends Component {
         })
     }
 
+    postGameState = () => {
+        var gamestate = {
+            LETCards: this.state.letcards,
+            InteractionCards: this.state.interactionCards,
+            QuestionCards: this.state.questionCards,
+            cardSelectOpen: this.state.cardSelectOpen,
+            selectedRowType: this.state.selectedRowType,
+            rulesOpen: this.state.rulesOpen,
+            //Roundnumber: this.state.roundNumber,
+            session_id: this.state.sessionID,
+        }
+        axios.post("https://cardgame.shannendolls.com/api/v1.0/new_gamestate", gamestate).then(res => console.log(res));
+    }
+
     // Delete a card on the board
     deleteCard = (key, type) => {
 
@@ -103,6 +118,8 @@ class Board extends Component {
         cards[index].reset(); // Reset all values to default except the key
 
         this.setState({[type]: cards}); // Set state to equal new card array
+
+        this.postGameState();
     }
 
     // Move a board card to the left
@@ -129,6 +146,8 @@ class Board extends Component {
 
         // Set state equal to new card array
         this.setState({[type]: cards});
+
+        this.postGameState();
     }
 
     // Move a board card to the right
@@ -148,6 +167,8 @@ class Board extends Component {
 
         // Set state to equal new card array
         this.setState({[type]: cards});
+
+        this.postGameState();
     }
 
     // Open the card selection menu
@@ -174,6 +195,8 @@ class Board extends Component {
         }
 
         this.setState({cardSelectOpen: true}); // Open the card selection menu
+
+        this.postGameState();
     }
 
     // Add a card to the board
@@ -200,6 +223,8 @@ class Board extends Component {
         this.setState({[this.state.selectedRowType]: cards}); // Save changes to the state
 
         this.setState({cardSelectOpen: false}) // Close the card selection menu
+
+        this.postGameState();
     }
 
     // Save the description of an interaction card to the state
@@ -214,7 +239,7 @@ class Board extends Component {
     }
 
     state = {
-        diaglogOpen: false,
+        rulesOpen: false,
         cardSelectOpen: false,
         selectKey: -1,
         selectedRowType: '',
@@ -233,7 +258,7 @@ class Board extends Component {
 
                 {/* The menu */}
                 <div className='BoardMenu' >
-                    <button onClick={(e) => this.setState({ diaglogOpen: !this.state.diaglogOpen})}>Regels</button>
+                    <button onClick={(e) => this.setState({ rulesOpen: !this.state.rulesOpen})}>Regels</button>
                     <p>These are menu items</p>
                 </div>
 
@@ -272,7 +297,7 @@ class Board extends Component {
                         onClose={(e) => this.setState({ cardSelectOpen: false})}
                         addCard={this.addCard}>
                     </CardSelector>
-                <Dialog isOpen={this.state.diaglogOpen} onClose={(e) => this.setState({ diaglogOpen: false})}> <img src={require('../../bordspel_cirkel.PNG')} width='90%'/> </Dialog>
+                <Dialog isOpen={this.state.rulesOpen} onClose={(e) => this.setState({ rulesOpen: false})}> <img src={require('../../bordspel_cirkel.PNG')} width='90%'/> </Dialog>
             </div>
         )
     }
