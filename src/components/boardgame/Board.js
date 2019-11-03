@@ -214,8 +214,11 @@ class Board extends Component {
         selectKey: -1,
         selectedRowType: '',
         menuCards: [],
-        allQuestionCards: [],
-        allLETCards: [],
+        allQuestionCards: [//key=null, title='', content=[], code='', description='', id=null, isEmpty=true
+            // new QuestionCard(null, 'Engagement', ['Presence (Online/Offline)', 'Online Actions (xApi)', 'Offline Actions (Camera)'], 'WHAT001', 'The engagement of the student in the interaction is the amount of time, attention and effort a student puts into the interaction', null, false),
+            // new QuestionCard(null, 'Use of Resources', ['Count of usage content', 'Timestamp of content use'], 'WHAT005', 'How much, how long, when are resources used', null, false),
+    ],
+        allLETCards: [],    
         allInteractionCards: [],
     }
 
