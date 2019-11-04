@@ -7,7 +7,7 @@ import InteractionCard from '../../classes/InteractionCard'
 import LETCard from '../../classes/LETCard'
 import CardSelector from './CardSelector'
 
-const MAX_CARD_LENGTH = 9;
+const MAX_CARD_LENGTH = 8;
 
 let LETCardPlaceholders = Array(MAX_CARD_LENGTH).fill();
 let interactionCardPlaceholders = Array(MAX_CARD_LENGTH).fill();
