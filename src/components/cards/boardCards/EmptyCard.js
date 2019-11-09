@@ -42,7 +42,7 @@ var emptyCardStyle = {
     color: 'white',
     margin: '7px',
     padding: '0px 4px',
-    opacity: '0.7',
+    opacity: '0.6',
     fontSize:'100px',
     textAlign: 'center',
     userSelect: 'none',

@@ -30,7 +30,7 @@ export default class QuestionCard {
         this._id = id;
     }
 
-    // Copy constructor
+    // Copy all of the values of another card
     copy(card){
         this.title = card.title;
         this.content = card.content;
@@ -40,6 +40,7 @@ export default class QuestionCard {
         this.isEmpty = card.isEmpty;
     }
 
+    // Get the data neccessary for storing stuff in the database
     getDBinfo() {
         let obj = {
             title: this.title,

@@ -13,6 +13,7 @@ class Dialog extends Component {
             </div>
         );
 
+        // Check if the dialog box is closed, if it's closed -> return null
         if (!this.props.isOpen) {
             dialog = null;
         }

@@ -20,7 +20,7 @@ class LETCard extends TemplateCard {
                 </div>
 
                 <div>
-                    <ul style={{textAlign:'left', listStylePosition: 'inside'}}>
+                    <ul style={{fontSize:'10px', textAlign:'left', listStylePosition: 'inside'}}>
                         {enhancements.map((item, index) => (<li key={index}>{item}</li>))}
                     </ul>
                 </div>
@@ -28,7 +28,7 @@ class LETCard extends TemplateCard {
                 <div style={contentStyle} name='content'>
                     <div style={{fontSize:'20px'}}>Learning Analytics</div>
 
-                    <ul style={{textAlign:'left', listStylePosition: 'inside'}}>
+                    <ul style={{fontSize:'10px', textAlign:'left', listStylePosition: 'inside'}}>
                         {analytics.map((item, index) => (<li key={index}>{item}</li>))}
                     </ul>
                 </div>

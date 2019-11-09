@@ -23,7 +23,7 @@ const allCardStyle = {
     fontSize: '1.5vh',
     color: 'black',
     boxShadow: '8px 8px rgba(0, 0, 0, 0.5)',
-    //width: '20%',
+    width: '11%',
     height: '250px',
     margin: '7px',
     padding: '0px 4px',

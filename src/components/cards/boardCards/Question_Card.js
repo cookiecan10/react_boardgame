@@ -28,14 +28,14 @@ class QuestionCard extends TemplateCard {
                 <div style={contentStyle} name='content'>
                     <div style={{fontSize:'17px'}}>Learning Analytics</div>
 
-                    <ul style={{textAlign:'left', listStylePosition: 'inside'}}>
+                    <ul style={{fontSize:'10px', textAlign:'left', listStylePosition: 'inside'}}>
                         {content.map((item, index) => (<li key={index}>{item}</li>))}
                     </ul>
                 </div>
 
                 <div name='description'>
                     <div style={{fontSize:'17px'}}>Description <code style={{fontSize:'10px'}}>(code:{code})</code></div>
-                    <p>{description}</p> 
+                    <p style={{fontSize:'12px'}}>{description}</p> 
                 </div>
 
             </div>
