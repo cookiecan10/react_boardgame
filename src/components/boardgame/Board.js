@@ -94,6 +94,7 @@ class Board extends Component {
         })
     }
 
+    // Send gamestate to the api
     postGameState = () => {
         var gamestate = {
             LETCards: this.state.letcards,
