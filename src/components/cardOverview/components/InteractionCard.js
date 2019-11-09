@@ -6,7 +6,13 @@ class InteractionCard extends TemplateCard {
     render() {
         const { key, from, to, description } = this.props.card;
         const cardRowType = this.props.cardRowType;
-
+        var text;
+        if(description === ''){
+            text = 'placeholder text'
+        }
+        else{
+            text = description
+        }
         var cardStyle = {...this.allCardStyle, ...interactionCardStyle};
         return (
             <div style={cardStyle} className='Card'>
@@ -16,13 +22,8 @@ class InteractionCard extends TemplateCard {
                     <div style={{ fontSize: '15px', fontWeight: 'normal', margin: '5px 0px 5px', textAlign: 'center' }}>{from} 🠊 {to} </div>
                 </div>
                 <div style={contentStyle} name='content'>
-                    <div style={{ fontSize: '15px' }}><textarea
-                                                             rows='4'
-                                                             cols='19'
-                                                             name='des' 
-                                                             style={descriptionStyle} 
-                                                             placeholder='Add Description' 
-                                                             value={description} />
+                    <div style={{ fontSize: '15px' }}>
+                        <div>{text}</div>
                                                     </div>
                 </div>
 
