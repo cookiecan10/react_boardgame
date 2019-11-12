@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/react_boardgame/static/css/main.e99f19b3.chunk.css",
+    "main.js": "/react_boardgame/static/js/main.334261f6.chunk.js",
+    "main.js.map": "/react_boardgame/static/js/main.334261f6.chunk.js.map",
+    "runtime-main.js": "/react_boardgame/static/js/runtime-main.bfe1601a.js",
+    "runtime-main.js.map": "/react_boardgame/static/js/runtime-main.bfe1601a.js.map",
+    "static/js/2.299ae726.chunk.js": "/react_boardgame/static/js/2.299ae726.chunk.js",
+    "static/js/2.299ae726.chunk.js.map": "/react_boardgame/static/js/2.299ae726.chunk.js.map",
+    "index.html": "/react_boardgame/index.html",
+    "precache-manifest.67f240c29019a17e686a312ad6e9f97b.js": "/react_boardgame/precache-manifest.67f240c29019a17e686a312ad6e9f97b.js",
+    "service-worker.js": "/react_boardgame/service-worker.js",
+    "static/css/main.e99f19b3.chunk.css.map": "/react_boardgame/static/css/main.e99f19b3.chunk.css.map",
+    "static/media/App.css": "/react_boardgame/static/media/background.79af7cb7.png",
+    "static/media/bordspel_cirkel.PNG": "/react_boardgame/static/media/bordspel_cirkel.57f5efa2.PNG"
+  }
+}
